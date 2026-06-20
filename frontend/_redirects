@@ -1,3 +1,5 @@
 # SPA routing - serve index.html for all paths
 /*    /index.html    200
-/sitemap.xml /sitemap.xml 200
+
+# Force sitemap to serve as XML
+/sitemap.xml /sitemap.xml 200!
