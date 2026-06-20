@@ -707,7 +707,7 @@
                                     <i class="fas fa-sign-out-alt"></i> Logout
                                 </button>
                             ` : `
-                                <a href="/login" class="nav-link ${isActive('/login')}" onclick="event.preventDefault(); navigate('/login')">
+                                <a href="/alwydivielage" class="nav-link ${isActive('/alwydivielage')}" onclick="event.preventDefault(); navigate('/alwydivielage')">
                                     <i class="fas fa-lock"></i> Admin
                                 </a>
                             `}
@@ -728,15 +728,15 @@
                             <h1 style="font-size: 24px; font-weight: 700; color: #0f172a;">Admin Login</h1>
                             <p style="color: #64748b; font-size: 15px; margin-top: 4px;">Enter the password to manage listings</p>
                         </div>
-                        <div id="login-message" style="display: none; padding: 12px 16px; border-radius: 8px; margin-bottom: 16px; font-size: 14px;"></div>
-                        <form id="login-form" onsubmit="handleLogin(event)">
+                        <div id="alwydivielage-message" style="display: none; padding: 12px 16px; border-radius: 8px; margin-bottom: 16px; font-size: 14px;"></div>
+                        <form id="alwydivielage-form" onsubmit="handleLogin(event)">
                             <div style="margin-bottom: 16px;">
                                 <label style="display: block; font-weight: 600; margin-bottom: 6px; color: #0f172a; font-size: 14px;">Password</label>
                                 <input type="password" id="admin-password" required placeholder="Enter password" class="input-field">
                             </div>
                             <button type="submit" class="btn-primary" style="width: 100%; padding: 16px; font-size: 18px;">
-                                <span id="login-text"><i class="fas fa-sign-in-alt"></i> Login</span>
-                                <span id="login-loading" style="display: none;"><i class="fas fa-spinner fa-spin"></i> Logging in...</span>
+                                <span id="alwydivielage-text"><i class="fas fa-sign-in-alt"></i> Login</span>
+                                <span id="alwydivielage-loading" style="display: none;"><i class="fas fa-spinner fa-spin"></i> Logging in...</span>
                             </button>
                         </form>
                     </div>
@@ -747,9 +747,9 @@
         async function handleLogin(e) {
             e.preventDefault();
             const password = document.getElementById('admin-password').value;
-            const submitBtn = document.getElementById('login-text');
-            const loadingBtn = document.getElementById('login-loading');
-            const messageDiv = document.getElementById('login-message');
+            const submitBtn = document.getElementById('alwydivielage-text');
+            const loadingBtn = document.getElementById('alwydivielage-loading');
+            const messageDiv = document.getElementById('alwydivielage-message');
             
             submitBtn.style.display = 'none';
             loadingBtn.style.display = 'inline';
@@ -1573,12 +1573,12 @@
                 content = renderHome();
                 document.getElementById('app').innerHTML = renderNavbar() + content;
                 setTimeout(() => loadListings('listings-container'), 100);
-            } else if (path === '/login') {
+            } else if (path === '/alwydivielage') {
                 content = renderLogin();
                 document.getElementById('app').innerHTML = renderNavbar() + content;
             } else if (path === '/admin') {
                 if (!isAdmin) {
-                    navigate('/login');
+                    navigate('/alwydivielage');
                     return;
                 }
                 content = renderAdmin();
@@ -1586,14 +1586,14 @@
                 setTimeout(() => loadAdminListings(), 100);
             } else if (path === '/add') {
                 if (!isAdmin) {
-                    navigate('/login');
+                    navigate('/alwydivielage');
                     return;
                 }
                 content = renderAdd();
                 document.getElementById('app').innerHTML = renderNavbar() + content;
             } else if (path.startsWith('/edit/')) {
                 if (!isAdmin) {
-                    navigate('/login');
+                    navigate('/alwydivielage');
                     return;
                 }
                 const id = path.split('/')[2];
