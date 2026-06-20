@@ -1,0 +1,1132 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HomeLink - Find Your Perfect Home 🇨🇲</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; background: #f0f2f5; }
+        
+        .btn-primary { 
+            background: linear-gradient(135deg, #FF385C, #e0314f); 
+            color: white; padding: 14px 28px; border-radius: 12px; 
+            border: none; font-weight: 600; cursor: pointer; transition: all 0.3s; 
+        }
+        .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 8px 25px rgba(255,56,92,0.4); }
+        
+        .btn-whatsapp { 
+            background: linear-gradient(135deg, #25D366, #1da851); 
+            color: white; padding: 10px 20px; border-radius: 10px; 
+            border: none; font-weight: 600; cursor: pointer; 
+            display: inline-flex; align-items: center; gap: 8px; text-decoration: none;
+            transition: all 0.3s;
+        }
+        .btn-whatsapp:hover { transform: scale(1.05); box-shadow: 0 4px 15px rgba(37,211,102,0.4); }
+        
+        .btn-tiktok {
+            background: linear-gradient(135deg, #000000, #fe2c55);
+            color: white; padding: 14px 28px; border-radius: 12px; 
+            border: none; font-weight: 600; cursor: pointer; 
+            display: inline-flex; align-items: center; gap: 8px; text-decoration: none;
+            transition: all 0.3s;
+        }
+        .btn-tiktok:hover { transform: scale(1.05); box-shadow: 0 4px 15px rgba(254,44,85,0.4); }
+        
+        .container { max-width: 1280px; margin: 0 auto; padding: 0 20px; }
+        
+        .card {
+            background: white; border-radius: 16px; overflow: hidden;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+            transition: all 0.3s;
+            cursor: pointer;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+        }
+        .card:hover { transform: translateY(-8px); box-shadow: 0 12px 40px rgba(0,0,0,0.15); }
+        
+        .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 24px; }
+        @media (max-width: 640px) { .grid { grid-template-columns: 1fr; } }
+        
+        .nav-link { 
+            color: #4a4a4a; text-decoration: none; 
+            display: flex; align-items: center; gap: 8px; 
+            padding: 10px 16px; border-radius: 10px;
+            transition: all 0.3s;
+            font-weight: 500;
+        }
+        .nav-link:hover { background: #f5f5f5; color: #FF385C; }
+        .nav-link.active { color: #FF385C; background: #fff5f7; }
+        
+        .nav-link-add {
+            background: linear-gradient(135deg, #FF385C, #e0314f);
+            color: white !important;
+            padding: 10px 20px;
+            border-radius: 9999px;
+            font-weight: 600;
+        }
+        .nav-link-add:hover { transform: scale(1.05); box-shadow: 0 4px 15px rgba(255,56,92,0.3); }
+        
+        .badge-available { background: #22c55e; color: white; padding: 4px 14px; border-radius: 9999px; font-size: 12px; font-weight: 600; }
+        .badge-rented { background: #ef4444; color: white; padding: 4px 14px; border-radius: 9999px; font-size: 12px; font-weight: 600; }
+        .badge-featured { background: #f59e0b; color: white; padding: 4px 14px; border-radius: 9999px; font-size: 12px; font-weight: 600; }
+        
+        .price-tag {
+            background: white; padding: 6px 16px; border-radius: 9999px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            font-weight: bold; color: #FF385C;
+        }
+        
+        .input-field {
+            width: 100%; padding: 14px 16px; 
+            border: 2px solid #e5e7eb; border-radius: 12px;
+            transition: all 0.3s;
+            font-size: 16px;
+        }
+        .input-field:focus { border-color: #FF385C; outline: none; box-shadow: 0 0 0 4px rgba(255,56,92,0.1); }
+        
+        .form-card { background: white; border-radius: 20px; padding: 40px; box-shadow: 0 4px 20px rgba(0,0,0,0.08); }
+        
+        .empty-state { text-align: center; padding: 80px 20px; }
+        .empty-state i { font-size: 80px; color: #FF385C; margin-bottom: 20px; }
+        .empty-state h2 { font-size: 28px; color: #1a1a1a; margin-bottom: 12px; }
+        .empty-state p { color: #666; font-size: 16px; }
+        
+        .stats-bar { display: flex; gap: 24px; padding: 16px 20px; background: white; border-radius: 12px; margin-bottom: 24px; flex-wrap: wrap; }
+        .stat-item { display: flex; align-items: center; gap: 8px; color: #4a4a4a; }
+        .stat-item i { color: #FF385C; }
+        .stat-number { font-weight: 700; color: #1a1a1a; }
+        
+        .search-bar { display: flex; gap: 12px; margin-bottom: 24px; flex-wrap: wrap; }
+        .search-bar input {
+            flex: 1; min-width: 200px; padding: 14px 16px;
+            border: 2px solid #e5e7eb; border-radius: 12px; font-size: 16px; transition: all 0.3s;
+        }
+        .search-bar input:focus { border-color: #FF385C; outline: none; box-shadow: 0 0 0 4px rgba(255,56,92,0.1); }
+        
+        .admin-table { width: 100%; background: white; border-radius: 12px; overflow: hidden; box-shadow: 0 2px 10px rgba(0,0,0,0.06); }
+        .admin-table th { padding: 12px 16px; text-align: left; font-weight: 600; color: #4a4a4a; background: #f8f9fa; }
+        .admin-table td { padding: 12px 16px; border-bottom: 1px solid #f0f0f0; }
+        .admin-table tr:hover { background: #fafafa; }
+        
+        .tiktok-video-container {
+            background: linear-gradient(135deg, #000000, #1a1a1a);
+            border-radius: 16px; padding: 40px 20px; text-align: center;
+            min-height: 200px; display: flex; flex-direction: column;
+            align-items: center; justify-content: center; width: 100%;
+        }
+        .tiktok-video-container i { font-size: 64px; color: #fe2c55; }
+        .admin-actions { display: flex; gap: 8px; flex-wrap: wrap; }
+        .btn-admin { background: #4a4a4a; color: white; padding: 8px 16px; border-radius: 8px; border: none; font-weight: 500; cursor: pointer; transition: all 0.3s; font-size: 14px; }
+        .btn-admin:hover { background: #333; }
+        .btn-edit { background: #3b82f6; color: white; padding: 6px 14px; border-radius: 6px; border: none; font-weight: 500; cursor: pointer; transition: all 0.3s; font-size: 13px; }
+        .btn-edit:hover { background: #2563eb; }
+        .btn-delete { background: #ef4444; color: white; padding: 6px 14px; border-radius: 6px; border: none; font-weight: 500; cursor: pointer; transition: all 0.3s; font-size: 13px; }
+        .btn-delete:hover { background: #dc2626; }
+        .view-count { font-size: 12px; color: #999; display: flex; align-items: center; gap: 4px; }
+        
+        @keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
+        .toast {
+            position: fixed; bottom: 20px; right: 20px;
+            background: #1a1a1a; color: white; padding: 16px 24px; border-radius: 12px;
+            box-shadow: 0 8px 30px rgba(0,0,0,0.2); z-index: 1000;
+            animation: slideUp 0.3s ease;
+        }
+        @keyframes slideUp { from { transform: translateY(100px); opacity: 0; } to { transform: translateY(0); opacity: 1; } }
+    </style>
+</head>
+<body>
+    <div id="app"></div>
+    
+    <script>
+        const API_URL = 'http://localhost:5000/api';
+        const CURRENCY = 'FCFA';
+        const ADMIN_PASSWORD = 'elage123@123';
+        
+        let isAdmin = sessionStorage.getItem('isAdmin') === 'true';
+        let allListings = [];
+        
+        function formatPrice(price) {
+            return new Intl.NumberFormat('en-CM').format(price);
+        }
+        
+        function navigate(path) {
+            window.history.pushState({}, '', path);
+            renderApp();
+        }
+        
+        function showToast(message, type = 'success') {
+            const colors = { success: '#22c55e', error: '#ef4444', info: '#3b82f6' };
+            const toast = document.createElement('div');
+            toast.className = 'toast';
+            toast.style.borderLeft = '4px solid ' + colors[type];
+            toast.innerHTML = message;
+            document.body.appendChild(toast);
+            setTimeout(() => { toast.remove(); }, 3000);
+        }
+        
+        function renderNavbar() {
+            const currentPath = window.location.pathname;
+            const isActive = (path) => currentPath === path ? 'active' : '';
+            const isAdmin = sessionStorage.getItem('isAdmin') === 'true';
+            
+            return `
+                <nav style="background: white; box-shadow: 0 2px 20px rgba(0,0,0,0.06); position: sticky; top: 0; z-index: 50;">
+                    <div class="container" style="padding: 12px 0; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 12px;">
+                        <a href="/" style="font-size: 26px; font-weight: 800; color: #FF385C; text-decoration: none; letter-spacing: -0.5px;">
+                            🏠 HomeLink
+                            <span style="font-size: 14px; font-weight: 400; color: #666; letter-spacing: 0;">🇨🇲</span>
+                        </a>
+                        <div style="display: flex; gap: 4px; align-items: center; flex-wrap: wrap;">
+                            <a href="/" class="nav-link ${isActive('/')}" onclick="event.preventDefault(); navigate('/')">
+                                <i class="fas fa-home"></i> Home
+                            </a>
+                            ${isAdmin ? `
+                                <a href="/admin" class="nav-link ${isActive('/admin')}" onclick="event.preventDefault(); navigate('/admin')">
+                                    <i class="fas fa-cog"></i> Dashboard
+                                </a>
+                                <a href="/add" class="nav-link-add" onclick="event.preventDefault(); navigate('/add')">
+                                    <i class="fas fa-plus-circle"></i> Add Listing
+                                </a>
+                                <button onclick="logout()" class="btn-admin" style="background: #ef4444; padding: 8px 16px; border-radius: 8px; border: none; color: white; cursor: pointer; font-weight: 500;">
+                                    <i class="fas fa-sign-out-alt"></i> Logout
+                                </button>
+                            ` : `
+                                <a href="/login" class="nav-link ${isActive('/login')}" onclick="event.preventDefault(); navigate('/login')">
+                                    <i class="fas fa-lock"></i> Admin
+                                </a>
+                            `}
+                        </div>
+                    </div>
+                </nav>
+            `;
+        }
+        
+        function renderLogin() {
+            return `
+                <div class="container" style="padding: 80px 0; max-width: 400px;">
+                    <div class="form-card">
+                        <div style="text-align: center; margin-bottom: 32px;">
+                            <i class="fas fa-lock" style="font-size: 48px; color: #FF385C;"></i>
+                            <h1 style="font-size: 24px; font-weight: 700; color: #1a1a1a; margin-top: 12px;">Admin Login</h1>
+                            <p style="color: #666;">Enter the password to manage listings</p>
+                        </div>
+                        <div id="login-message" style="display: none; padding: 12px; border-radius: 8px; margin-bottom: 16px;"></div>
+                        <form id="login-form" onsubmit="handleLogin(event)">
+                            <div style="margin-bottom: 16px;">
+                                <label style="display: block; font-weight: 600; margin-bottom: 6px; color: #1a1a1a;">Password</label>
+                                <input type="password" id="admin-password" required placeholder="Enter password" class="input-field">
+                            </div>
+                            <button type="submit" class="btn-primary" style="width: 100%; padding: 16px; font-size: 18px;">
+                                <span id="login-text"><i class="fas fa-sign-in-alt"></i> Login</span>
+                                <span id="login-loading" style="display: none;"><i class="fas fa-spinner fa-spin"></i> Logging in...</span>
+                            </button>
+                        </form>
+                    </div>
+                </div>
+            `;
+        }
+        
+        async function handleLogin(e) {
+            e.preventDefault();
+            const password = document.getElementById('admin-password').value;
+            const submitBtn = document.getElementById('login-text');
+            const loadingBtn = document.getElementById('login-loading');
+            const messageDiv = document.getElementById('login-message');
+            
+            submitBtn.style.display = 'none';
+            loadingBtn.style.display = 'inline';
+            messageDiv.style.display = 'none';
+            
+            if (password === ADMIN_PASSWORD) {
+                isAdmin = true;
+                sessionStorage.setItem('isAdmin', 'true');
+                showToast('✅ Login successful!');
+                setTimeout(() => navigate('/admin'), 500);
+            } else {
+                messageDiv.style.display = 'block';
+                messageDiv.style.background = '#fee2e2';
+                messageDiv.style.color = '#991b1b';
+                messageDiv.style.border = '1px solid #fca5a5';
+                messageDiv.innerHTML = '❌ Incorrect password';
+                submitBtn.style.display = 'inline';
+                loadingBtn.style.display = 'none';
+            }
+        }
+        
+        function renderHome() {
+            return `
+                <div class="container" style="padding: 32px 0;">
+                    <div style="margin-bottom: 32px;">
+                        <h1 style="font-size: 36px; font-weight: 800; color: #1a1a1a; margin-bottom: 8px;">
+                            🔍 Find Your Perfect Home
+                        </h1>
+                        <p style="color: #666; font-size: 18px;">
+                            Direct listings from homeowners, no agents 🏡
+                        </p>
+                    </div>
+                    
+                    <div class="search-bar">
+                        <input type="text" id="search-input" placeholder="🔍 Search by city (e.g., Molyko, Buea...)" onkeyup="if(event.key==='Enter') handleSearch()">
+                        <button onclick="handleSearch()" class="btn-primary" style="padding: 14px 28px;">
+                            <i class="fas fa-search"></i> Search
+                        </button>
+                        <button onclick="clearSearch()" style="padding: 14px 24px; border: 2px solid #e5e7eb; border-radius: 12px; background: white; cursor: pointer; font-weight: 500; color: #4a4a4a;">
+                            <i class="fas fa-times"></i> Clear
+                        </button>
+                    </div>
+                    
+                    <div class="stats-bar" id="stats-bar">
+                        <div class="stat-item">
+                            <i class="fas fa-home"></i>
+                            <span class="stat-number" id="total-listings">0</span> listings
+                        </div>
+                        <div class="stat-item">
+                            <i class="fas fa-eye"></i>
+                            <span class="stat-number" id="total-views">0</span> views
+                        </div>
+                        <div class="stat-item">
+                            <i class="fas fa-map-marker-alt"></i>
+                            <span class="stat-number" id="total-locations">0</span> cities
+                        </div>
+                    </div>
+                    
+                    <div id="listings-container">
+                        <div style="text-align: center; padding: 60px 0;">
+                            <div style="display: inline-block; width: 50px; height: 50px; border: 5px solid #FF385C; border-top-color: transparent; border-radius: 50%; animation: spin 1s linear infinite;"></div>
+                            <p style="margin-top: 20px; color: #666; font-size: 16px;">Loading listings...</p>
+                        </div>
+                    </div>
+                </div>
+            `;
+        }
+        
+        function renderAdd() {
+            const houseTypes = ['Single Room', 'Studio', '1 Bedroom', '2 Bedroom', '3 Bedroom', 'Apartment', 'Other'];
+            
+            return `
+                <div class="container" style="padding: 32px 0; max-width: 768px;">
+                    <div class="form-card">
+                        <div style="display: flex; align-items: center; gap: 12px; margin-bottom: 8px;">
+                            <i class="fas fa-plus-circle" style="color: #FF385C; font-size: 28px;"></i>
+                            <h1 style="font-size: 28px; font-weight: 700; color: #1a1a1a;">Add New Listing</h1>
+                        </div>
+                        <p style="color: #666; margin-bottom: 24px;">Fill in the information to list your property</p>
+                        
+                        <div id="form-message" style="display: none; padding: 14px; border-radius: 12px; margin-bottom: 20px;"></div>
+                        
+                        <form id="listing-form" onsubmit="submitListing(event)">
+                            <div style="margin-bottom: 18px;">
+                                <label style="display: block; font-weight: 600; margin-bottom: 6px; color: #1a1a1a;">Title *</label>
+                                <input type="text" id="title" required placeholder="e.g., Beautiful 2-bedroom apartment in Molyko" class="input-field">
+                            </div>
+                            
+                            <div style="margin-bottom: 18px;">
+                                <label style="display: block; font-weight: 600; margin-bottom: 6px; color: #1a1a1a;">Description *</label>
+                                <textarea id="description" required rows="4" placeholder="Describe your property in detail..." class="input-field" style="resize: vertical;"></textarea>
+                            </div>
+                            
+                            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-bottom: 18px;">
+                                <div>
+                                    <label style="display: block; font-weight: 600; margin-bottom: 6px; color: #1a1a1a;">Price (FCFA/month) *</label>
+                                    <input type="number" id="price" required min="0" placeholder="150000" class="input-field">
+                                </div>
+                                <div>
+                                    <label style="display: block; font-weight: 600; margin-bottom: 6px; color: #1a1a1a;">Location *</label>
+                                    <input type="text" id="location" required placeholder="e.g., Molyko, Buea" class="input-field">
+                                    <span style="font-size: 12px; color: #999;">Enter city or neighborhood</span>
+                                </div>
+                            </div>
+                            
+                            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-bottom: 18px;">
+                                <div>
+                                    <label style="display: block; font-weight: 600; margin-bottom: 6px; color: #1a1a1a;">Property Type *</label>
+                                    <select id="houseType" required class="input-field">
+                                        <option value="">Select type</option>
+                                        ${houseTypes.map(t => `<option value="${t}">${t}</option>`).join('')}
+                                    </select>
+                                </div>
+                                <div>
+                                    <label style="display: block; font-weight: 600; margin-bottom: 6px; color: #1a1a1a;">WhatsApp Number *</label>
+                                    <input type="tel" id="whatsapp" required placeholder="690123456" class="input-field">
+                                    <span style="font-size: 12px; color: #999;">Format: 690123456 (without country code)</span>
+                                </div>
+                            </div>
+                            
+                            <div style="margin-bottom: 18px;">
+                                <label style="display: block; font-weight: 600; margin-bottom: 6px; color: #1a1a1a;">TikTok Video Link *</label>
+                                <input type="url" id="video-url" required placeholder="https://www.tiktok.com/@user/video/123456789" class="input-field">
+                                <span style="font-size: 12px; color: #999;">Paste the TikTok video link</span>
+                            </div>
+                            
+                            <div style="margin-bottom: 18px;">
+                                <label style="display: block; font-weight: 600; margin-bottom: 6px; color: #1a1a1a;">Image Link (optional)</label>
+                                <input type="url" id="image-url" placeholder="https://i.imgur.com/xxxxx.jpg" class="input-field">
+                                <span style="font-size: 12px; color: #999;">Use free hosting like Imgur or Postimage</span>
+                            </div>
+                            
+                            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-bottom: 24px;">
+                                <div style="display: flex; align-items: center; gap: 12px;">
+                                    <input type="checkbox" id="available" checked style="width: 20px; height: 20px; accent-color: #FF385C;">
+                                    <label style="font-weight: 500; color: #1a1a1a;">Available</label>
+                                </div>
+                                <div style="display: flex; align-items: center; gap: 12px;">
+                                    <input type="checkbox" id="featured" style="width: 20px; height: 20px; accent-color: #f59e0b;">
+                                    <label style="font-weight: 500; color: #1a1a1a;">⭐ Featured</label>
+                                </div>
+                            </div>
+                            
+                            <button type="submit" class="btn-primary" style="width: 100%; padding: 16px; font-size: 18px;">
+                                <span id="submit-text"><i class="fas fa-plus"></i> Publish Listing</span>
+                                <span id="submit-loading" style="display: none;"><i class="fas fa-spinner fa-spin"></i> Publishing...</span>
+                            </button>
+                        </form>
+                    </div>
+                </div>
+            `;
+        }
+        
+        function renderAdmin() {
+            return `
+                <div class="container" style="padding: 32px 0;">
+                    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 32px; flex-wrap: wrap; gap: 12px;">
+                        <div>
+                            <h1 style="font-size: 32px; font-weight: 800; color: #1a1a1a;">
+                                <i class="fas fa-cog" style="color: #FF385C;"></i> Dashboard
+                            </h1>
+                            <p style="color: #666;">Manage all your listings</p>
+                        </div>
+                        <div style="display: flex; gap: 8px;">
+                            <a href="/add" class="btn-primary" style="padding: 10px 20px; font-size: 14px; text-decoration: none;" onclick="event.preventDefault(); navigate('/add')">
+                                <i class="fas fa-plus"></i> New Listing
+                            </a>
+                        </div>
+                    </div>
+                    
+                    <div class="stats-bar">
+                        <div class="stat-item">
+                            <i class="fas fa-home"></i>
+                            <span class="stat-number" id="admin-total">0</span> listings
+                        </div>
+                        <div class="stat-item">
+                            <i class="fas fa-eye"></i>
+                            <span class="stat-number" id="admin-views">0</span> total views
+                        </div>
+                        <div class="stat-item">
+                            <i class="fas fa-check-circle" style="color: #22c55e;"></i>
+                            <span class="stat-number" id="admin-available">0</span> available
+                        </div>
+                        <div class="stat-item">
+                            <i class="fas fa-times-circle" style="color: #ef4444;"></i>
+                            <span class="stat-number" id="admin-rented">0</span> rented
+                        </div>
+                    </div>
+                    
+                    <div id="admin-listings">
+                        <div style="text-align: center; padding: 60px 0;">
+                            <div style="display: inline-block; width: 50px; height: 50px; border: 5px solid #FF385C; border-top-color: transparent; border-radius: 50%; animation: spin 1s linear infinite;"></div>
+                            <p style="margin-top: 20px; color: #666; font-size: 16px;">Loading...</p>
+                        </div>
+                    </div>
+                </div>
+            `;
+        }
+        
+        function renderEdit(listingId) {
+            return `
+                <div class="container" style="padding: 32px 0; max-width: 768px;">
+                    <div id="edit-container">
+                        <div style="text-align: center; padding: 60px 0;">
+                            <div style="display: inline-block; width: 50px; height: 50px; border: 5px solid #FF385C; border-top-color: transparent; border-radius: 50%; animation: spin 1s linear infinite;"></div>
+                            <p style="margin-top: 20px; color: #666; font-size: 16px;">Loading...</p>
+                        </div>
+                    </div>
+                </div>
+            `;
+        }
+        
+        function renderListingDetail() {
+            const id = window.location.pathname.split('/')[2];
+            return `
+                <div class="container" style="padding: 32px 0;">
+                    <a href="/" style="color: #666; text-decoration: none; display: inline-flex; align-items: center; gap: 8px; margin-bottom: 20px;" onclick="event.preventDefault(); navigate('/')">
+                        <i class="fas fa-arrow-left"></i> Back to listings
+                    </a>
+                    <div id="detail-container">
+                        <div style="text-align: center; padding: 60px 0;">
+                            <div style="display: inline-block; width: 50px; height: 50px; border: 5px solid #FF385C; border-top-color: transparent; border-radius: 50%; animation: spin 1s linear infinite;"></div>
+                            <p style="margin-top: 20px; color: #666; font-size: 16px;">Loading details...</p>
+                        </div>
+                    </div>
+                </div>
+            `;
+        }
+        
+        // Load functions
+        async function loadListings(containerId, keyword = '') {
+            try {
+                const url = keyword ? `${API_URL}/listings?search=${encodeURIComponent(keyword)}` : `${API_URL}/listings`;
+                const response = await fetch(url);
+                const data = await response.json();
+                allListings = data.data || [];
+                const container = document.getElementById(containerId);
+                if (!container) return;
+                
+                updateStats(allListings);
+                
+                if (allListings.length === 0) {
+                    container.innerHTML = `
+                        <div class="empty-state">
+                            <i class="fas fa-home"></i>
+                            <h2>${keyword ? 'No results for "' + keyword + '"' : 'No listings found'}</h2>
+                            <p>${keyword ? 'Try a different search' : 'Be the first to list your property!'}</p>
+                            ${!keyword ? `
+                                <br>
+                                <a href="/add" class="btn-primary" style="display: inline-block; text-decoration: none;" onclick="event.preventDefault(); navigate('/add')">
+                                    <i class="fas fa-plus"></i> Add Listing
+                                </a>
+                            ` : `
+                                <br>
+                                <button onclick="clearSearch()" class="btn-primary" style="display: inline-block;">
+                                    <i class="fas fa-times"></i> Clear Search
+                                </button>
+                            `}
+                        </div>
+                    `;
+                    return;
+                }
+                
+                container.innerHTML = `
+                    <div style="margin-bottom: 16px; color: #666; font-size: 14px;">
+                        ${keyword ? '🔍 Results for "' + keyword + '" : ' : ''}
+                        ${allListings.length} listing${allListings.length > 1 ? 's' : ''} found
+                    </div>
+                    <div class="grid">
+                        ${allListings.map(listing => `
+                            <div class="card" onclick="navigate('/listing/${listing._id}')">
+                                <div style="position: relative; padding: 16px 0; min-height: 80px; background: linear-gradient(135deg, #f5f5f5, #e5e5e5); overflow: hidden;">
+                                    <div style="position: absolute; top: 12px; left: 12px;">
+                                        ${listing.featured ? `<span class="badge-featured">⭐ Featured</span>` : ''}
+                                    </div>
+                                    <div style="position: absolute; bottom: 12px; left: 12px;">
+                                        <span class="price-tag">
+                                            <i class="fas fa-coins" style="font-size: 12px;"></i>
+                                            ${formatPrice(listing.price)} ${CURRENCY}
+                                            <span style="font-size: 12px; color: #999; font-weight: normal;">/month</span>
+                                        </span>
+                                    </div>
+                                    <div style="position: absolute; top: 12px; right: 12px;">
+                                        <span class="${listing.isAvailable ? 'badge-available' : 'badge-rented'}">
+                                            ${listing.isAvailable ? '✓ Available' : '✗ Rented'}
+                                        </span>
+                                    </div>
+                                    <div style="position: absolute; bottom: 12px; right: 12px;">
+                                        <span class="view-count">
+                                            <i class="fas fa-eye"></i> ${listing.views || 0}
+                                        </span>
+                                    </div>
+                                </div>
+                                <div style="padding: 20px; flex: 1; display: flex; flex-direction: column;">
+                                    <h3 style="font-weight: 700; font-size: 18px; color: #1a1a1a; margin-bottom: 6px; line-height: 1.3;">
+                                        ${listing.title}
+                                    </h3>
+                                    <div style="display: flex; align-items: center; gap: 8px; color: #666; font-size: 14px; margin-bottom: 4px;">
+                                        <i class="fas fa-map-marker-alt" style="color: #FF385C; font-size: 12px;"></i>
+                                        <span>📍 ${listing.location}</span>
+                                    </div>
+                                    <div style="display: flex; align-items: center; gap: 8px; color: #666; font-size: 14px; margin-bottom: 12px;">
+                                        <i class="fas fa-bed" style="color: #FF385C; font-size: 12px;"></i>
+                                        <span>${listing.houseType}</span>
+                                    </div>
+                                    <div style="display: flex; justify-content: space-between; align-items: center; margin-top: auto; padding-top: 12px; border-top: 1px solid #f0f0f0;">
+                                        <span style="font-size: 12px; color: #999;">
+                                            <i class="far fa-calendar-alt"></i> ${new Date(listing.createdAt).toLocaleDateString('en-CM')}
+                                        </span>
+                                        <a href="https://wa.me/237${listing.whatsappNumber}" target="_blank" class="btn-whatsapp" style="font-size: 13px; padding: 6px 14px;" onclick="event.stopPropagation();">
+                                            <i class="fab fa-whatsapp"></i> Contact
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                        `).join('')}
+                    </div>
+                `;
+            } catch(e) {
+                console.error('Error:', e);
+                document.getElementById(containerId).innerHTML = `
+                    <div class="empty-state">
+                        <i class="fas fa-exclamation-triangle" style="color: #ef4444;"></i>
+                        <h2>Unable to load listings</h2>
+                        <p>Make sure the backend is running.</p>
+                        <p style="font-size: 14px; color: #999; margin-top: 8px;">${API_URL}</p>
+                    </div>
+                `;
+            }
+        }
+        
+        function updateStats(listings) {
+            const total = listings.length;
+            const views = listings.reduce((sum, l) => sum + (l.views || 0), 0);
+            const locations = new Set(listings.map(l => l.location)).size;
+            
+            const totalEl = document.getElementById('total-listings');
+            const viewsEl = document.getElementById('total-views');
+            const locationsEl = document.getElementById('total-locations');
+            
+            if (totalEl) totalEl.textContent = total;
+            if (viewsEl) viewsEl.textContent = views;
+            if (locationsEl) locationsEl.textContent = locations;
+        }
+        
+        function updateAdminStats(listings) {
+            const total = listings.length;
+            const views = listings.reduce((sum, l) => sum + (l.views || 0), 0);
+            const available = listings.filter(l => l.isAvailable).length;
+            const rented = listings.filter(l => !l.isAvailable).length;
+            
+            const totalEl = document.getElementById('admin-total');
+            const viewsEl = document.getElementById('admin-views');
+            const availEl = document.getElementById('admin-available');
+            const rentedEl = document.getElementById('admin-rented');
+            
+            if (totalEl) totalEl.textContent = total;
+            if (viewsEl) viewsEl.textContent = views;
+            if (availEl) availEl.textContent = available;
+            if (rentedEl) rentedEl.textContent = rented;
+        }
+        
+        async function loadAdminListings() {
+            try {
+                const response = await fetch(`${API_URL}/listings`);
+                const data = await response.json();
+                allListings = data.data || [];
+                const container = document.getElementById('admin-listings');
+                if (!container) return;
+                
+                updateAdminStats(allListings);
+                
+                if (allListings.length === 0) {
+                    container.innerHTML = `
+                        <div class="empty-state">
+                            <i class="fas fa-home"></i>
+                            <h2>No listings</h2>
+                            <p>Start publishing listings</p>
+                        </div>
+                    `;
+                    return;
+                }
+                
+                container.innerHTML = `
+                    <div style="overflow-x: auto;">
+                        <table class="admin-table">
+                            <thead>
+                                <tr>
+                                    <th>Title</th>
+                                    <th>Location</th>
+                                    <th>Price</th>
+                                    <th>Status</th>
+                                    <th>Views</th>
+                                    <th style="text-align: center;">Actions</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                ${allListings.map(listing => `
+                                    <tr>
+                                        <td><strong>${listing.title}</strong></td>
+                                        <td>${listing.location}</td>
+                                        <td style="font-weight: 600; color: #FF385C;">${formatPrice(listing.price)} FCFA</td>
+                                        <td>
+                                            <span class="${listing.isAvailable ? 'badge-available' : 'badge-rented'}">
+                                                ${listing.isAvailable ? 'Available' : 'Rented'}
+                                            </span>
+                                            ${listing.featured ? ' <span class="badge-featured">⭐</span>' : ''}
+                                        </td>
+                                        <td>${listing.views || 0}</td>
+                                        <td style="text-align: center;">
+                                            <div class="admin-actions" style="justify-content: center;">
+                                                <button onclick="event.stopPropagation(); toggleAvailability('${listing._id}')" class="btn-edit" style="background: ${listing.isAvailable ? '#f59e0b' : '#22c55e'};">
+                                                    <i class="fas fa-exchange-alt"></i> ${listing.isAvailable ? 'Rent' : 'Avail'}
+                                                </button>
+                                                <button onclick="event.stopPropagation(); editListing('${listing._id}')" class="btn-edit">
+                                                    <i class="fas fa-edit"></i>
+                                                </button>
+                                                <button onclick="event.stopPropagation(); deleteListing('${listing._id}')" class="btn-delete">
+                                                    <i class="fas fa-trash"></i>
+                                                </button>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                `).join('')}
+                            </tbody>
+                        </table>
+                    </div>
+                `;
+            } catch(e) {
+                console.error('Error:', e);
+                container.innerHTML = '<div class="empty-state"><i class="fas fa-exclamation-triangle" style="color: #ef4444;"></i><h2>Error loading</h2></div>';
+            }
+        }
+        
+        async function toggleAvailability(id) {
+            if (!confirm('Change the status of this listing?')) return;
+            
+            try {
+                const listing = allListings.find(l => l._id === id);
+                if (!listing) return;
+                
+                const updated = {
+                    ...listing,
+                    isAvailable: !listing.isAvailable
+                };
+                
+                const response = await fetch(`${API_URL}/listings/${id}`, {
+                    method: 'PUT',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(updated)
+                });
+                
+                if (response.ok) {
+                    showToast('✅ Status updated!');
+                    loadAdminListings();
+                    loadListings('listings-container');
+                } else {
+                    showToast('❌ Error updating status', 'error');
+                }
+            } catch(e) {
+                showToast('❌ Connection error', 'error');
+            }
+        }
+        
+        async function deleteListing(id) {
+            if (!confirm('⚠️ Delete this listing? This action cannot be undone!')) return;
+            
+            try {
+                const response = await fetch(`${API_URL}/listings/${id}`, {
+                    method: 'DELETE'
+                });
+                
+                if (response.ok) {
+                    showToast('✅ Listing deleted!');
+                    loadAdminListings();
+                    loadListings('listings-container');
+                } else {
+                    showToast('❌ Error deleting', 'error');
+                }
+            } catch(e) {
+                showToast('❌ Connection error', 'error');
+            }
+        }
+        
+        function editListing(id) {
+            navigate(`/edit/${id}`);
+        }
+        
+        async function loadEditForm(id) {
+            const container = document.getElementById('edit-container');
+            if (!container) return;
+            
+            try {
+                const response = await fetch(`${API_URL}/listings/${id}`);
+                const data = await response.json();
+                const listing = data.data;
+                
+                if (!listing) {
+                    container.innerHTML = '<div class="empty-state"><i class="fas fa-exclamation-circle"></i><h2>Listing not found</h2></div>';
+                    return;
+                }
+                
+                const houseTypes = ['Single Room', 'Studio', '1 Bedroom', '2 Bedroom', '3 Bedroom', 'Apartment', 'Other'];
+                
+                container.innerHTML = `
+                    <div class="form-card">
+                        <div style="display: flex; align-items: center; gap: 12px; margin-bottom: 8px;">
+                            <i class="fas fa-edit" style="color: #FF385C; font-size: 28px;"></i>
+                            <h1 style="font-size: 28px; font-weight: 700; color: #1a1a1a;">Edit Listing</h1>
+                        </div>
+                        <p style="color: #666; margin-bottom: 24px;">Update the information</p>
+                        
+                        <div id="edit-message" style="display: none; padding: 14px; border-radius: 12px; margin-bottom: 20px;"></div>
+                        
+                        <form id="edit-form" onsubmit="updateListing(event)">
+                            <input type="hidden" id="edit-id" value="${listing._id}">
+                            
+                            <div style="margin-bottom: 18px;">
+                                <label style="display: block; font-weight: 600; margin-bottom: 6px; color: #1a1a1a;">Title *</label>
+                                <input type="text" id="edit-title" required value="${listing.title}" class="input-field">
+                            </div>
+                            
+                            <div style="margin-bottom: 18px;">
+                                <label style="display: block; font-weight: 600; margin-bottom: 6px; color: #1a1a1a;">Description *</label>
+                                <textarea id="edit-description" required rows="4" class="input-field" style="resize: vertical;">${listing.description}</textarea>
+                            </div>
+                            
+                            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-bottom: 18px;">
+                                <div>
+                                    <label style="display: block; font-weight: 600; margin-bottom: 6px; color: #1a1a1a;">Price (FCFA/month) *</label>
+                                    <input type="number" id="edit-price" required min="0" value="${listing.price}" class="input-field">
+                                </div>
+                                <div>
+                                    <label style="display: block; font-weight: 600; margin-bottom: 6px; color: #1a1a1a;">Location *</label>
+                                    <input type="text" id="edit-location" required value="${listing.location}" placeholder="e.g., Molyko, Buea" class="input-field">
+                                </div>
+                            </div>
+                            
+                            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-bottom: 18px;">
+                                <div>
+                                    <label style="display: block; font-weight: 600; margin-bottom: 6px; color: #1a1a1a;">Property Type *</label>
+                                    <select id="edit-houseType" required class="input-field">
+                                        ${houseTypes.map(t => `<option value="${t}" ${listing.houseType === t ? 'selected' : ''}>${t}</option>`).join('')}
+                                    </select>
+                                </div>
+                                <div>
+                                    <label style="display: block; font-weight: 600; margin-bottom: 6px; color: #1a1a1a;">WhatsApp *</label>
+                                    <input type="tel" id="edit-whatsapp" required value="${listing.whatsappNumber}" class="input-field">
+                                </div>
+                            </div>
+                            
+                            <div style="margin-bottom: 18px;">
+                                <label style="display: block; font-weight: 600; margin-bottom: 6px; color: #1a1a1a;">TikTok Video Link *</label>
+                                <input type="url" id="edit-video" required value="${listing.videoUrl}" class="input-field">
+                            </div>
+                            
+                            <div style="margin-bottom: 18px;">
+                                <label style="display: block; font-weight: 600; margin-bottom: 6px; color: #1a1a1a;">Image Link</label>
+                                <input type="url" id="edit-image" value="${listing.images && listing.images[0] ? listing.images[0] : ''}" class="input-field">
+                            </div>
+                            
+                            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-bottom: 24px;">
+                                <div style="display: flex; align-items: center; gap: 12px;">
+                                    <input type="checkbox" id="edit-available" ${listing.isAvailable ? 'checked' : ''} style="width: 20px; height: 20px; accent-color: #FF385C;">
+                                    <label style="font-weight: 500; color: #1a1a1a;">Available</label>
+                                </div>
+                                <div style="display: flex; align-items: center; gap: 12px;">
+                                    <input type="checkbox" id="edit-featured" ${listing.featured ? 'checked' : ''} style="width: 20px; height: 20px; accent-color: #f59e0b;">
+                                    <label style="font-weight: 500; color: #1a1a1a;">⭐ Featured</label>
+                                </div>
+                            </div>
+                            
+                            <div style="display: flex; gap: 12px;">
+                                <button type="submit" class="btn-primary" style="flex: 1; padding: 16px; font-size: 18px;">
+                                    <span id="edit-submit-text"><i class="fas fa-save"></i> Update</span>
+                                    <span id="edit-submit-loading" style="display: none;"><i class="fas fa-spinner fa-spin"></i> Updating...</span>
+                                </button>
+                                <button type="button" onclick="navigate('/admin')" style="padding: 16px 24px; border: 2px solid #e5e7eb; border-radius: 12px; background: white; cursor: pointer; font-weight: 500; color: #4a4a4a;">
+                                    Cancel
+                                </button>
+                            </div>
+                        </form>
+                    </div>
+                `;
+            } catch(e) {
+                container.innerHTML = '<div class="empty-state"><i class="fas fa-exclamation-triangle" style="color: #ef4444;"></i><h2>Error loading</h2></div>';
+            }
+        }
+        
+        async function updateListing(e) {
+            e.preventDefault();
+            const id = document.getElementById('edit-id').value;
+            const submitBtn = document.getElementById('edit-submit-text');
+            const loadingBtn = document.getElementById('edit-submit-loading');
+            const messageDiv = document.getElementById('edit-message');
+            
+            submitBtn.style.display = 'none';
+            loadingBtn.style.display = 'inline';
+            messageDiv.style.display = 'none';
+            
+            const imageUrl = document.getElementById('edit-image').value.trim();
+            
+            const data = {
+                title: document.getElementById('edit-title').value,
+                description: document.getElementById('edit-description').value,
+                price: parseFloat(document.getElementById('edit-price').value),
+                location: document.getElementById('edit-location').value,
+                houseType: document.getElementById('edit-houseType').value,
+                whatsappNumber: document.getElementById('edit-whatsapp').value.replace(/\D/g, ''),
+                videoUrl: document.getElementById('edit-video').value,
+                images: imageUrl ? [imageUrl] : ['https://example.com/image.jpg'],
+                isAvailable: document.getElementById('edit-available').checked,
+                featured: document.getElementById('edit-featured').checked
+            };
+            
+            try {
+                const response = await fetch(`${API_URL}/listings/${id}`, {
+                    method: 'PUT',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(data)
+                });
+                
+                if (response.ok) {
+                    messageDiv.style.display = 'block';
+                    messageDiv.style.background = '#dcfce7';
+                    messageDiv.style.color = '#166534';
+                    messageDiv.style.border = '1px solid #86efac';
+                    messageDiv.innerHTML = '✅ Listing updated successfully!';
+                    showToast('✅ Listing updated!');
+                    setTimeout(() => navigate('/admin'), 1000);
+                } else {
+                    const error = await response.json();
+                    messageDiv.style.display = 'block';
+                    messageDiv.style.background = '#fee2e2';
+                    messageDiv.style.color = '#991b1b';
+                    messageDiv.style.border = '1px solid #fca5a5';
+                    messageDiv.innerHTML = '❌ ' + (error.message || 'Error updating');
+                }
+            } catch(e) {
+                messageDiv.style.display = 'block';
+                messageDiv.style.background = '#fee2e2';
+                messageDiv.style.color = '#991b1b';
+                messageDiv.style.border = '1px solid #fca5a5';
+                messageDiv.innerHTML = '❌ Connection error';
+            }
+            
+            submitBtn.style.display = 'inline';
+            loadingBtn.style.display = 'none';
+        }
+        
+        async function loadListingDetail() {
+            const id = window.location.pathname.split('/')[2];
+            const container = document.getElementById('detail-container');
+            if (!container) return;
+            
+            try {
+                const response = await fetch(`${API_URL}/listings/${id}`);
+                const data = await response.json();
+                const listing = data.data;
+                
+                if (!listing) {
+                    container.innerHTML = `<div class="empty-state"><i class="fas fa-exclamation-circle"></i><h2>Listing not found</h2></div>`;
+                    return;
+                }
+                
+                container.innerHTML = `
+                    <div style="background: white; border-radius: 20px; overflow: hidden; box-shadow: 0 4px 20px rgba(0,0,0,0.08);">
+                        <div style="padding: 16px 0; min-height: 80px; background: linear-gradient(135deg, #f5f5f5, #e5e5e5); overflow: hidden; position: relative;">
+                            ${listing.featured ? `
+                                <div style="position: absolute; top: 12px; left: 12px;">
+                                    <span class="badge-featured">⭐ Featured</span>
+                                </div>
+                            ` : ''}
+                            <div style="position: absolute; bottom: 12px; left: 12px;">
+                                <span class="price-tag" style="font-size: 20px; padding: 8px 20px;">
+                                    <i class="fas fa-coins"></i>
+                                    ${formatPrice(listing.price)} ${CURRENCY}
+                                    <span style="font-size: 14px; color: #999; font-weight: normal;">/month</span>
+                                </span>
+                            </div>
+                            <div style="position: absolute; top: 12px; right: 12px;">
+                                <span class="${listing.isAvailable ? 'badge-available' : 'badge-rented'}">
+                                    ${listing.isAvailable ? '✓ Available' : '✗ Rented'}
+                                </span>
+                            </div>
+                            <div style="position: absolute; bottom: 12px; right: 12px;">
+                                <span style="font-size: 14px; color: #999;"><i class="fas fa-eye"></i> ${listing.views || 0} views</span>
+                            </div>
+                        </div>
+                        
+                        <div style="padding: 32px;">
+                            <div style="display: flex; justify-content: space-between; align-items: flex-start; flex-wrap: wrap; gap: 16px; margin-bottom: 16px;">
+                                <div style="flex: 1;">
+                                    <h1 style="font-size: 28px; font-weight: 700; color: #1a1a1a; margin-bottom: 8px;">${listing.title}</h1>
+                                    <div style="display: flex; flex-wrap: wrap; gap: 16px; color: #666; font-size: 16px;">
+                                        <span><i class="fas fa-map-marker-alt" style="color: #FF385C;"></i> ${listing.location}</span>
+                                        <span><i class="fas fa-bed" style="color: #FF385C;"></i> ${listing.houseType}</span>
+                                        <span style="font-size: 14px; color: #999;"><i class="fas fa-eye"></i> ${listing.views || 0} views</span>
+                                    </div>
+                                </div>
+                                <div style="text-align: right;">
+                                    <div style="font-size: 32px; font-weight: 700; color: #FF385C;">
+                                        ${formatPrice(listing.price)} <span style="font-size: 16px; font-weight: 400; color: #666;">${CURRENCY}/month</span>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div style="border-top: 1px solid #f0f0f0; padding-top: 24px; margin-top: 8px;">
+                                <h2 style="font-size: 18px; font-weight: 600; color: #1a1a1a; margin-bottom: 12px;">📝 Description</h2>
+                                <p style="color: #4a4a4a; line-height: 1.8; font-size: 16px;">${listing.description}</p>
+                            </div>
+                            
+                            <div style="border-top: 1px solid #f0f0f0; padding-top: 24px; margin-top: 24px;">
+                                <h2 style="font-size: 18px; font-weight: 600; color: #1a1a1a; margin-bottom: 12px;">🎬 Video Walkthrough</h2>
+                                <div class="tiktok-video-container">
+                                    <i class="fab fa-tiktok"></i>
+                                    <p style="color: #fff; margin: 12px 0; font-size: 16px;">
+                                        🎥 Video available on TikTok
+                                    </p>
+                                    <a href="${listing.videoUrl}" target="_blank" class="btn-tiktok" style="display: inline-flex; align-items: center; gap: 10px; padding: 14px 28px;">
+                                        <i class="fab fa-tiktok" style="font-size: 24px;"></i>
+                                        Watch on TikTok
+                                        <i class="fas fa-external-link-alt" style="font-size: 14px;"></i>
+                                    </a>
+                                    <p style="color: #999; font-size: 12px; margin-top: 8px;">
+                                        Click to watch the video in the TikTok app
+                                    </p>
+                                </div>
+                            </div>
+                            
+                            <div style="border-top: 1px solid #f0f0f0; padding-top: 24px; margin-top: 24px; display: flex; flex-wrap: wrap; gap: 12px;">
+                                <a href="https://wa.me/237${listing.whatsappNumber}" target="_blank" class="btn-whatsapp" style="font-size: 18px; padding: 14px 32px;">
+                                    <i class="fab fa-whatsapp"></i> Contact Owner
+                                </a>
+                                <button onclick="navigator.clipboard.writeText('237${listing.whatsappNumber}'); showToast('📋 Number copied!');" style="padding: 14px 24px; border: 2px solid #e5e7eb; border-radius: 12px; background: white; cursor: pointer; font-weight: 500; color: #4a4a4a;">
+                                    <i class="fas fa-copy"></i> Copy Number
+                                </button>
+                            </div>
+                            
+                            <div style="border-top: 1px solid #f0f0f0; padding-top: 16px; margin-top: 16px; display: flex; justify-content: space-between; flex-wrap: wrap; gap: 8px; font-size: 14px; color: #999;">
+                                <span><i class="far fa-calendar-alt"></i> Listed on ${new Date(listing.createdAt).toLocaleDateString('en-CM', { year: 'numeric', month: 'long', day: 'numeric' })}</span>
+                                <span><i class="fas fa-eye"></i> ${listing.views || 0} views</span>
+                            </div>
+                        </div>
+                    </div>
+                `;
+            } catch(e) {
+                container.innerHTML = `<div class="empty-state"><i class="fas fa-exclamation-triangle" style="color: #ef4444;"></i><h2>Error loading</h2></div>`;
+            }
+        }
+        
+        // Search functions
+        function handleSearch() {
+            const keyword = document.getElementById('search-input').value.trim();
+            if (keyword) {
+                loadListings('listings-container', keyword);
+            } else {
+                loadListings('listings-container');
+            }
+        }
+        
+        function clearSearch() {
+            document.getElementById('search-input').value = '';
+            loadListings('listings-container');
+        }
+        
+        // Submit listing
+        async function submitListing(e) {
+            e.preventDefault();
+            const submitBtn = document.getElementById('submit-text');
+            const loadingBtn = document.getElementById('submit-loading');
+            const messageDiv = document.getElementById('form-message');
+            
+            submitBtn.style.display = 'none';
+            loadingBtn.style.display = 'inline';
+            messageDiv.style.display = 'none';
+            
+            let whatsapp = document.getElementById('whatsapp').value.trim();
+            whatsapp = whatsapp.replace(/\D/g, '');
+            
+            const imageUrl = document.getElementById('image-url').value.trim();
+            const videoUrl = document.getElementById('video-url').value.trim();
+            
+            const data = {
+                title: document.getElementById('title').value,
+                description: document.getElementById('description').value,
+                price: parseFloat(document.getElementById('price').value),
+                location: document.getElementById('location').value,
+                houseType: document.getElementById('houseType').value,
+                whatsappNumber: whatsapp,
+                isAvailable: document.getElementById('available').checked,
+                featured: document.getElementById('featured').checked,
+                images: imageUrl ? [imageUrl] : ['https://example.com/image.jpg'],
+                videoUrl: videoUrl || 'https://example.com/video.mp4'
+            };
+            
+            try {
+                const response = await fetch(`${API_URL}/listings`, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(data)
+                });
+                
+                if (response.ok) {
+                    messageDiv.style.display = 'block';
+                    messageDiv.style.background = '#dcfce7';
+                    messageDiv.style.color = '#166534';
+                    messageDiv.style.border = '1px solid #86efac';
+                    messageDiv.innerHTML = '✅ Listing published successfully! Redirecting...';
+                    showToast('✅ Listing published successfully!');
+                    setTimeout(() => navigate('/'), 1500);
+                } else {
+                    const error = await response.json();
+                    messageDiv.style.display = 'block';
+                    messageDiv.style.background = '#fee2e2';
+                    messageDiv.style.color = '#991b1b';
+                    messageDiv.style.border = '1px solid #fca5a5';
+                    messageDiv.innerHTML = '❌ ' + (error.message || 'Error publishing');
+                }
+            } catch(e) {
+                messageDiv.style.display = 'block';
+                messageDiv.style.background = '#fee2e2';
+                messageDiv.style.color = '#991b1b';
+                messageDiv.style.border = '1px solid #fca5a5';
+                messageDiv.innerHTML = '❌ Cannot connect to server. Make sure the backend is running.';
+            }
+            
+            submitBtn.style.display = 'inline';
+            loadingBtn.style.display = 'none';
+        }
+        
+        function logout() {
+            isAdmin = false;
+            sessionStorage.removeItem('isAdmin');
+            showToast('👋 Logged out');
+            navigate('/');
+        }
+        
+        // Main render function
+        function renderApp() {
+            const path = window.location.pathname;
+            let content = '';
+            
+            if (path === '/' || path === '') {
+                content = renderHome();
+                document.getElementById('app').innerHTML = renderNavbar() + content;
+                setTimeout(() => loadListings('listings-container'), 100);
+            } else if (path === '/login') {
+                content = renderLogin();
+                document.getElementById('app').innerHTML = renderNavbar() + content;
+            } else if (path === '/admin') {
+                if (!isAdmin) {
+                    navigate('/login');
+                    return;
+                }
+                content = renderAdmin();
+                document.getElementById('app').innerHTML = renderNavbar() + content;
+                setTimeout(() => loadAdminListings(), 100);
+            } else if (path === '/add') {
+                if (!isAdmin) {
+                    navigate('/login');
+                    return;
+                }
+                content = renderAdd();
+                document.getElementById('app').innerHTML = renderNavbar() + content;
+            } else if (path.startsWith('/edit/')) {
+                if (!isAdmin) {
+                    navigate('/login');
+                    return;
+                }
+                const id = path.split('/')[2];
+                content = renderEdit(id);
+                document.getElementById('app').innerHTML = renderNavbar() + content;
+                setTimeout(() => loadEditForm(id), 100);
+            } else if (path.startsWith('/listing/')) {
+                content = renderListingDetail();
+                document.getElementById('app').innerHTML = renderNavbar() + content;
+                setTimeout(() => loadListingDetail(), 100);
+            } else {
+                content = renderHome();
+                document.getElementById('app').innerHTML = renderNavbar() + content;
+                setTimeout(() => loadListings('listings-container'), 100);
+            }
+        }
+        
+        window.addEventListener('popstate', renderApp);
+        renderApp();
+        
+        const style = document.createElement('style');
+        style.textContent = `@keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }`;
+        document.head.appendChild(style);
+    </script>
+</body>
+</html>

@@ -1,0 +1,36 @@
+/* Change page background from white to light gray */
+body { 
+    background: #f1f5f9 !important; 
+}
+
+/* Make cards white with better shadows */
+.card {
+    background: white !important;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.08) !important;
+    border: none !important;
+}
+
+/* More spacing between cards */
+.grid { 
+    gap: 32px !important;
+}
+
+/* More padding inside cards */
+.card-body {
+    padding: 24px 24px 20px !important;
+}
+
+/* Slightly wider cards */
+.grid {
+    grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)) !important;
+}
+
+/* Stats bar background */
+.stats-bar {
+    background: white !important;
+}
+
+/* Hero section stays as is */
+.hero {
+    margin-bottom: 40px !important;
+}

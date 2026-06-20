@@ -1,0 +1,38 @@
+function renderNavbar() {
+    const currentPath = window.location.pathname;
+    const isActive = (path) => currentPath === path ? 'active' : '';
+    
+    // Only show admin links if logged in
+    const isAdmin = sessionStorage.getItem('isAdmin') === 'true';
+    
+    return `
+        <nav style="background: white; box-shadow: 0 2px 20px rgba(0,0,0,0.06); position: sticky; top: 0; z-index: 50;">
+            <div class="container" style="padding: 12px 0; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 12px;">
+                <a href="/" style="font-size: 26px; font-weight: 800; color: #FF385C; text-decoration: none; letter-spacing: -0.5px;">
+                    🏠 HomeLink
+                    <span style="font-size: 14px; font-weight: 400; color: #666; letter-spacing: 0;">🇨🇲</span>
+                </a>
+                <div style="display: flex; gap: 4px; align-items: center; flex-wrap: wrap;">
+                    <a href="/" class="nav-link ${isActive('/')}" onclick="event.preventDefault(); navigate('/')">
+                        <i class="fas fa-home"></i> Home
+                    </a>
+                    ${isAdmin ? `
+                        <a href="/admin" class="nav-link ${isActive('/admin')}" onclick="event.preventDefault(); navigate('/admin')">
+                            <i class="fas fa-cog"></i> Dashboard
+                        </a>
+                        <a href="/add" class="nav-link-add" onclick="event.preventDefault(); navigate('/add')">
+                            <i class="fas fa-plus-circle"></i> Add Listing
+                        </a>
+                        <button onclick="logout()" class="btn-admin" style="background: #ef4444; padding: 8px 16px; border-radius: 8px; border: none; color: white; cursor: pointer; font-weight: 500;">
+                            <i class="fas fa-sign-out-alt"></i> Logout
+                        </button>
+                    ` : `
+                        <a href="/login" class="nav-link ${isActive('/login')}" onclick="event.preventDefault(); navigate('/login')">
+                            <i class="fas fa-lock"></i> Admin
+                        </a>
+                    `}
+                </div>
+            </div>
+        </nav>
+    `;
+}

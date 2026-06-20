@@ -1,0 +1,82 @@
+{
+  "listings": [
+    {
+      "_id": "223f38f8-aa4e-48c9-8c7c-1a754be6801c",
+      "title": "Jsmsk",
+      "description": "Nsndnn",
+      "price": 200,
+      "location": "Buea Town",
+      "houseType": "2 Bedroom",
+      "videoUrl": "https://example.com/video.mp4",
+      "images": [
+        "https://example.com/image.jpg"
+      ],
+      "whatsappNumber": "656595959",
+      "isAvailable": true,
+      "createdAt": "2026-06-19T17:54:09.763Z",
+      "views": 5,
+      "viewedBy": [
+        "::1"
+      ]
+    },
+    {
+      "_id": "2fcec780-5e7f-4dbf-ae65-75b4bd5670be",
+      "title": "Appartement",
+      "description": "Ok it buetifull",
+      "price": 20,
+      "location": "Bonduma",
+      "houseType": "1 Bedroom",
+      "videoUrl": "https://example.com/video.mp4",
+      "images": [
+        "https://example.com/image.jpg"
+      ],
+      "whatsappNumber": "674378787",
+      "isAvailable": true,
+      "createdAt": "2026-06-19T17:55:46.931Z",
+      "views": 2,
+      "viewedBy": [
+        "::1"
+      ]
+    },
+    {
+      "_id": "1a810322-1e5c-4bfe-aec5-540d3a0c2051",
+      "title": "Beautiful",
+      "description": "Good house",
+      "price": 1500,
+      "location": "Bonduma",
+      "houseType": "1 Bedroom",
+      "videoUrl": "https://example.com/video.mp4",
+      "images": [
+        "https://example.com/image.jpg"
+      ],
+      "whatsappNumber": "674348787",
+      "isAvailable": true,
+      "createdAt": "2026-06-19T18:44:25.234Z",
+      "views": 7,
+      "featured": false,
+      "viewedBy": [
+        "::1"
+      ]
+    },
+    {
+      "_id": "3f9d9c87-919f-48d9-b5b8-336964dd2b9e",
+      "title": "3 beds room",
+      "description": "Good house",
+      "price": 2300,
+      "location": "Douala, Bonaberi",
+      "houseType": "1 Bedroom",
+      "whatsappNumber": "674348787",
+      "videoUrl": "https://vt.tiktok.com/ZSQcdEJuj/",
+      "images": [
+        "https://example.com/image.jpg"
+      ],
+      "isAvailable": false,
+      "featured": false,
+      "createdAt": "2026-06-19T20:13:13.045Z",
+      "views": 11,
+      "viewedBy": [
+        "::1"
+      ]
+    }
+  ]
+}
