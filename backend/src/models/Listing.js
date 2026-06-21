@@ -8,11 +8,11 @@ const Listing = {
       _id: uuidv4(),
       ...data,
       images: data.images || [],
+      badges: data.badges || [],
       isAvailable: data.isAvailable !== undefined ? data.isAvailable : true,
       createdAt: new Date().toISOString(),
       price: parseFloat(data.price),
       views: 0,
-      viewedBy: [], // Store IP addresses that viewed this listing
       featured: data.featured || false
     };
     db.data.listings.push(listing);
@@ -39,7 +39,6 @@ const Listing = {
     
     listings.sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt));
     
-    // Remove viewedBy array when sending to frontend (for privacy)
     return listings.slice(0, 100).map(({ viewedBy, ...rest }) => rest);
   },
 
@@ -47,8 +46,6 @@ const Listing = {
     await db.read();
     const listing = db.data.listings.find(l => l._id === id);
     if (!listing) return null;
-    
-    // Return listing without viewedBy array for privacy
     const { viewedBy, ...rest } = listing;
     return rest;
   },
@@ -58,7 +55,6 @@ const Listing = {
     const listing = db.data.listings.find(l => l._id === id);
     if (!listing) return null;
     
-    // Check if this IP already viewed this listing
     if (!listing.viewedBy) {
       listing.viewedBy = [];
     }
@@ -69,7 +65,6 @@ const Listing = {
       await db.write();
     }
     
-    // Return listing without viewedBy array
     const { viewedBy, ...rest } = listing;
     return rest;
   },
@@ -79,7 +74,6 @@ const Listing = {
     const index = db.data.listings.findIndex(l => l._id === id);
     if (index === -1) return null;
     
-    // Preserve viewedBy array when updating
     const viewedBy = db.data.listings[index].viewedBy || [];
     db.data.listings[index] = { ...db.data.listings[index], ...data, viewedBy };
     await db.write();
