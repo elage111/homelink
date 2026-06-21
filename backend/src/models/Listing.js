@@ -19,7 +19,6 @@ const Listing = {
     await db.write();
     return listing;
   },
-
   async find(filters = {}) {
     await db.read();
     let listings = db.data.listings;
@@ -37,7 +36,6 @@ const Listing = {
     listings.sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt));
     return listings.slice(0, 100).map(({ viewedBy, ...rest }) => rest);
   },
-
   async findById(id) {
     await db.read();
     const listing = db.data.listings.find(l => l._id === id);
@@ -45,14 +43,11 @@ const Listing = {
     const { viewedBy, ...rest } = listing;
     return rest;
   },
-
   async addView(id, ip) {
     await db.read();
     const listing = db.data.listings.find(l => l._id === id);
     if (!listing) return null;
-    if (!listing.viewedBy) {
-      listing.viewedBy = [];
-    }
+    if (!listing.viewedBy) { listing.viewedBy = []; }
     if (!listing.viewedBy.includes(ip)) {
       listing.viewedBy.push(ip);
       listing.views = (listing.views || 0) + 1;
@@ -61,7 +56,6 @@ const Listing = {
     const { viewedBy, ...rest } = listing;
     return rest;
   },
-
   async update(id, data) {
     await db.read();
     const index = db.data.listings.findIndex(l => l._id === id);
@@ -72,7 +66,6 @@ const Listing = {
     const { viewedBy: v, ...rest } = db.data.listings[index];
     return rest;
   },
-
   async delete(id) {
     await db.read();
     const index = db.data.listings.findIndex(l => l._id === id);
@@ -81,7 +74,6 @@ const Listing = {
     await db.write();
     return true;
   },
-
   async getStats() {
     await db.read();
     const listings = db.data.listings;
@@ -91,5 +83,4 @@ const Listing = {
     return { total, views, locations };
   }
 };
-
 export default Listing;
