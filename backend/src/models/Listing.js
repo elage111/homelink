@@ -23,7 +23,6 @@ const Listing = {
   async find(filters = {}) {
     await db.read();
     let listings = db.data.listings;
-    
     if (filters.keyword) {
       const keyword = filters.keyword.toLowerCase();
       listings = listings.filter(l => 
@@ -32,13 +31,10 @@ const Listing = {
         l.description.toLowerCase().includes(keyword)
       );
     }
-    
     if (filters.isAvailable !== undefined) {
       listings = listings.filter(l => l.isAvailable === filters.isAvailable);
     }
-    
     listings.sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt));
-    
     return listings.slice(0, 100).map(({ viewedBy, ...rest }) => rest);
   },
 
@@ -54,17 +50,14 @@ const Listing = {
     await db.read();
     const listing = db.data.listings.find(l => l._id === id);
     if (!listing) return null;
-    
     if (!listing.viewedBy) {
       listing.viewedBy = [];
     }
-    
     if (!listing.viewedBy.includes(ip)) {
       listing.viewedBy.push(ip);
       listing.views = (listing.views || 0) + 1;
       await db.write();
     }
-    
     const { viewedBy, ...rest } = listing;
     return rest;
   },
@@ -73,11 +66,9 @@ const Listing = {
     await db.read();
     const index = db.data.listings.findIndex(l => l._id === id);
     if (index === -1) return null;
-    
     const viewedBy = db.data.listings[index].viewedBy || [];
     db.data.listings[index] = { ...db.data.listings[index], ...data, viewedBy };
     await db.write();
-    
     const { viewedBy: v, ...rest } = db.data.listings[index];
     return rest;
   },
@@ -86,7 +77,6 @@ const Listing = {
     await db.read();
     const index = db.data.listings.findIndex(l => l._id === id);
     if (index === -1) return false;
-    
     db.data.listings.splice(index, 1);
     await db.write();
     return true;
