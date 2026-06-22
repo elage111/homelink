@@ -10,363 +10,88 @@
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
         body { font-family: 'Inter', sans-serif; background: #f1f5f9; color: #1a1a1a; }
-        .btn-primary { 
-            background: linear-gradient(135deg, #FF385C 0%, #e0314f 100%);
-            color: white; padding: 14px 28px; border-radius: 12px; 
-            border: none; font-weight: 600; cursor: pointer; transition: all 0.3s; 
-        }
-        .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 8px 30px rgba(255,56,92,0.4); }
-        .btn-whatsapp { 
-            background: linear-gradient(135deg, #25D366 0%, #1da851 100%);
-            color: white; padding: 8px 16px; border-radius: 8px; 
-            border: none; font-weight: 600; cursor: pointer; 
-            display: inline-flex; align-items: center; gap: 6px; text-decoration: none;
-            transition: all 0.3s; font-size: 13px;
-        }
-        .btn-whatsapp:hover { transform: scale(1.05); }
-        .btn-tiktok {
-            background: linear-gradient(135deg, #000000 0%, #1a1a1a 50%, #fe2c55 100%);
-            color: white; padding: 14px 28px; border-radius: 12px; 
-            border: none; font-weight: 600; cursor: pointer; 
-            display: inline-flex; align-items: center; gap: 10px; text-decoration: none;
-            transition: all 0.3s;
-        }
-        .btn-tiktok:hover { transform: scale(1.05); }
-        .btn-admin { 
-            background: #4a4a4a; color: white; padding: 8px 16px; border-radius: 8px; 
-            border: none; font-weight: 500; cursor: pointer; transition: all 0.2s; font-size: 14px;
-        }
-        .btn-admin:hover { background: #333; }
-        .btn-edit { background: #3b82f6; color: white; padding: 6px 14px; border-radius: 6px; border: none; font-weight: 500; cursor: pointer; font-size: 13px; }
-        .btn-edit:hover { background: #2563eb; }
-        .btn-delete { background: #ef4444; color: white; padding: 6px 14px; border-radius: 6px; border: none; font-weight: 500; cursor: pointer; font-size: 13px; }
-        .btn-delete:hover { background: #dc2626; }
         .container { max-width: 1280px; margin: 0 auto; padding: 0 24px; }
-        .hero {
-            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 30%, #0f3460 60%, #e0314f 100%);
-            border-radius: 24px;
-            padding: 60px 40px;
-            margin: 24px 0 40px 0;
-            position: relative;
-            overflow: hidden;
-        }
-        .hero::before {
-            content: '';
-            position: absolute;
-            top: -50%;
-            right: -20%;
-            width: 500px;
-            height: 500px;
-            background: rgba(255,56,92,0.1);
-            border-radius: 50%;
-        }
-        .hero-content { position: relative; z-index: 1; max-width: 700px; }
-        .hero h1 { font-size: 48px; font-weight: 900; color: white; line-height: 1.1; margin-bottom: 16px; }
-        .hero h1 span { background: linear-gradient(135deg, #FF385C, #f97316); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
-        .hero p { color: rgba(255,255,255,0.8); font-size: 20px; line-height: 1.6; margin-bottom: 24px; }
-        .hero .badge {
-            display: inline-block;
-            background: rgba(255,255,255,0.12);
-            backdrop-filter: blur(10px);
-            color: white;
-            padding: 6px 16px;
-            border-radius: 9999px;
-            font-size: 13px;
-            font-weight: 500;
-            margin-bottom: 16px;
-            border: 1px solid rgba(255,255,255,0.08);
-        }
-        .search-wrapper {
-            display: flex;
-            gap: 12px;
-            background: white;
-            padding: 8px;
-            border-radius: 16px;
-            box-shadow: 0 8px 40px rgba(0,0,0,0.15);
-            max-width: 600px;
-            margin-top: 8px;
-        }
-        .search-wrapper input {
-            flex: 1;
-            padding: 14px 20px;
-            border: none;
-            border-radius: 10px;
-            font-size: 16px;
-            outline: none;
-            background: transparent;
-            color: #1a1a1a;
-        }
-        .search-wrapper input::placeholder { color: #94a3b8; }
-        .search-wrapper button {
-            padding: 14px 28px;
-            background: linear-gradient(135deg, #FF385C, #e0314f);
-            color: white;
-            border: none;
-            border-radius: 10px;
-            font-weight: 600;
-            cursor: pointer;
-            transition: all 0.3s;
-            font-size: 15px;
-        }
-        .search-wrapper button:hover { transform: scale(1.02); }
-        .search-wrapper .clear-btn {
-            background: transparent;
-            color: #94a3b8;
-            padding: 14px 18px;
-            border: none;
-            border-radius: 10px;
-            cursor: pointer;
-            font-size: 15px;
-        }
-        .search-wrapper .clear-btn:hover { color: #1a1a1a; background: #f1f5f9; }
-        .grid { 
-            display: grid; 
-            grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); 
-            gap: 32px; 
-        }
-        @media (max-width: 640px) { 
-            .grid { grid-template-columns: 1fr; gap: 24px; }
-            .hero { padding: 40px 24px; }
-            .hero h1 { font-size: 32px; }
-            .search-wrapper { flex-wrap: wrap; }
-            .search-wrapper input { width: 100%; }
-        }
-        .card {
-            background: white;
-            border-radius: 16px;
-            overflow: hidden;
-            box-shadow: 0 4px 20px rgba(0,0,0,0.08);
-            transition: all 0.4s;
-            cursor: pointer;
-            height: 100%;
-            display: flex;
-            flex-direction: column;
-            border: none;
-        }
-        .card:hover { transform: translateY(-8px); box-shadow: 0 20px 60px rgba(0,0,0,0.12); }
-        .card-image-area {
-            padding: 24px 0;
-            min-height: 100px;
-            background: linear-gradient(135deg, #f8fafc, #f1f5f9);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            position: relative;
-        }
-        .card-image-area .tiktok-icon {
-            font-size: 44px;
-            color: #fe2c55;
-            opacity: 0.3;
-            transition: all 0.3s;
-        }
-        .card:hover .card-image-area .tiktok-icon { opacity: 0.5; transform: scale(1.1); }
-        .card-body { padding: 24px 24px 20px; flex: 1; display: flex; flex-direction: column; }
-        .card-body h3 { font-weight: 700; font-size: 18px; color: #0f172a; margin-bottom: 6px; line-height: 1.3; }
-        .card-body .location { display: flex; align-items: center; gap: 6px; color: #64748b; font-size: 14px; margin-bottom: 4px; }
-        .card-body .location i { color: #FF385C; font-size: 12px; }
-        .card-body .property-type { display: flex; align-items: center; gap: 6px; color: #64748b; font-size: 14px; margin-bottom: 14px; }
-        .card-body .property-type i { color: #FF385C; font-size: 12px; }
-        .card-footer {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding-top: 14px;
-            margin-top: auto;
-            border-top: 1px solid #f1f5f9;
-        }
-        .card-footer .date { font-size: 12px; color: #94a3b8; }
-        .badge-available { background: #dcfce7; color: #166534; padding: 4px 14px; border-radius: 9999px; font-size: 12px; font-weight: 600; }
-        .badge-rented { background: #fee2e2; color: #991b1b; padding: 4px 14px; border-radius: 9999px; font-size: 12px; font-weight: 600; }
-        .badge-featured { background: #fef3c7; color: #92400e; padding: 4px 14px; border-radius: 9999px; font-size: 12px; font-weight: 600; }
-        .price-tag {
-            background: white;
-            padding: 6px 16px;
-            border-radius: 9999px;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.08);
-            font-weight: 700;
-            color: #FF385C;
-            font-size: 15px;
-            display: inline-flex;
-            align-items: center;
-            gap: 4px;
-        }
-        .price-tag .currency { font-size: 12px; color: #94a3b8; font-weight: 400; }
-        .view-count { font-size: 12px; color: #94a3b8; display: flex; align-items: center; gap: 4px; }
-        .nav-link { 
-            color: #475569; text-decoration: none; 
-            display: flex; align-items: center; gap: 8px; 
-            padding: 10px 16px; border-radius: 10px;
-            transition: all 0.2s;
-            font-weight: 500;
-            font-size: 15px;
-        }
+        
+        .btn-primary { background: linear-gradient(135deg, #FF385C, #e0314f); color: white; padding: 14px 28px; border-radius: 12px; border: none; font-weight: 600; cursor: pointer; transition: all 0.3s; }
+        .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 8px 25px rgba(255,56,92,0.4); }
+        .btn-whatsapp { background: #25D366; color: white; padding: 8px 16px; border-radius: 8px; border: none; font-weight: 600; cursor: pointer; display: inline-flex; align-items: center; gap: 6px; text-decoration: none; transition: all 0.3s; font-size: 13px; }
+        .btn-whatsapp:hover { transform: scale(1.05); }
+        .btn-tiktok { background: linear-gradient(135deg, #000, #fe2c55); color: white; padding: 14px 28px; border-radius: 12px; border: none; font-weight: 600; cursor: pointer; display: inline-flex; align-items: center; gap: 10px; text-decoration: none; transition: all 0.3s; }
+        .btn-tiktok:hover { transform: scale(1.05); }
+        
+        .nav-link { color: #475569; text-decoration: none; padding: 10px 16px; border-radius: 10px; font-weight: 500; transition: all 0.2s; }
         .nav-link:hover { background: #f1f5f9; color: #FF385C; }
         .nav-link.active { color: #FF385C; background: #fff5f7; }
-        .nav-link-add {
-            background: linear-gradient(135deg, #FF385C, #e0314f);
-            color: white !important;
-            padding: 10px 20px;
-            border-radius: 9999px;
-            font-weight: 600;
-            box-shadow: 0 4px 15px rgba(255,56,92,0.25);
-            transition: all 0.3s;
-        }
-        .nav-link-add:hover { transform: scale(1.05); box-shadow: 0 8px 25px rgba(255,56,92,0.35); }
-        .input-field {
-            width: 100%;
-            padding: 14px 16px;
-            border: 2px solid #e2e8f0;
-            border-radius: 12px;
-            transition: all 0.3s;
-            font-size: 16px;
-            background: white;
-            font-family: inherit;
-        }
-        .input-field:focus { border-color: #FF385C; outline: none; box-shadow: 0 0 0 4px rgba(255,56,92,0.1); }
-        .form-card {
-            background: white;
-            border-radius: 20px;
-            padding: 40px;
-            box-shadow: 0 4px 20px rgba(0,0,0,0.06);
-            border: 1px solid rgba(0,0,0,0.04);
-        }
-        .detail-card {
-            background: white;
-            border-radius: 20px;
-            overflow: hidden;
-            box-shadow: 0 4px 20px rgba(0,0,0,0.06);
-            border: 1px solid rgba(0,0,0,0.04);
-        }
-        .detail-content { padding: 32px; }
-        .detail-title { font-size: 28px; font-weight: 700; color: #0f172a; margin-bottom: 8px; }
-        .detail-meta { display: flex; flex-wrap: wrap; gap: 16px; color: #64748b; font-size: 16px; }
-        .detail-meta i { color: #FF385C; width: 18px; }
-        .detail-description { color: #475569; line-height: 1.8; font-size: 16px; }
-        .detail-price { font-size: 36px; font-weight: 800; color: #FF385C; }
-        .detail-price .currency { font-size: 18px; font-weight: 400; color: #64748b; }
-        .detail-image-area {
-            padding: 40px 0;
-            min-height: 160px;
-            background: linear-gradient(135deg, #f8fafc, #f1f5f9);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            position: relative;
-        }
-        .detail-image-area .tiktok-icon { font-size: 72px; color: #fe2c55; opacity: 0.2; }
-        .tiktok-video-container {
-            background: linear-gradient(135deg, #0f0f1a, #1a1a2e);
-            border-radius: 16px;
-            padding: 48px 24px;
-            text-align: center;
-            min-height: 200px;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            width: 100%;
-            border: 1px solid rgba(255,255,255,0.06);
-        }
-        .tiktok-video-container i { font-size: 56px; color: #fe2c55; margin-bottom: 12px; }
-        .tiktok-video-container p { color: rgba(255,255,255,0.7); font-size: 16px; margin-bottom: 16px; }
-        .stats-bar {
-            display: flex;
-            gap: 32px;
-            padding: 20px 24px;
-            background: white;
-            border-radius: 16px;
-            margin-bottom: 32px;
-            flex-wrap: wrap;
-            box-shadow: 0 1px 3px rgba(0,0,0,0.06);
-            border: 1px solid rgba(0,0,0,0.04);
-        }
-        .stat-item { display: flex; align-items: center; gap: 10px; color: #475569; font-size: 15px; }
-        .stat-item i { color: #FF385C; font-size: 18px; width: 24px; text-align: center; }
-        .stat-number { font-weight: 700; color: #0f172a; font-size: 18px; }
-        .admin-table {
-            width: 100%;
-            background: white;
-            border-radius: 12px;
-            overflow: hidden;
-            box-shadow: 0 1px 3px rgba(0,0,0,0.06);
-            border: 1px solid rgba(0,0,0,0.04);
-        }
-        .admin-table th { padding: 14px 16px; text-align: left; font-weight: 600; color: #475569; background: #f8fafc; font-size: 13px; text-transform: uppercase; letter-spacing: 0.5px; }
-        .admin-table td { padding: 14px 16px; border-bottom: 1px solid #f1f5f9; font-size: 14px; }
-        .admin-table tr:hover { background: #fafbfc; }
-        .admin-actions { display: flex; gap: 8px; flex-wrap: wrap; justify-content: center; }
-        .empty-state { text-align: center; padding: 80px 20px; }
-        .empty-state i { font-size: 72px; color: #FF385C; opacity: 0.3; margin-bottom: 20px; }
-        .empty-state h2 { font-size: 28px; color: #0f172a; margin-bottom: 12px; font-weight: 700; }
-        .empty-state p { color: #64748b; font-size: 16px; }
-        .toast {
-            position: fixed;
-            bottom: 24px;
-            right: 24px;
-            background: #0f172a;
-            color: white;
-            padding: 16px 24px;
-            border-radius: 12px;
-            box-shadow: 0 8px 40px rgba(0,0,0,0.2);
-            z-index: 1000;
-            animation: slideUp 0.4s;
-            font-size: 15px;
-            font-weight: 500;
-            max-width: 400px;
-        }
-        @keyframes slideUp {
-            from { transform: translateY(100px); opacity: 0; }
-            to { transform: translateY(0); opacity: 1; }
-        }
-        @keyframes spin {
-            0% { transform: rotate(0deg); }
-            100% { transform: rotate(360deg); }
-        }
-        .spinner {
-            display: inline-block;
-            width: 50px;
-            height: 50px;
-            border: 4px solid #f1f5f9;
-            border-top-color: #FF385C;
-            border-radius: 50%;
-            animation: spin 0.8s linear infinite;
-        }
-        .card-image-area .badge-featured { position: absolute; top: 12px; left: 12px; }
+        .nav-link-add { background: linear-gradient(135deg, #FF385C, #e0314f); color: white !important; padding: 10px 20px; border-radius: 9999px; font-weight: 600; }
+        .btn-admin { background: #4a4a4a; color: white; padding: 8px 16px; border-radius: 8px; border: none; font-weight: 500; cursor: pointer; }
+        .btn-admin:hover { background: #333; }
+        .btn-delete { background: #ef4444; color: white; padding: 4px 12px; border: none; border-radius: 4px; cursor: pointer; font-size: 13px; }
+        .btn-delete:hover { background: #dc2626; }
+        .btn-edit { background: #3b82f6; color: white; padding: 4px 12px; border: none; border-radius: 4px; cursor: pointer; font-size: 13px; }
+        .btn-edit:hover { background: #2563eb; }
         
-        .about-section {
-            background: white;
-            border-radius: 20px;
-            padding: 50px 40px;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.06);
-            max-width: 900px;
-            margin: 32px auto;
-        }
-        .about-section h1 { font-size: 38px; font-weight: 800; color: #1a1a1a; text-align: center; }
-        .about-section .subtitle { color: #64748b; font-size: 18px; text-align: center; margin-top: 4px; }
-        .about-section .description { color: #4a4a4a; line-height: 1.8; font-size: 17px; max-width: 700px; margin: 0 auto 24px; text-align: center; }
-        .about-section .feature-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; max-width: 700px; margin: 0 auto 32px; }
-        .about-section .feature-item { padding: 16px; background: #f8fafc; border-radius: 12px; text-align: center; }
-        .about-section .feature-item .icon { font-size: 24px; margin-bottom: 4px; }
-        .about-section .feature-item .label { font-weight: 600; color: #1a1a1a; }
-        .about-section .feature-item .desc { font-size: 14px; color: #64748b; }
-        .about-section .contact-box { background: linear-gradient(135deg, #f8fafc, #f1f5f9); border-radius: 12px; padding: 24px; text-align: center; max-width: 500px; margin: 0 auto; }
-        .about-section .contact-box .label { font-weight: 600; color: #1a1a1a; margin-bottom: 4px; }
-        .about-section .contact-box .phone { color: #25D366; font-weight: 700; font-size: 20px; text-decoration: none; }
-        .about-section .contact-box .hours { font-size: 13px; color: #94a3b8; margin-top: 4px; }
-        @media (max-width: 640px) {
-            .about-section { padding: 30px 20px; }
-            .about-section h1 { font-size: 28px; }
-            .about-section .feature-grid { grid-template-columns: 1fr 1fr; }
-        }
+        .card { background: white; border-radius: 16px; overflow: hidden; box-shadow: 0 4px 20px rgba(0,0,0,0.08); transition: all 0.3s; cursor: pointer; }
+        .card:hover { transform: translateY(-8px); box-shadow: 0 20px 60px rgba(0,0,0,0.12); }
+        .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 28px; }
+        @media (max-width: 640px) { .grid { grid-template-columns: 1fr; } }
+        
+        .badge-available { background: #dcfce7; color: #166534; padding: 4px 12px; border-radius: 9999px; font-size: 12px; font-weight: 600; }
+        .badge-rented { background: #fee2e2; color: #991b1b; padding: 4px 12px; border-radius: 9999px; font-size: 12px; font-weight: 600; }
+        .badge-featured { background: #fef3c7; color: #92400e; padding: 4px 12px; border-radius: 9999px; font-size: 12px; font-weight: 600; }
+        .price-tag { background: white; padding: 4px 12px; border-radius: 9999px; box-shadow: 0 2px 10px rgba(0,0,0,0.08); font-weight: 700; color: #FF385C; font-size: 14px; display: inline-flex; align-items: center; gap: 4px; }
+        .price-tag .currency { font-size: 11px; color: #94a3b8; font-weight: 400; }
+        .view-count { font-size: 12px; color: #94a3b8; display: flex; align-items: center; gap: 4px; }
+        
+        .input-field { width: 100%; padding: 14px 16px; border: 2px solid #e2e8f0; border-radius: 12px; font-size: 16px; transition: all 0.3s; background: white; }
+        .input-field:focus { border-color: #FF385C; outline: none; box-shadow: 0 0 0 4px rgba(255,56,92,0.1); }
+        .form-card { background: white; border-radius: 20px; padding: 40px; box-shadow: 0 4px 20px rgba(0,0,0,0.06); }
+        
+        .hero { background: linear-gradient(135deg, #1a1a2e, #16213e, #0f3460, #e0314f); border-radius: 24px; padding: 60px 40px; margin: 24px 0 40px 0; position: relative; overflow: hidden; }
+        .hero h1 { font-size: 48px; font-weight: 900; color: white; line-height: 1.1; }
+        .hero h1 span { background: linear-gradient(135deg, #FF385C, #f97316); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+        .hero p { color: rgba(255,255,255,0.8); font-size: 20px; margin-top: 12px; }
+        .hero .badge-tag { display: inline-block; background: rgba(255,255,255,0.12); color: white; padding: 6px 16px; border-radius: 9999px; font-size: 13px; font-weight: 500; margin-bottom: 16px; border: 1px solid rgba(255,255,255,0.08); }
+        
+        .search-wrapper { display: flex; gap: 12px; background: white; padding: 8px; border-radius: 16px; box-shadow: 0 8px 40px rgba(0,0,0,0.15); max-width: 600px; margin-top: 20px; }
+        .search-wrapper input { flex: 1; padding: 14px 20px; border: none; border-radius: 10px; font-size: 16px; outline: none; }
+        .search-wrapper button { padding: 14px 28px; background: linear-gradient(135deg, #FF385C, #e0314f); color: white; border: none; border-radius: 10px; font-weight: 600; cursor: pointer; transition: all 0.3s; }
+        .search-wrapper button:hover { transform: scale(1.02); }
+        .search-wrapper .clear-btn { background: transparent; color: #94a3b8; padding: 14px 18px; border: none; border-radius: 10px; cursor: pointer; font-size: 15px; }
+        
+        .stats-bar { display: flex; gap: 32px; padding: 20px 24px; background: white; border-radius: 16px; margin-bottom: 32px; flex-wrap: wrap; box-shadow: 0 1px 3px rgba(0,0,0,0.06); }
+        .stat-item { display: flex; align-items: center; gap: 10px; color: #475569; }
+        .stat-item i { color: #FF385C; font-size: 18px; }
+        .stat-number { font-weight: 700; color: #0f172a; font-size: 18px; }
+        
+        .toast { position: fixed; bottom: 24px; right: 24px; background: #0f172a; color: white; padding: 16px 24px; border-radius: 12px; box-shadow: 0 8px 40px rgba(0,0,0,0.2); z-index: 1000; animation: slideUp 0.4s; font-size: 15px; font-weight: 500; }
+        @keyframes slideUp { from { transform: translateY(100px); opacity: 0; } to { transform: translateY(0); opacity: 1; } }
+        
+        .spinner { display: inline-block; width: 40px; height: 40px; border: 4px solid #f1f5f9; border-top-color: #FF385C; border-radius: 50%; animation: spin 0.8s linear infinite; }
+        @keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
+        
+        .empty-state { text-align: center; padding: 60px 20px; }
+        .empty-state i { font-size: 72px; color: #FF385C; opacity: 0.3; margin-bottom: 16px; }
+        .empty-state h2 { font-size: 28px; color: #0f172a; margin-bottom: 8px; }
+        .empty-state p { color: #64748b; }
+        
+        .admin-table { width: 100%; background: white; border-radius: 12px; overflow: hidden; border: 1px solid rgba(0,0,0,0.04); }
+        .admin-table th { padding: 12px 16px; text-align: left; font-weight: 600; color: #475569; background: #f8fafc; font-size: 13px; text-transform: uppercase; letter-spacing: 0.5px; }
+        .admin-table td { padding: 12px 16px; border-bottom: 1px solid #f1f5f9; font-size: 14px; }
+        .admin-table tr:hover { background: #fafbfc; }
+        
+        .detail-card { background: white; border-radius: 20px; overflow: hidden; box-shadow: 0 4px 20px rgba(0,0,0,0.06); }
+        .detail-content { padding: 32px; }
+        .detail-title { font-size: 28px; font-weight: 700; color: #0f172a; }
+        .detail-meta { display: flex; gap: 16px; color: #64748b; font-size: 16px; margin-top: 8px; }
+        .detail-meta i { color: #FF385C; width: 18px; }
+        
+        .detail-image-area { padding: 40px 0; min-height: 120px; background: linear-gradient(135deg, #f8fafc, #f1f5f9); display: flex; align-items: center; justify-content: center; position: relative; }
+        .detail-image-area .tiktok-icon { font-size: 60px; color: #fe2c55; opacity: 0.2; }
+        
         /* Hide admin link from public */
         nav a[href="/alwydivielage"] {
             display: none !important;
         }
-/* Badge styles */
-.badge-verified { background: #dcfce7; color: #166534; padding: 2px 10px; border-radius: 9999px; font-size: 10px; font-weight: 600; display: inline-block; }
-.badge-owner { background: #dbeafe; color: #1e40af; padding: 2px 10px; border-radius: 9999px; font-size: 10px; font-weight: 600; display: inline-block; }
-.badge-agent { background: #fef3c7; color: #92400e; padding: 2px 10px; border-radius: 9999px; font-size: 10px; font-weight: 600; display: inline-block; }
-.badge-container { display: flex; flex-wrap: wrap; gap: 4px; margin-bottom: 8px; }
     </style>
 </head>
 <body>
@@ -383,16 +108,27 @@
             return new Intl.NumberFormat('fr-CM').format(price);
         }
         
+        function formatDescription(text) {
+            if (!text) return '';
+            // Convert line breaks to <br>
+            let formatted = text.replace(/\n/g, '<br>');
+            // Convert **bold** to <strong>
+            formatted = formatted.replace(/\*\*([^*]+)\*\*/g, '<strong>$1</strong>');
+            // Convert *italic* to <em>
+            formatted = formatted.replace(/\*([^*]+)\*/g, '<em>$1</em>');
+            return formatted;
+        }
+        
         function navigate(path) {
             window.history.pushState({}, '', path);
             renderApp();
         }
         
-        function showToast(message, type = 'success') {
+        function showToast(message, type) {
             const colors = { success: '#22c55e', error: '#ef4444', info: '#3b82f6' };
             const toast = document.createElement('div');
             toast.className = 'toast';
-            toast.style.borderLeft = '4px solid ' + colors[type];
+            toast.style.borderLeft = '4px solid ' + (colors[type] || colors.success);
             toast.innerHTML = message;
             document.body.appendChild(toast);
             setTimeout(() => { toast.remove(); }, 3500);
@@ -443,7 +179,7 @@
                 <div class="container" style="padding: 0 0 32px 0;">
                     <div class="hero">
                         <div class="hero-content">
-                            <div class="badge">🏠 Direct from Homeowners</div>
+                            <div class="badge-tag">🏠 Direct from Homeowners</div>
                             <h1>Find Your <span>Perfect Home</span> in Cameroon</h1>
                             <p>Discover verified properties directly from homeowners. No agents, no commissions.</p>
                             <div class="search-wrapper">
@@ -482,60 +218,51 @@
         function renderAbout() {
             return `
                 <div class="container">
-                    <div class="about-section">
+                    <div class="about-section" style="background: white; border-radius: 20px; padding: 50px 40px; box-shadow: 0 2px 10px rgba(0,0,0,0.06); max-width: 900px; margin: 32px auto;">
                         <div style="text-align: center; margin-bottom: 32px;">
                             <div style="font-size: 48px; margin-bottom: 12px;">🏠</div>
-                            <h1>About HomeLink Cameroon</h1>
-                            <p class="subtitle">Cameroon's #1 Direct Real Estate Platform</p>
+                            <h1 style="font-size: 38px; font-weight: 800; color: #1a1a1a;">About HomeLink Cameroon</h1>
+                            <p style="color: #64748b; font-size: 18px; margin-top: 4px;">Cameroon's #1 Direct Real Estate Platform</p>
                         </div>
-                        
-                        <p class="description">
-                            HomeLink is Cameroon's leading real estate platform that connects homeowners directly to tenants. 
-                            We eliminate agents and commissions, making it easy to find and list properties in Buea, Douala, 
-                            and Yaoundé.
-                        </p>
-                        
-                        <h2 style="font-size: 22px; font-weight: 700; color: #1a1a1a; text-align: center; margin-top: 32px; margin-bottom: 16px;">
-                            Our Mission
-                        </h2>
-                        <p style="color: #4a4a4a; line-height: 1.8; font-size: 16px; max-width: 700px; margin: 0 auto 24px; text-align: center;">
-                            To make finding a home easy, transparent, and affordable for everyone in Cameroon. 
-                            We believe in connecting people directly, saving money, and building trust.
-                        </p>
-                        
-                        <h2 style="font-size: 22px; font-weight: 700; color: #1a1a1a; text-align: center; margin-top: 32px; margin-bottom: 16px;">
-                            Why HomeLink?
-                        </h2>
-                        
-                        <div class="feature-grid">
-                            <div class="feature-item">
-                                <div class="icon">🏠</div>
-                                <p class="label">Direct Listings</p>
-                                <p class="desc">No agents, no middlemen</p>
+                        <div style="max-width: 700px; margin: 0 auto;">
+                            <p style="color: #4a4a4a; line-height: 1.8; font-size: 17px; margin-bottom: 24px;">
+                                HomeLink is Cameroon's leading real estate platform that connects homeowners directly to tenants. 
+                                We eliminate agents and commissions, making it easy to find and list properties in Buea, Douala, 
+                                and Yaoundé.
+                            </p>
+                            <h2 style="font-size: 22px; font-weight: 700; color: #1a1a1a; margin-top: 32px; margin-bottom: 16px; text-align: center;">Our Mission</h2>
+                            <p style="color: #4a4a4a; line-height: 1.8; font-size: 16px; max-width: 700px; margin: 0 auto 24px; text-align: center;">
+                                To make finding a home easy, transparent, and affordable for everyone in Cameroon.
+                            </p>
+                            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-bottom: 32px;">
+                                <div style="padding: 16px; background: #f8fafc; border-radius: 12px; text-align: center;">
+                                    <div style="font-size: 24px; margin-bottom: 4px;">🏠</div>
+                                    <p style="font-weight: 600; color: #1a1a1a;">Direct Listings</p>
+                                    <p style="font-size: 14px; color: #64748b;">No agents, no middlemen</p>
+                                </div>
+                                <div style="padding: 16px; background: #f8fafc; border-radius: 12px; text-align: center;">
+                                    <div style="font-size: 24px; margin-bottom: 4px;">📱</div>
+                                    <p style="font-weight: 600; color: #1a1a1a;">WhatsApp Contact</p>
+                                    <p style="font-size: 14px; color: #64748b;">Connect with owners directly</p>
+                                </div>
+                                <div style="padding: 16px; background: #f8fafc; border-radius: 12px; text-align: center;">
+                                    <div style="font-size: 24px; margin-bottom: 4px;">💰</div>
+                                    <p style="font-weight: 600; color: #1a1a1a;">Zero Commission</p>
+                                    <p style="font-size: 14px; color: #64748b;">Save money on both sides</p>
+                                </div>
+                                <div style="padding: 16px; background: #f8fafc; border-radius: 12px; text-align: center;">
+                                    <div style="font-size: 24px; margin-bottom: 4px;">✅</div>
+                                    <p style="font-weight: 600; color: #1a1a1a;">Verified Properties</p>
+                                    <p style="font-size: 14px; color: #64748b;">Trusted and authentic</p>
+                                </div>
                             </div>
-                            <div class="feature-item">
-                                <div class="icon">📱</div>
-                                <p class="label">WhatsApp Contact</p>
-                                <p class="desc">Connect with owners directly</p>
+                            <div style="background: linear-gradient(135deg, #f8fafc, #f1f5f9); border-radius: 12px; padding: 24px; text-align: center;">
+                                <p style="font-weight: 600; color: #1a1a1a; margin-bottom: 4px;">📞 Contact Us</p>
+                                <a href="https://wa.me/237672751769" target="_blank" style="color: #25D366; font-weight: 700; font-size: 20px; text-decoration: none;">
+                                    <i class="fab fa-whatsapp"></i> +237 6 72 75 17 69
+                                </a>
+                                <p style="font-size: 13px; color: #94a3b8; margin-top: 4px;">Available 7 days a week</p>
                             </div>
-                            <div class="feature-item">
-                                <div class="icon">💰</div>
-                                <p class="label">Zero Commission</p>
-                                <p class="desc">Save money on both sides</p>
-                            </div>
-                            <div class="feature-item">
-                                <div class="icon">✅</div>
-                                <p class="label">Verified Properties</p>
-                                <p class="desc">Trusted and authentic</p>
-                            </div>
-                        </div>
-                        
-                        <div class="contact-box">
-                            <p class="label">📞 Contact Us</p>
-                            <a href="https://wa.me/237672751769" target="_blank" class="phone">
-                                <i class="fab fa-whatsapp"></i> +237 6 72 75 17 69
-                            </a>
-                            <p class="hours">Available 7 days a week</p>
                         </div>
                     </div>
                 </div>
@@ -607,25 +334,6 @@
                                     <label style="font-weight: 500; color: #0f172a;">⭐ Featured</label>
                                 </div>
                             </div>
-                            <!-- Badges Section -->
-                            <div style="margin-bottom: 18px;">
-                                <label style="display: block; font-weight: 600; margin-bottom: 8px; color: #0f172a; font-size: 14px;">Property Badges</label>
-                                <div style="display: flex; flex-wrap: wrap; gap: 10px;">
-                                    <label style="display: flex; align-items: center; gap: 6px; background: #f0fdf4; padding: 8px 14px; border-radius: 8px; cursor: pointer; border: 2px solid #dcfce7;">
-                                        <input type="checkbox" value="verified" class="badge-checkbox" style="width: 18px; height: 18px; accent-color: #22c55e;">
-                                        <span style="font-size: 13px; font-weight: 500;">✅ Verified by HomeVN</span>
-                                    </label>
-                                    <label style="display: flex; align-items: center; gap: 6px; background: #eff6ff; padding: 8px 14px; border-radius: 8px; cursor: pointer; border: 2px solid #dbeafe;">
-                                        <input type="checkbox" value="owner" class="badge-checkbox" style="width: 18px; height: 18px; accent-color: #3b82f6;">
-                                        <span style="font-size: 13px; font-weight: 500;">🏠 Owner Listed</span>
-                                    </label>
-                                    <label style="display: flex; align-items: center; gap: 6px; background: #fef3c7; padding: 8px 14px; border-radius: 8px; cursor: pointer; border: 2px solid #fde68a;">
-                                        <input type="checkbox" value="agent" class="badge-checkbox" style="width: 18px; height: 18px; accent-color: #f59e0b;">
-                                        <span style="font-size: 13px; font-weight: 500;">👔 Agent Listed</span>
-                                    </label>
-                                </div>
-                                <span style="font-size: 12px; color: #94a3b8; margin-top: 4px; display: block;">Select the badges that apply to this property</span>
-                            </div>
                             <button type="submit" class="btn-primary" style="width: 100%; padding: 16px; font-size: 18px;">
                                 <span id="submit-text"><i class="fas fa-plus"></i> Publish Listing</span>
                                 <span id="submit-loading" style="display: none;"><i class="fas fa-spinner fa-spin"></i> Publishing...</span>
@@ -659,7 +367,7 @@
                         </div>
                         <div class="stat-item">
                             <i class="fas fa-eye"></i>
-                            <span class="stat-number" id="admin-views">0</span> <span style="color: #94a3b8; font-weight: 400;">total views</span>
+                            <span class="stat-number" id="admin-views">0</span> <span style="color: #94a3b8; font-weight: 400;">views</span>
                         </div>
                         <div class="stat-item">
                             <i class="fas fa-check-circle" style="color: #22c55e;"></i>
@@ -697,25 +405,6 @@
                                 <label style="display: block; font-weight: 600; margin-bottom: 6px; color: #0f172a; font-size: 14px;">Password</label>
                                 <input type="password" id="admin-password" required placeholder="Enter password" class="input-field">
                             </div>
-                            <!-- Badges Section -->
-                            <div style="margin-bottom: 18px;">
-                                <label style="display: block; font-weight: 600; margin-bottom: 8px; color: #0f172a; font-size: 14px;">Property Badges</label>
-                                <div style="display: flex; flex-wrap: wrap; gap: 10px;">
-                                    <label style="display: flex; align-items: center; gap: 6px; background: #f0fdf4; padding: 8px 14px; border-radius: 8px; cursor: pointer; border: 2px solid #dcfce7;">
-                                        <input type="checkbox" value="verified" class="badge-checkbox" style="width: 18px; height: 18px; accent-color: #22c55e;">
-                                        <span style="font-size: 13px; font-weight: 500;">✅ Verified by HomeVN</span>
-                                    </label>
-                                    <label style="display: flex; align-items: center; gap: 6px; background: #eff6ff; padding: 8px 14px; border-radius: 8px; cursor: pointer; border: 2px solid #dbeafe;">
-                                        <input type="checkbox" value="owner" class="badge-checkbox" style="width: 18px; height: 18px; accent-color: #3b82f6;">
-                                        <span style="font-size: 13px; font-weight: 500;">🏠 Owner Listed</span>
-                                    </label>
-                                    <label style="display: flex; align-items: center; gap: 6px; background: #fef3c7; padding: 8px 14px; border-radius: 8px; cursor: pointer; border: 2px solid #fde68a;">
-                                        <input type="checkbox" value="agent" class="badge-checkbox" style="width: 18px; height: 18px; accent-color: #f59e0b;">
-                                        <span style="font-size: 13px; font-weight: 500;">👔 Agent Listed</span>
-                                    </label>
-                                </div>
-                                <span style="font-size: 12px; color: #94a3b8; margin-top: 4px; display: block;">Select the badges that apply to this property</span>
-                            </div>
                             <button type="submit" class="btn-primary" style="width: 100%; padding: 16px; font-size: 18px;">
                                 <span id="login-text"><i class="fas fa-sign-in-alt"></i> Login</span>
                                 <span id="login-loading" style="display: none;"><i class="fas fa-spinner fa-spin"></i> Logging in...</span>
@@ -740,7 +429,6 @@
         }
         
         function renderListingDetail() {
-            const id = window.location.pathname.split('/')[2];
             return `
                 <div class="container" style="padding: 32px 0;">
                     <a href="/" style="color: #64748b; text-decoration: none; display: inline-flex; align-items: center; gap: 8px; margin-bottom: 20px; font-size: 15px;" onclick="event.preventDefault(); navigate('/')">
@@ -797,46 +485,27 @@
                     <div class="grid">
                         ${allListings.map(listing => `
                             <div class="card" onclick="navigate('/listing/${listing._id}')">
-                                <div class="card-image-area">
-                                    ${listing.featured ? `<span class="badge-featured">⭐ Featured</span>` : ''}
-                                    <i class="fab fa-tiktok tiktok-icon"></i>
-                                    <div style="position: absolute; bottom: 12px; left: 12px;">
-                                        <span class="price-tag">
-                                            <i class="fas fa-coins" style="font-size: 12px;"></i>
-                                            ${formatPrice(listing.price)} <span class="currency">${CURRENCY}/mo</span>
-                                        </span>
+                                <div style="padding: 20px 0; min-height: 80px; background: linear-gradient(135deg, #f8fafc, #f1f5f9); display: flex; align-items: center; justify-content: center; position: relative;">
+                                    ${listing.featured ? `<span class="badge-featured" style="position: absolute; top: 8px; left: 8px;">⭐ Featured</span>` : ''}
+                                    <i class="fab fa-tiktok" style="font-size: 40px; color: #fe2c55; opacity: 0.3;"></i>
+                                    <div style="position: absolute; bottom: 8px; left: 8px; background: white; padding: 4px 12px; border-radius: 9999px; box-shadow: 0 2px 10px rgba(0,0,0,0.08); font-weight: 700; color: #FF385C; font-size: 14px;">
+                                        ${formatPrice(listing.price)} <span style="font-size: 11px; color: #94a3b8; font-weight: 400;">FCFA/mo</span>
                                     </div>
-                                    <div style="position: absolute; top: 12px; right: 12px;">
-                                        <span class="${listing.isAvailable ? 'badge-available' : 'badge-rented'}">
-                                            ${listing.isAvailable ? '✓ Available' : '✗ Rented'}
-                                        </span>
-                                    </div>
-                                    <div style="position: absolute; bottom: 12px; right: 12px;">
-                                        <span class="view-count">
-                                            <i class="fas fa-eye"></i> ${listing.views || 0}
-                                        </span>
+                                    <div style="position: absolute; top: 8px; right: 8px;">
+                                        <span class="${listing.isAvailable ? 'badge-available' : 'badge-rented'}">${listing.isAvailable ? '✓ Available' : '✗ Rented'}</span>
                                     </div>
                                 </div>
-                                <div class="card-body">
-                                    <div class="badge-container">
-                                        ${listing.badges && listing.badges.includes('verified') ? '<span class="badge-verified">✅ Verified</span>' : ''}
-                                        ${listing.badges && listing.badges.includes('owner') ? '<span class="badge-owner">🏠 Owner</span>' : ''}
-                                        ${listing.badges && listing.badges.includes('agent') ? '<span class="badge-agent">👔 Agent</span>' : ''}
+                                <div style="padding: 16px;">
+                                    <h3 style="font-weight: 700; font-size: 17px; color: #0f172a; margin-bottom: 4px;">${listing.title}</h3>
+                                    <div style="display: flex; align-items: center; gap: 6px; color: #64748b; font-size: 14px; margin-bottom: 4px;">
+                                        <i class="fas fa-map-marker-alt" style="color: #FF385C; font-size: 12px;"></i> ${listing.location}
                                     </div>
-                                    <h3>${listing.title}</h3>
-                                    <div class="location">
-                                        <i class="fas fa-map-marker-alt"></i>
-                                        <span>${listing.location}</span>
+                                    <div style="display: flex; align-items: center; gap: 6px; color: #64748b; font-size: 14px; margin-bottom: 12px;">
+                                        <i class="fas fa-bed" style="color: #FF385C; font-size: 12px;"></i> ${listing.houseType || 'Apartment'}
                                     </div>
-                                    <div class="property-type">
-                                        <i class="fas fa-bed"></i>
-                                        <span>${listing.houseType}</span>
-                                    </div>
-                                    <div class="card-footer">
-                                        <span class="date">
-                                            <i class="far fa-calendar-alt"></i> ${new Date(listing.createdAt).toLocaleDateString('fr-CM')}
-                                        </span>
-                                        <a href="https://wa.me/237${listing.whatsappNumber}" target="_blank" class="btn-whatsapp" style="font-size: 13px; padding: 6px 14px;" onclick="event.stopPropagation();">
+                                    <div style="display: flex; justify-content: space-between; align-items: center; padding-top: 12px; border-top: 1px solid #f1f5f9;">
+                                        <span style="font-size: 12px; color: #94a3b8;"><i class="far fa-calendar-alt"></i> ${new Date(listing.createdAt).toLocaleDateString()}</span>
+                                        <a href="https://wa.me/${listing.whatsappNumber}" target="_blank" class="btn-whatsapp" style="font-size: 12px; padding: 4px 12px;" onclick="event.stopPropagation();">
                                             <i class="fab fa-whatsapp"></i> Contact
                                         </a>
                                     </div>
@@ -851,7 +520,6 @@
                         <i class="fas fa-exclamation-triangle" style="color: #ef4444; opacity: 1;"></i>
                         <h2>Unable to load listings</h2>
                         <p style="color: #ef4444;">Make sure the backend is running.</p>
-                        <p style="font-size: 14px; color: #94a3b8; margin-top: 8px;">${API_URL}</p>
                     </div>
                 `;
             }
@@ -884,7 +552,9 @@
                 allListings = data.data || [];
                 const container = document.getElementById('admin-listings');
                 if (!container) return;
+                
                 updateAdminStats(allListings);
+                
                 if (allListings.length === 0) {
                     container.innerHTML = `
                         <div class="empty-state">
@@ -895,6 +565,7 @@
                     `;
                     return;
                 }
+                
                 container.innerHTML = `
                     <div style="overflow-x: auto;">
                         <table class="admin-table">
@@ -1038,25 +709,6 @@
                                 </div>
                             </div>
                             <div style="display: flex; gap: 12px;">
-                            <!-- Badges Section -->
-                            <div style="margin-bottom: 18px;">
-                                <label style="display: block; font-weight: 600; margin-bottom: 8px; color: #0f172a; font-size: 14px;">Property Badges</label>
-                                <div style="display: flex; flex-wrap: wrap; gap: 10px;">
-                                    <label style="display: flex; align-items: center; gap: 6px; background: #f0fdf4; padding: 8px 14px; border-radius: 8px; cursor: pointer; border: 2px solid #dcfce7;">
-                                        <input type="checkbox" value="verified" class="badge-checkbox" style="width: 18px; height: 18px; accent-color: #22c55e;">
-                                        <span style="font-size: 13px; font-weight: 500;">✅ Verified by HomeVN</span>
-                                    </label>
-                                    <label style="display: flex; align-items: center; gap: 6px; background: #eff6ff; padding: 8px 14px; border-radius: 8px; cursor: pointer; border: 2px solid #dbeafe;">
-                                        <input type="checkbox" value="owner" class="badge-checkbox" style="width: 18px; height: 18px; accent-color: #3b82f6;">
-                                        <span style="font-size: 13px; font-weight: 500;">🏠 Owner Listed</span>
-                                    </label>
-                                    <label style="display: flex; align-items: center; gap: 6px; background: #fef3c7; padding: 8px 14px; border-radius: 8px; cursor: pointer; border: 2px solid #fde68a;">
-                                        <input type="checkbox" value="agent" class="badge-checkbox" style="width: 18px; height: 18px; accent-color: #f59e0b;">
-                                        <span style="font-size: 13px; font-weight: 500;">👔 Agent Listed</span>
-                                    </label>
-                                </div>
-                                <span style="font-size: 12px; color: #94a3b8; margin-top: 4px; display: block;">Select the badges that apply to this property</span>
-                            </div>
                                 <button type="submit" class="btn-primary" style="flex: 1; padding: 16px; font-size: 18px;">
                                     <span id="edit-submit-text"><i class="fas fa-save"></i> Update</span>
                                     <span id="edit-submit-loading" style="display: none;"><i class="fas fa-spinner fa-spin"></i> Updating...</span>
@@ -1080,7 +732,6 @@
             messageDiv.style.display = 'none';
             const imageUrl = document.getElementById('edit-image').value.trim();
             const data = {
-                badges: badges,
                 title: document.getElementById('edit-title').value,
                 description: document.getElementById('edit-description').value,
                 price: parseFloat(document.getElementById('edit-price').value),
@@ -1146,11 +797,6 @@
                             </div>
                         </div>
                         <div class="detail-content">
-                                    <div class="badge-container">
-                                        ${listing.badges && listing.badges.includes('verified') ? '<span class="badge-verified">✅ Verified by HomeVN</span>' : ''}
-                                        ${listing.badges && listing.badges.includes('owner') ? '<span class="badge-owner">🏠 Owner Listed</span>' : ''}
-                                        ${listing.badges && listing.badges.includes('agent') ? '<span class="badge-agent">👔 Agent Listed</span>' : ''}
-                                    </div>
                             <div style="display:flex;justify-content:space-between;align-items:flex-start;flex-wrap:wrap;gap:16px;margin-bottom:16px;">
                                 <div>
                                     <h1 class="detail-title">${listing.title}</h1>
@@ -1165,13 +811,13 @@
                             </div>
                             <div style="border-top:1px solid #f1f5f9;padding-top:24px;margin-top:8px;">
                                 <h2 style="font-size:18px;font-weight:600;color:#0f172a;margin-bottom:12px;">📝 Description</h2>
-                                <p class="detail-description">${listing.description}</p>
+                                <p class="detail-description">${formatDescription(listing.description)}</p>
                             </div>
                             <div style="border-top:1px solid #f1f5f9;padding-top:24px;margin-top:24px;">
                                 <h2 style="font-size:18px;font-weight:600;color:#0f172a;margin-bottom:12px;">🎬 Video Walkthrough</h2>
-                                <div class="tiktok-video-container">
-                                    <i class="fab fa-tiktok"></i>
-                                    <p>🎥 Video available on TikTok</p>
+                                <div class="tiktok-video-container" style="background: linear-gradient(135deg, #0f0f1a, #1a1a2e); border-radius: 16px; padding: 48px 24px; text-align: center; min-height: 200px; display: flex; flex-direction: column; align-items: center; justify-content: center; width: 100%; border: 1px solid rgba(255,255,255,0.06);">
+                                    <i class="fab fa-tiktok" style="font-size: 56px; color: #fe2c55; margin-bottom: 12px;"></i>
+                                    <p style="color: rgba(255,255,255,0.7); font-size: 16px; margin-bottom: 16px;">🎥 Video available on TikTok</p>
                                     <a href="${listing.videoUrl}" target="_blank" class="btn-tiktok">
                                         <i class="fab fa-tiktok" style="font-size:24px;"></i> Watch on TikTok <i class="fas fa-external-link-alt" style="font-size:14px;"></i>
                                     </a>
@@ -1179,10 +825,10 @@
                                 </div>
                             </div>
                             <div style="border-top:1px solid #f1f5f9;padding-top:24px;margin-top:24px;display:flex;flex-wrap:wrap;gap:12px;">
-                                <a href="https://wa.me/237${listing.whatsappNumber}" target="_blank" class="btn-whatsapp" style="font-size:18px;padding:14px 32px;">
+                                <a href="https://wa.me/${listing.whatsappNumber}" target="_blank" class="btn-whatsapp" style="font-size:18px;padding:14px 32px;">
                                     <i class="fab fa-whatsapp"></i> Contact Owner
                                 </a>
-                                <button onclick="navigator.clipboard.writeText('237${listing.whatsappNumber}'); showToast('📋 Number copied!');" style="padding:14px 24px;border:2px solid #e2e8f0;border-radius:12px;background:white;cursor:pointer;font-weight:500;color:#64748b;">
+                                <button onclick="navigator.clipboard.writeText('${listing.whatsappNumber}'); showToast('📋 Number copied!');" style="padding:14px 24px;border:2px solid #e2e8f0;border-radius:12px;background:white;cursor:pointer;font-weight:500;color:#64748b;">
                                     <i class="fas fa-copy"></i> Copy Number
                                 </button>
                             </div>
@@ -1215,14 +861,13 @@
             submitBtn.style.display = 'none';
             loadingBtn.style.display = 'inline';
             messageDiv.style.display = 'none';
-            let whatsapp = document.getElementById('whatsapp').value.trim().replace(/\D/g, '');
-            // Collect selected badges
-            const badgeCheckboxes = document.querySelectorAll('.badge-checkbox:checked');
-            const badges = Array.from(badgeCheckboxes).map(cb => cb.value);
+            
+            let whatsapp = document.getElementById('whatsapp').value.trim();
+            whatsapp = whatsapp.replace(/\D/g, '');
             const imageUrl = document.getElementById('image-url').value.trim();
             const videoUrl = document.getElementById('video-url').value.trim();
+            
             const data = {
-                badges: badges,
                 title: document.getElementById('title').value,
                 description: document.getElementById('description').value,
                 price: parseFloat(document.getElementById('price').value),
@@ -1234,12 +879,14 @@
                 images: imageUrl ? [imageUrl] : ['https://example.com/image.jpg'],
                 videoUrl: videoUrl || 'https://example.com/video.mp4'
             };
+            
             try {
                 const response = await fetch(`${API_URL}/listings`, {
                     method: 'POST',
                     headers: { 'Content-Type': 'application/json' },
                     body: JSON.stringify(data)
                 });
+                
                 if (response.ok) {
                     messageDiv.style.display = 'block';
                     messageDiv.style.background = '#dcfce7';
@@ -1247,6 +894,12 @@
                     messageDiv.innerHTML = '✅ Listing published successfully! Redirecting...';
                     showToast('✅ Listing published successfully!');
                     setTimeout(() => navigate('/'), 1500);
+                } else {
+                    const error = await response.json();
+                    messageDiv.style.display = 'block';
+                    messageDiv.style.background = '#fee2e2';
+                    messageDiv.style.color = '#991b1b';
+                    messageDiv.innerHTML = '❌ ' + (error.message || 'Error publishing');
                 }
             } catch(e) {
                 messageDiv.style.display = 'block';
@@ -1254,6 +907,7 @@
                 messageDiv.style.color = '#991b1b';
                 messageDiv.innerHTML = '❌ Cannot connect to server. Make sure the backend is running.';
             }
+            
             submitBtn.style.display = 'inline';
             loadingBtn.style.display = 'none';
         }
@@ -1292,6 +946,7 @@
         function renderApp() {
             const path = window.location.pathname;
             let content = '';
+            
             if (path === '/' || path === '') {
                 content = renderHome();
                 document.getElementById('app').innerHTML = renderNavbar() + content;
@@ -1329,6 +984,11 @@
         }
         
         window.addEventListener('popstate', renderApp);
+        
+        if (sessionStorage.getItem('isAdmin') === 'true') {
+            isAdmin = true;
+        }
+        
         renderApp();
     </script>
 </body>

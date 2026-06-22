@@ -8,11 +8,11 @@ const Listing = {
       _id: uuidv4(),
       ...data,
       images: data.images || [],
-      badges: data.badges || [],
       isAvailable: data.isAvailable !== undefined ? data.isAvailable : true,
       createdAt: new Date().toISOString(),
       price: parseFloat(data.price),
       views: 0,
+      viewedBy: [],
       featured: data.featured || false
     };
     db.data.listings.push(listing);
@@ -37,7 +37,29 @@ const Listing = {
 
   async findById(id) {
     await db.read();
-    return db.data.listings.find(l => l._id === id) || null;
+    const listing = db.data.listings.find(l => l._id === id);
+    if (!listing) return null;
+    
+    // Track unique views by IP
+    return listing;
+  },
+
+  async addView(id, ip) {
+    await db.read();
+    const listing = db.data.listings.find(l => l._id === id);
+    if (!listing) return null;
+    
+    if (!listing.viewedBy) {
+      listing.viewedBy = [];
+    }
+    
+    if (!listing.viewedBy.includes(ip)) {
+      listing.viewedBy.push(ip);
+      listing.views = (listing.views || 0) + 1;
+      await db.write();
+    }
+    
+    return listing;
   },
 
   async update(id, data) {
@@ -56,6 +78,15 @@ const Listing = {
     db.data.listings.splice(index, 1);
     await db.write();
     return true;
+  },
+
+  async getStats() {
+    await db.read();
+    const listings = db.data.listings;
+    const total = listings.length;
+    const views = listings.reduce((sum, l) => sum + (l.views || 0), 0);
+    const locations = new Set(listings.map(l => l.location)).size;
+    return { total, views, locations };
   }
 };
 
