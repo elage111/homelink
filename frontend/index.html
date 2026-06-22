@@ -1207,33 +1207,74 @@
             loadListings('listings-container');
         }
         
-        async function submitListing(e) {
-            e.preventDefault();
-            const submitBtn = document.getElementById('submit-text');
-            const loadingBtn = document.getElementById('submit-loading');
-            const messageDiv = document.getElementById('form-message');
-            submitBtn.style.display = 'none';
-            loadingBtn.style.display = 'inline';
-            messageDiv.style.display = 'none';
-            let whatsapp = document.getElementById('whatsapp').value.trim().replace(/\D/g, '');
-            // Collect selected badges
-            const badgeCheckboxes = document.querySelectorAll('.badge-checkbox:checked');
-            const badges = Array.from(badgeCheckboxes).map(cb => cb.value);
-            const imageUrl = document.getElementById('image-url').value.trim();
-            const videoUrl = document.getElementById('video-url').value.trim();
-            const data = {
-                badges: badges,
-                title: document.getElementById('title').value,
-                description: document.getElementById('description').value,
-                price: parseFloat(document.getElementById('price').value),
-                location: document.getElementById('location').value,
-                houseType: document.getElementById('houseType').value,
-                whatsappNumber: whatsapp,
-                isAvailable: document.getElementById('available').checked,
-                featured: document.getElementById('featured').checked,
-                images: imageUrl ? [imageUrl] : ['https://example.com/image.jpg'],
-                videoUrl: videoUrl || 'https://example.com/video.mp4'
-            };
+async function submitListing(e) {
+    e.preventDefault();
+    const submitBtn = document.getElementById('submit-text');
+    const loadingBtn = document.getElementById('submit-loading');
+    const messageDiv = document.getElementById('form-message');
+    
+    submitBtn.style.display = 'none';
+    loadingBtn.style.display = 'inline';
+    messageDiv.style.display = 'none';
+    
+    let whatsapp = document.getElementById('whatsapp').value.trim();
+    whatsapp = whatsapp.replace(/D/g, '');
+    
+    const imageUrl = document.getElementById('image-url').value.trim();
+    const videoUrl = document.getElementById('video-url').value.trim();
+    
+    // COLLECT BADGES - THIS IS THE FIX
+    const badgeCheckboxes = document.querySelectorAll('.badge-checkbox:checked');
+    const badges = Array.from(badgeCheckboxes).map(cb => cb.value);
+    console.log('Badges selected:', badges);
+    
+    const data = {
+        title: document.getElementById('title').value,
+        description: document.getElementById('description').value,
+        price: parseFloat(document.getElementById('price').value),
+        location: document.getElementById('location').value,
+        houseType: document.getElementById('houseType').value,
+        whatsappNumber: whatsapp,
+        isAvailable: document.getElementById('available').checked,
+        featured: document.getElementById('featured').checked,
+        images: imageUrl ? [imageUrl] : ['https://example.com/image.jpg'],
+        videoUrl: videoUrl || 'https://example.com/video.mp4',
+        badges: badges
+    };
+    
+    console.log('Sending data:', data);
+    
+    try {
+        const response = await fetch(`${API_URL}/listings`, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(data)
+        });
+        
+        if (response.ok) {
+            messageDiv.style.display = 'block';
+            messageDiv.style.background = '#dcfce7';
+            messageDiv.style.color = '#166534';
+            messageDiv.innerHTML = '✅ Listing published successfully! Redirecting...';
+            showToast('✅ Listing published successfully!');
+            setTimeout(() => navigate('/'), 1500);
+        } else {
+            const error = await response.json();
+            messageDiv.style.display = 'block';
+            messageDiv.style.background = '#fee2e2';
+            messageDiv.style.color = '#991b1b';
+            messageDiv.innerHTML = '❌ ' + (error.message || 'Error publishing');
+        }
+    } catch(e) {
+        messageDiv.style.display = 'block';
+        messageDiv.style.background = '#fee2e2';
+        messageDiv.style.color = '#991b1b';
+        messageDiv.innerHTML = '❌ Cannot connect to server. Make sure the backend is running.';
+    }
+    
+    submitBtn.style.display = 'inline';
+    loadingBtn.style.display = 'none';
+}
             try {
                 const response = await fetch(`${API_URL}/listings`, {
                     method: 'POST',
