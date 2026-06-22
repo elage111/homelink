@@ -37,11 +37,7 @@ const Listing = {
 
   async findById(id) {
     await db.read();
-    const listing = db.data.listings.find(l => l._id === id);
-    if (!listing) return null;
-    
-    // Track unique views by IP
-    return listing;
+    return db.data.listings.find(l => l._id === id) || null;
   },
 
   async addView(id, ip) {

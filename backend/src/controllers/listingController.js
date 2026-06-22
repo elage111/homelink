@@ -39,7 +39,7 @@ export const getListings = async (req, res) => {
 export const getListing = async (req, res) => {
   try {
     const ip = req.headers['x-forwarded-for'] || req.socket.remoteAddress || req.ip || 'unknown';
-    const listing = await Listing.findById(req.params.id);
+    const listing = await Listing.addView(req.params.id, ip);
     if (!listing) return res.status(404).json({ message: "Listing not found" });
     res.json({ success: true, data: listing });
   } catch (error) {
