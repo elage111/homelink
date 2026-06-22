@@ -1,5 +1,6 @@
-# SPA routing
-/*    /index.html    200
+# Important: Allow robots.txt and sitemap.xml to be served directly
+/robots.txt /robots.txt 200!
+/sitemap.xml /sitemap.xml 200!
 
-# Sitemap redirect
-/sitemap.xml    /sitemap.xml    200!
+# SPA routing - all other paths go to index.html
+/* /index.html 200

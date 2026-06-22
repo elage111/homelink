@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://homevn.netlify.app/sitemap.xml
