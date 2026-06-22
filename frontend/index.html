@@ -112,7 +112,7 @@
         const CURRENCY = 'FCFA';
         const ADMIN_PASSWORD = 'elage123@123';
         
-        let isAdmin = sessionStorage.getItem('isAdmin') === 'true';
+        let isAdmin = localStorage.getItem('isAdmin') === 'true';
         let allListings = [];
         
         function formatPrice(price) {
@@ -145,7 +145,7 @@
         function renderNavbar() {
             const currentPath = window.location.pathname;
             const isActive = (path) => currentPath === path ? 'active' : '';
-            const isAdmin = sessionStorage.getItem('isAdmin') === 'true';
+            const isAdmin = localStorage.getItem('isAdmin') === 'true';
             
             return `
                 <nav style="background: white; box-shadow: 0 1px 3px rgba(0,0,0,0.06); position: sticky; top: 0; z-index: 50; border-bottom: 1px solid rgba(0,0,0,0.04);">
@@ -936,7 +936,7 @@
                         }
                     }
                 });
-                localStorage.setItem('homelink_form', JSON.stringify(data));
+                localStorage.setItem('homelink_form_autosave_temp', JSON.stringify(data));
                 
                 // Show indicator
                 const indicator = document.getElementById('save-indicator');
@@ -952,7 +952,7 @@
         
         function clearSavedFormData() {
             try {
-                localStorage.removeItem('homelink_form');
+                localStorage.removeItem('homelink_form_autosave');
             } catch(e) {}
         }
         
@@ -960,7 +960,7 @@
         document.addEventListener('DOMContentLoaded', function() {
             // Restore saved data
             try {
-                const savedData = localStorage.getItem('homelink_form');
+                const savedData = localStorage.getItem('homelink_form_autosave');
                 if (savedData) {
                     const data = JSON.parse(savedData);
                     Object.keys(data).forEach(key => {
@@ -999,7 +999,7 @@
             messageDiv.style.display = 'none';
             if (password === ADMIN_PASSWORD) {
                 isAdmin = true;
-                sessionStorage.setItem('isAdmin', 'true');
+                localStorage.setItem('isAdmin', 'true');
                 showToast('✅ Login successful!');
                 setTimeout(() => navigate('/admin'), 500);
             } else {
@@ -1014,7 +1014,7 @@
         
         function logout() {
             isAdmin = false;
-            sessionStorage.removeItem('isAdmin');
+            localStorage.removeItem('isAdmin');
             showToast('👋 Logged out');
             navigate('/');
         }
@@ -1062,7 +1062,7 @@
         
         window.addEventListener('popstate', renderApp);
         
-        if (sessionStorage.getItem('isAdmin') === 'true') {
+        if (localStorage.getItem('isAdmin') === 'true') {
             isAdmin = true;
         }
         
