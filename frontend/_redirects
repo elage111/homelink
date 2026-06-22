@@ -3,3 +3,4 @@
 
 # Force sitemap to serve as XML
 /sitemap.xml /sitemap.xml 200!
+/sitemap.xml /sitemap.xml 200!
