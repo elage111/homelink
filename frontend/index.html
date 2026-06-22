@@ -330,6 +330,7 @@
                         <p style="color: #64748b; margin-bottom: 24px; font-size: 16px;">Fill in the information to list your property</p>
                         <div id="form-message" style="display: none; padding: 14px 16px; border-radius: 12px; margin-bottom: 20px; font-size: 14px;"></div>
                         <form id="listing-form" onsubmit="submitListing(event)">
+                        <div id="save-indicator" style="font-size: 12px; color: #94a3b8; text-align: right; margin-bottom: 8px; display: none;">💾 Saving...</div>
                             <div style="margin-bottom: 18px;">
                                 <label style="display: block; font-weight: 600; margin-bottom: 6px; color: #0f172a; font-size: 14px;">Title *</label>
                                 <input type="text" id="title" required placeholder="e.g., Beautiful 2-bedroom apartment in Molyko" class="input-field">
@@ -670,6 +671,7 @@
                     body: JSON.stringify(updated)
                 });
                 if (response.ok) {
+                    clearSavedFormData();
                     showToast('✅ Status updated!');
                     loadAdminListings();
                     loadListings('listings-container');
@@ -682,6 +684,7 @@
             try {
                 const response = await fetch(`${API_URL}/listings/${id}`, { method: 'DELETE' });
                 if (response.ok) {
+                    clearSavedFormData();
                     showToast('✅ Listing deleted!');
                     loadAdminListings();
                     loadListings('listings-container');
@@ -799,6 +802,7 @@
                     body: JSON.stringify(data)
                 });
                 if (response.ok) {
+                    clearSavedFormData();
                     messageDiv.style.display = 'block';
                     messageDiv.style.background = '#dcfce7';
                     messageDiv.style.color = '#166534';
@@ -937,6 +941,7 @@
                 });
                 
                 if (response.ok) {
+                    clearSavedFormData();
                     messageDiv.style.display = 'block';
                     messageDiv.style.background = '#dcfce7';
                     messageDiv.style.color = '#166534';
@@ -1040,5 +1045,64 @@
         
         renderApp();
     </script>
+<script>
+// Auto-save form data
+document.addEventListener('DOMContentLoaded', function() {
+    // Restore saved data
+    const savedData = localStorage.getItem('homelink_form_data');
+    if (savedData) {
+        try {
+            const data = JSON.parse(savedData);
+            Object.keys(data).forEach(key => {
+                const el = document.getElementById(key);
+                if (el) {
+                    if (el.type === 'checkbox') {
+                        el.checked = data[key];
+                    } else {
+                        el.value = data[key];
+                    }}
+            });
+        } catch(e) {}
+    }
+    
+    // Save data on change
+    document.querySelectorAll('#listing-form input, #listing-form textarea, #listing-form select').forEach(el => {
+        if (el.id) {
+            el.addEventListener('input', function() { saveFormData(); });
+            el.addEventListener('change', function() { saveFormData(); });
+        }
+    });
+});
+
+function saveFormData() {
+    const indicator = document.getElementById('save-indicator');
+    if (indicator) { indicator.style.display = 'block'; }
+    clearTimeout(window.saveTimeout);
+    window.saveTimeout = setTimeout(() => {
+        if (indicator) { indicator.style.display = 'none'; }
+    }, 1000);
+    const data = {};
+    document.querySelectorAll('#listing-form input, #listing-form textarea, #listing-form select').forEach(el => {
+        if (el.id) {
+            if (el.type === 'checkbox') {
+                data[el.id] = el.checked;
+            } else {
+                data[el.id] = el.value;
+            }
+        }
+    });
+    localStorage.setItem('homelink_form_data', JSON.stringify(data));
+}
+
+// Clear saved data after successful submission
+function clearSavedFormData() {
+    localStorage.removeItem('homelink_form_data');
+}
+
+// Also save when user leaves the page
+window.addEventListener('beforeunload', function() {
+    saveFormData();
+});
+</script>
 </body>
 </html>
