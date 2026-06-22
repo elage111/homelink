@@ -1086,6 +1086,7 @@
             const imageUrl = document.getElementById('edit-image').value.trim();
             const data = {
                 badges: badges,
+                badges: badges,
                 title: document.getElementById('edit-title').value,
                 description: document.getElementById('edit-description').value,
                 price: parseFloat(document.getElementById('edit-price').value),
@@ -1221,7 +1222,12 @@
             // Collect selected badges
             const badgeCheckboxes = document.querySelectorAll('.badge-checkbox:checked');
             const badges = Array.from(badgeCheckboxes).map(cb => cb.value);
+            console.log('Selected badges:', badges);
+            // Collect selected badges
+            const badgeCheckboxes = document.querySelectorAll('.badge-checkbox:checked');
+            const badges = Array.from(badgeCheckboxes).map(cb => cb.value);
             const data = {
+                badges: badges,
                 badges: badges,
                 title: document.getElementById('title').value,
                 description: document.getElementById('description').value,
