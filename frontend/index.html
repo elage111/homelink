@@ -10,111 +10,39 @@
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
-        body { 
-            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif; 
-            background: #f1f5f9 !important; 
-            color: #1a1a1a;
-        }
-        
+        body { font-family: 'Inter', sans-serif; background: #f1f5f9; color: #1a1a1a; }
         .btn-primary { 
             background: linear-gradient(135deg, #FF385C 0%, #e0314f 100%);
-            color: white; 
-            padding: 16px 32px; 
-            border-radius: 12px; 
-            border: none; 
-            font-weight: 600; 
-            cursor: pointer; 
-            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-            font-size: 16px;
-            box-shadow: 0 4px 15px rgba(255,56,92,0.3);
+            color: white; padding: 14px 28px; border-radius: 12px; 
+            border: none; font-weight: 600; cursor: pointer; transition: all 0.3s; 
         }
-        .btn-primary:hover { 
-            transform: translateY(-2px); 
-            box-shadow: 0 8px 30px rgba(255,56,92,0.4); 
-        }
-        
+        .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 8px 30px rgba(255,56,92,0.4); }
         .btn-whatsapp { 
             background: linear-gradient(135deg, #25D366 0%, #1da851 100%);
-            color: white; 
-            padding: 10px 20px; 
-            border-radius: 10px; 
-            border: none; 
-            font-weight: 600; 
-            cursor: pointer; 
-            display: inline-flex; 
-            align-items: center; 
-            gap: 8px; 
-            text-decoration: none;
-            transition: all 0.3s;
-            font-size: 14px;
-            box-shadow: 0 2px 10px rgba(37,211,102,0.3);
+            color: white; padding: 8px 16px; border-radius: 8px; 
+            border: none; font-weight: 600; cursor: pointer; 
+            display: inline-flex; align-items: center; gap: 6px; text-decoration: none;
+            transition: all 0.3s; font-size: 13px;
         }
-        .btn-whatsapp:hover { 
-            transform: scale(1.05); 
-            box-shadow: 0 4px 20px rgba(37,211,102,0.4); 
-        }
-        
+        .btn-whatsapp:hover { transform: scale(1.05); }
         .btn-tiktok {
             background: linear-gradient(135deg, #000000 0%, #1a1a1a 50%, #fe2c55 100%);
-            color: white; 
-            padding: 14px 28px; 
-            border-radius: 12px; 
-            border: none; 
-            font-weight: 600; 
-            cursor: pointer; 
-            display: inline-flex; 
-            align-items: center; 
-            gap: 10px; 
-            text-decoration: none;
+            color: white; padding: 14px 28px; border-radius: 12px; 
+            border: none; font-weight: 600; cursor: pointer; 
+            display: inline-flex; align-items: center; gap: 10px; text-decoration: none;
             transition: all 0.3s;
-            box-shadow: 0 4px 15px rgba(254,44,85,0.2);
         }
-        .btn-tiktok:hover { 
-            transform: scale(1.05) translateY(-2px); 
-            box-shadow: 0 8px 30px rgba(254,44,85,0.3); 
-        }
-        
-        .btn-edit { 
-            background: #3b82f6; 
-            color: white; 
-            padding: 6px 14px; 
-            border-radius: 6px; 
-            border: none; 
-            font-weight: 500; 
-            cursor: pointer; 
-            transition: all 0.2s; 
-            font-size: 13px;
-        }
-        .btn-edit:hover { background: #2563eb; transform: scale(1.05); }
-        
-        .btn-delete { 
-            background: #ef4444; 
-            color: white; 
-            padding: 6px 14px; 
-            border-radius: 6px; 
-            border: none; 
-            font-weight: 500; 
-            cursor: pointer; 
-            transition: all 0.2s; 
-            font-size: 13px;
-        }
-        .btn-delete:hover { background: #dc2626; transform: scale(1.05); }
-        
+        .btn-tiktok:hover { transform: scale(1.05); }
         .btn-admin { 
-            background: #4a4a4a; 
-            color: white; 
-            padding: 8px 16px; 
-            border-radius: 8px; 
-            border: none; 
-            font-weight: 500; 
-            cursor: pointer; 
-            transition: all 0.2s; 
-            font-size: 14px;
+            background: #4a4a4a; color: white; padding: 8px 16px; border-radius: 8px; 
+            border: none; font-weight: 500; cursor: pointer; transition: all 0.2s; font-size: 14px;
         }
-        .btn-admin:hover { background: #333; transform: scale(1.05); }
-        
+        .btn-admin:hover { background: #333; }
+        .btn-edit { background: #3b82f6; color: white; padding: 6px 14px; border-radius: 6px; border: none; font-weight: 500; cursor: pointer; font-size: 13px; }
+        .btn-edit:hover { background: #2563eb; }
+        .btn-delete { background: #ef4444; color: white; padding: 6px 14px; border-radius: 6px; border: none; font-weight: 500; cursor: pointer; font-size: 13px; }
+        .btn-delete:hover { background: #dc2626; }
         .container { max-width: 1280px; margin: 0 auto; padding: 0 24px; }
-        
         .hero {
             background: linear-gradient(135deg, #1a1a2e 0%, #16213e 30%, #0f3460 60%, #e0314f 100%);
             border-radius: 24px;
@@ -132,44 +60,11 @@
             height: 500px;
             background: rgba(255,56,92,0.1);
             border-radius: 50%;
-            pointer-events: none;
         }
-        .hero::after {
-            content: '';
-            position: absolute;
-            bottom: -40%;
-            left: -10%;
-            width: 400px;
-            height: 400px;
-            background: rgba(255,56,92,0.08);
-            border-radius: 50%;
-            pointer-events: none;
-        }
-        .hero-content {
-            position: relative;
-            z-index: 1;
-            max-width: 700px;
-        }
-        .hero h1 {
-            font-size: 48px;
-            font-weight: 900;
-            color: white;
-            line-height: 1.1;
-            margin-bottom: 16px;
-            letter-spacing: -1px;
-        }
-        .hero h1 span {
-            background: linear-gradient(135deg, #FF385C, #f97316);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-        }
-        .hero p {
-            color: rgba(255,255,255,0.8);
-            font-size: 20px;
-            font-weight: 400;
-            line-height: 1.6;
-            margin-bottom: 24px;
-        }
+        .hero-content { position: relative; z-index: 1; max-width: 700px; }
+        .hero h1 { font-size: 48px; font-weight: 900; color: white; line-height: 1.1; margin-bottom: 16px; }
+        .hero h1 span { background: linear-gradient(135deg, #FF385C, #f97316); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+        .hero p { color: rgba(255,255,255,0.8); font-size: 20px; line-height: 1.6; margin-bottom: 24px; }
         .hero .badge {
             display: inline-block;
             background: rgba(255,255,255,0.12);
@@ -182,7 +77,6 @@
             margin-bottom: 16px;
             border: 1px solid rgba(255,255,255,0.08);
         }
-        
         .search-wrapper {
             display: flex;
             gap: 12px;
@@ -202,11 +96,8 @@
             outline: none;
             background: transparent;
             color: #1a1a1a;
-            font-weight: 400;
         }
-        .search-wrapper input::placeholder {
-            color: #94a3b8;
-        }
+        .search-wrapper input::placeholder { color: #94a3b8; }
         .search-wrapper button {
             padding: 14px 28px;
             background: linear-gradient(135deg, #FF385C, #e0314f);
@@ -217,12 +108,8 @@
             cursor: pointer;
             transition: all 0.3s;
             font-size: 15px;
-            white-space: nowrap;
         }
-        .search-wrapper button:hover {
-            transform: scale(1.02);
-            box-shadow: 0 4px 20px rgba(255,56,92,0.3);
-        }
+        .search-wrapper button:hover { transform: scale(1.02); }
         .search-wrapper .clear-btn {
             background: transparent;
             color: #94a3b8;
@@ -230,44 +117,9 @@
             border: none;
             border-radius: 10px;
             cursor: pointer;
-            transition: all 0.2s;
             font-size: 15px;
         }
-        .search-wrapper .clear-btn:hover {
-            color: #1a1a1a;
-            background: #f1f5f9;
-        }
-        
-        .stats-bar {
-            display: flex;
-            gap: 32px;
-            padding: 20px 24px;
-            background: white;
-            border-radius: 16px;
-            margin-bottom: 32px;
-            flex-wrap: wrap;
-            box-shadow: 0 1px 3px rgba(0,0,0,0.06);
-            border: 1px solid rgba(0,0,0,0.04);
-        }
-        .stat-item {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            color: #475569;
-            font-size: 15px;
-        }
-        .stat-item i { 
-            color: #FF385C; 
-            font-size: 18px;
-            width: 24px;
-            text-align: center;
-        }
-        .stat-number { 
-            font-weight: 700; 
-            color: #0f172a; 
-            font-size: 18px;
-        }
-        
+        .search-wrapper .clear-btn:hover { color: #1a1a1a; background: #f1f5f9; }
         .grid { 
             display: grid; 
             grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); 
@@ -279,26 +131,20 @@
             .hero h1 { font-size: 32px; }
             .search-wrapper { flex-wrap: wrap; }
             .search-wrapper input { width: 100%; }
-            .stats-bar { gap: 16px; }
         }
-        
         .card {
             background: white;
             border-radius: 16px;
             overflow: hidden;
             box-shadow: 0 4px 20px rgba(0,0,0,0.08);
-            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            transition: all 0.4s;
             cursor: pointer;
             height: 100%;
             display: flex;
             flex-direction: column;
             border: none;
         }
-        .card:hover {
-            transform: translateY(-8px);
-            box-shadow: 0 20px 60px rgba(0,0,0,0.12);
-        }
-        
+        .card:hover { transform: translateY(-8px); box-shadow: 0 20px 60px rgba(0,0,0,0.12); }
         .card-image-area {
             padding: 24px 0;
             min-height: 100px;
@@ -314,49 +160,13 @@
             opacity: 0.3;
             transition: all 0.3s;
         }
-        .card:hover .card-image-area .tiktok-icon {
-            opacity: 0.5;
-            transform: scale(1.1);
-        }
-        
-        .card-body {
-            padding: 24px 24px 20px;
-            flex: 1;
-            display: flex;
-            flex-direction: column;
-        }
-        .card-body h3 {
-            font-weight: 700;
-            font-size: 18px;
-            color: #0f172a;
-            margin-bottom: 6px;
-            line-height: 1.3;
-        }
-        .card-body .location {
-            display: flex;
-            align-items: center;
-            gap: 6px;
-            color: #64748b;
-            font-size: 14px;
-            margin-bottom: 4px;
-        }
-        .card-body .location i {
-            color: #FF385C;
-            font-size: 12px;
-        }
-        .card-body .property-type {
-            display: flex;
-            align-items: center;
-            gap: 6px;
-            color: #64748b;
-            font-size: 14px;
-            margin-bottom: 14px;
-        }
-        .card-body .property-type i {
-            color: #FF385C;
-            font-size: 12px;
-        }
-        
+        .card:hover .card-image-area .tiktok-icon { opacity: 0.5; transform: scale(1.1); }
+        .card-body { padding: 24px 24px 20px; flex: 1; display: flex; flex-direction: column; }
+        .card-body h3 { font-weight: 700; font-size: 18px; color: #0f172a; margin-bottom: 6px; line-height: 1.3; }
+        .card-body .location { display: flex; align-items: center; gap: 6px; color: #64748b; font-size: 14px; margin-bottom: 4px; }
+        .card-body .location i { color: #FF385C; font-size: 12px; }
+        .card-body .property-type { display: flex; align-items: center; gap: 6px; color: #64748b; font-size: 14px; margin-bottom: 14px; }
+        .card-body .property-type i { color: #FF385C; font-size: 12px; }
         .card-footer {
             display: flex;
             justify-content: space-between;
@@ -365,36 +175,10 @@
             margin-top: auto;
             border-top: 1px solid #f1f5f9;
         }
-        .card-footer .date {
-            font-size: 12px;
-            color: #94a3b8;
-        }
-        
-        .badge-available { 
-            background: #dcfce7; 
-            color: #166534; 
-            padding: 4px 14px; 
-            border-radius: 9999px; 
-            font-size: 12px; 
-            font-weight: 600; 
-        }
-        .badge-rented { 
-            background: #fee2e2; 
-            color: #991b1b; 
-            padding: 4px 14px; 
-            border-radius: 9999px; 
-            font-size: 12px; 
-            font-weight: 600; 
-        }
-        .badge-featured { 
-            background: #fef3c7; 
-            color: #92400e; 
-            padding: 4px 14px; 
-            border-radius: 9999px; 
-            font-size: 12px; 
-            font-weight: 600; 
-        }
-        
+        .card-footer .date { font-size: 12px; color: #94a3b8; }
+        .badge-available { background: #dcfce7; color: #166534; padding: 4px 14px; border-radius: 9999px; font-size: 12px; font-weight: 600; }
+        .badge-rented { background: #fee2e2; color: #991b1b; padding: 4px 14px; border-radius: 9999px; font-size: 12px; font-weight: 600; }
+        .badge-featured { background: #fef3c7; color: #92400e; padding: 4px 14px; border-radius: 9999px; font-size: 12px; font-weight: 600; }
         .price-tag {
             background: white;
             padding: 6px 16px;
@@ -407,42 +191,18 @@
             align-items: center;
             gap: 4px;
         }
-        .price-tag .currency {
-            font-size: 12px;
-            color: #94a3b8;
-            font-weight: 400;
-        }
-        
-        .view-count {
-            font-size: 12px;
-            color: #94a3b8;
-            display: flex;
-            align-items: center;
-            gap: 4px;
-        }
-        .view-count i { font-size: 12px; }
-        
+        .price-tag .currency { font-size: 12px; color: #94a3b8; font-weight: 400; }
+        .view-count { font-size: 12px; color: #94a3b8; display: flex; align-items: center; gap: 4px; }
         .nav-link { 
-            color: #475569; 
-            text-decoration: none; 
-            display: flex; 
-            align-items: center; 
-            gap: 8px; 
-            padding: 10px 16px; 
-            border-radius: 10px;
+            color: #475569; text-decoration: none; 
+            display: flex; align-items: center; gap: 8px; 
+            padding: 10px 16px; border-radius: 10px;
             transition: all 0.2s;
             font-weight: 500;
             font-size: 15px;
         }
-        .nav-link:hover { 
-            background: #f1f5f9; 
-            color: #FF385C; 
-        }
-        .nav-link.active { 
-            color: #FF385C; 
-            background: #fff5f7; 
-        }
-        
+        .nav-link:hover { background: #f1f5f9; color: #FF385C; }
+        .nav-link.active { color: #FF385C; background: #fff5f7; }
         .nav-link-add {
             background: linear-gradient(135deg, #FF385C, #e0314f);
             color: white !important;
@@ -452,12 +212,7 @@
             box-shadow: 0 4px 15px rgba(255,56,92,0.25);
             transition: all 0.3s;
         }
-        .nav-link-add:hover {
-            transform: scale(1.05);
-            box-shadow: 0 8px 25px rgba(255,56,92,0.35);
-            background: linear-gradient(135deg, #e0314f, #c0284a);
-        }
-        
+        .nav-link-add:hover { transform: scale(1.05); box-shadow: 0 8px 25px rgba(255,56,92,0.35); }
         .input-field {
             width: 100%;
             padding: 14px 16px;
@@ -468,13 +223,7 @@
             background: white;
             font-family: inherit;
         }
-        .input-field:focus {
-            border-color: #FF385C;
-            outline: none;
-            box-shadow: 0 0 0 4px rgba(255,56,92,0.1);
-        }
-        .input-field::placeholder { color: #94a3b8; }
-        
+        .input-field:focus { border-color: #FF385C; outline: none; box-shadow: 0 0 0 4px rgba(255,56,92,0.1); }
         .form-card {
             background: white;
             border-radius: 20px;
@@ -482,7 +231,20 @@
             box-shadow: 0 4px 20px rgba(0,0,0,0.06);
             border: 1px solid rgba(0,0,0,0.04);
         }
-        
+        .detail-card {
+            background: white;
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.06);
+            border: 1px solid rgba(0,0,0,0.04);
+        }
+        .detail-content { padding: 32px; }
+        .detail-title { font-size: 28px; font-weight: 700; color: #0f172a; margin-bottom: 8px; }
+        .detail-meta { display: flex; flex-wrap: wrap; gap: 16px; color: #64748b; font-size: 16px; }
+        .detail-meta i { color: #FF385C; width: 18px; }
+        .detail-description { color: #475569; line-height: 1.8; font-size: 16px; }
+        .detail-price { font-size: 36px; font-weight: 800; color: #FF385C; }
+        .detail-price .currency { font-size: 18px; font-weight: 400; color: #64748b; }
         .detail-image-area {
             padding: 40px 0;
             min-height: 160px;
@@ -492,23 +254,7 @@
             justify-content: center;
             position: relative;
         }
-        .detail-image-area .tiktok-icon {
-            font-size: 72px;
-            color: #fe2c55;
-            opacity: 0.2;
-        }
-        
-        .detail-price {
-            font-size: 36px;
-            font-weight: 800;
-            color: #FF385C;
-        }
-        .detail-price .currency {
-            font-size: 18px;
-            font-weight: 400;
-            color: #64748b;
-        }
-        
+        .detail-image-area .tiktok-icon { font-size: 72px; color: #fe2c55; opacity: 0.2; }
         .tiktok-video-container {
             background: linear-gradient(135deg, #0f0f1a, #1a1a2e);
             border-radius: 16px;
@@ -522,17 +268,22 @@
             width: 100%;
             border: 1px solid rgba(255,255,255,0.06);
         }
-        .tiktok-video-container i {
-            font-size: 56px;
-            color: #fe2c55;
-            margin-bottom: 12px;
+        .tiktok-video-container i { font-size: 56px; color: #fe2c55; margin-bottom: 12px; }
+        .tiktok-video-container p { color: rgba(255,255,255,0.7); font-size: 16px; margin-bottom: 16px; }
+        .stats-bar {
+            display: flex;
+            gap: 32px;
+            padding: 20px 24px;
+            background: white;
+            border-radius: 16px;
+            margin-bottom: 32px;
+            flex-wrap: wrap;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.06);
+            border: 1px solid rgba(0,0,0,0.04);
         }
-        .tiktok-video-container p {
-            color: rgba(255,255,255,0.7);
-            font-size: 16px;
-            margin-bottom: 16px;
-        }
-        
+        .stat-item { display: flex; align-items: center; gap: 10px; color: #475569; font-size: 15px; }
+        .stat-item i { color: #FF385C; font-size: 18px; width: 24px; text-align: center; }
+        .stat-number { font-weight: 700; color: #0f172a; font-size: 18px; }
         .admin-table {
             width: 100%;
             background: white;
@@ -541,45 +292,14 @@
             box-shadow: 0 1px 3px rgba(0,0,0,0.06);
             border: 1px solid rgba(0,0,0,0.04);
         }
-        .admin-table th {
-            padding: 14px 16px;
-            text-align: left;
-            font-weight: 600;
-            color: #475569;
-            background: #f8fafc;
-            font-size: 13px;
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
-        }
-        .admin-table td {
-            padding: 14px 16px;
-            border-bottom: 1px solid #f1f5f9;
-            font-size: 14px;
-        }
+        .admin-table th { padding: 14px 16px; text-align: left; font-weight: 600; color: #475569; background: #f8fafc; font-size: 13px; text-transform: uppercase; letter-spacing: 0.5px; }
+        .admin-table td { padding: 14px 16px; border-bottom: 1px solid #f1f5f9; font-size: 14px; }
         .admin-table tr:hover { background: #fafbfc; }
         .admin-actions { display: flex; gap: 8px; flex-wrap: wrap; justify-content: center; }
-        
-        .empty-state { 
-            text-align: center; 
-            padding: 80px 20px; 
-        }
-        .empty-state i { 
-            font-size: 72px; 
-            color: #FF385C; 
-            opacity: 0.3;
-            margin-bottom: 20px; 
-        }
-        .empty-state h2 { 
-            font-size: 28px; 
-            color: #0f172a; 
-            margin-bottom: 12px; 
-            font-weight: 700;
-        }
-        .empty-state p { 
-            color: #64748b; 
-            font-size: 16px; 
-        }
-        
+        .empty-state { text-align: center; padding: 80px 20px; }
+        .empty-state i { font-size: 72px; color: #FF385C; opacity: 0.3; margin-bottom: 20px; }
+        .empty-state h2 { font-size: 28px; color: #0f172a; margin-bottom: 12px; font-weight: 700; }
+        .empty-state p { color: #64748b; font-size: 16px; }
         .toast {
             position: fixed;
             bottom: 24px;
@@ -590,7 +310,7 @@
             border-radius: 12px;
             box-shadow: 0 8px 40px rgba(0,0,0,0.2);
             z-index: 1000;
-            animation: slideUp 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            animation: slideUp 0.4s;
             font-size: 15px;
             font-weight: 500;
             max-width: 400px;
@@ -599,7 +319,6 @@
             from { transform: translateY(100px); opacity: 0; }
             to { transform: translateY(0); opacity: 1; }
         }
-        
         @keyframes spin {
             0% { transform: rotate(0deg); }
             100% { transform: rotate(360deg); }
@@ -613,47 +332,75 @@
             border-radius: 50%;
             animation: spin 0.8s linear infinite;
         }
+        .card-image-area .badge-featured { position: absolute; top: 12px; left: 12px; }
         
-        .detail-card {
+        /* About Page Styles - Integrated */
+        .about-section {
             background: white;
             border-radius: 20px;
-            overflow: hidden;
-            box-shadow: 0 4px 20px rgba(0,0,0,0.06);
-            border: 1px solid rgba(0,0,0,0.04);
+            padding: 50px 40px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.06);
+            max-width: 900px;
+            margin: 32px auto;
         }
-        .detail-content {
-            padding: 32px;
+        .about-section h1 {
+            font-size: 38px;
+            font-weight: 800;
+            color: #1a1a1a;
+            text-align: center;
         }
-        .detail-title {
-            font-size: 28px;
-            font-weight: 700;
-            color: #0f172a;
-            margin-bottom: 8px;
-        }
-        .detail-meta {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 16px;
+        .about-section .subtitle {
             color: #64748b;
-            font-size: 16px;
+            font-size: 18px;
+            text-align: center;
+            margin-top: 4px;
         }
-        .detail-meta i { color: #FF385C; width: 18px; }
-        .detail-description {
-            color: #475569;
+        .about-section .description {
+            color: #4a4a4a;
             line-height: 1.8;
-            font-size: 16px;
+            font-size: 17px;
+            margin-bottom: 24px;
+            max-width: 700px;
+            margin-left: auto;
+            margin-right: auto;
+            text-align: center;
         }
-        
-        .card-image-area .badge-featured {
-            position: absolute;
-            top: 12px;
-            left: 12px;
+        .about-section .feature-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 16px;
+            max-width: 700px;
+            margin: 0 auto 32px;
+        }
+        .about-section .feature-item {
+            padding: 16px;
+            background: #f8fafc;
+            border-radius: 12px;
+            text-align: center;
+        }
+        .about-section .feature-item .icon { font-size: 24px; margin-bottom: 4px; }
+        .about-section .feature-item .label { font-weight: 600; color: #1a1a1a; }
+        .about-section .feature-item .desc { font-size: 14px; color: #64748b; }
+        .about-section .contact-box {
+            background: linear-gradient(135deg, #f8fafc, #f1f5f9);
+            border-radius: 12px;
+            padding: 24px;
+            text-align: center;
+            max-width: 500px;
+            margin: 0 auto;
+        }
+        .about-section .contact-box .label { font-weight: 600; color: #1a1a1a; margin-bottom: 4px; }
+        .about-section .contact-box .phone { color: #25D366; font-weight: 700; font-size: 20px; text-decoration: none; }
+        .about-section .contact-box .hours { font-size: 13px; color: #94a3b8; margin-top: 4px; }
+        @media (max-width: 640px) {
+            .about-section { padding: 30px 20px; }
+            .about-section h1 { font-size: 28px; }
+            .about-section .feature-grid { grid-template-columns: 1fr 1fr; }
         }
     </style>
 </head>
 <body>
     <div id="app"></div>
-    
     <script>
         const API_URL = 'https://homelink-production.up.railway.app/api';
         const CURRENCY = 'FCFA';
@@ -695,10 +442,10 @@
                         </a>
                         <div style="display: flex; gap: 4px; align-items: center; flex-wrap: wrap;">
                             <a href="/" class="nav-link ${isActive('/')}" onclick="event.preventDefault(); navigate('/')">
+                                <i class="fas fa-home"></i> Home
+                            </a>
                             <a href="/about" class="nav-link ${isActive('/about')}" onclick="event.preventDefault(); navigate('/about')">
                                 <i class="fas fa-info-circle"></i> About
-                            </a>
-                                <i class="fas fa-home"></i> Home
                             </a>
                             ${isAdmin ? `
                                 <a href="/admin" class="nav-link ${isActive('/admin')}" onclick="event.preventDefault(); navigate('/admin')">
@@ -711,65 +458,14 @@
                                     <i class="fas fa-sign-out-alt"></i> Logout
                                 </button>
                             ` : `
+                                <a href="/alwydivielage" class="nav-link ${isActive('/alwydivielage')}" onclick="event.preventDefault(); navigate('/alwydivielage')">
+                                    <i class="fas fa-lock"></i> Admin
+                                </a>
                             `}
                         </div>
                     </div>
                 </nav>
             `;
-        }
-        
-        function renderLogin() {
-            return `
-                <div class="container" style="padding: 80px 0; max-width: 420px;">
-                    <div class="form-card">
-                        <div style="text-align: center; margin-bottom: 32px;">
-                            <div style="width: 72px; height: 72px; background: linear-gradient(135deg, #FF385C, #e0314f); border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto 16px;">
-                                <i class="fas fa-lock" style="font-size: 28px; color: white;"></i>
-                            </div>
-                            <h1 style="font-size: 24px; font-weight: 700; color: #0f172a;">Admin Login</h1>
-                            <p style="color: #64748b; font-size: 15px; margin-top: 4px;">Enter the password to manage listings</p>
-                        </div>
-                        <div id="alwydivielage-message" style="display: none; padding: 12px 16px; border-radius: 8px; margin-bottom: 16px; font-size: 14px;"></div>
-                        <form id="alwydivielage-form" onsubmit="handleLogin(event)">
-                            <div style="margin-bottom: 16px;">
-                                <label style="display: block; font-weight: 600; margin-bottom: 6px; color: #0f172a; font-size: 14px;">Password</label>
-                                <input type="password" id="admin-password" required placeholder="Enter password" class="input-field">
-                            </div>
-                            <button type="submit" class="btn-primary" style="width: 100%; padding: 16px; font-size: 18px;">
-                                <span id="alwydivielage-text"><i class="fas fa-sign-in-alt"></i> Login</span>
-                                <span id="alwydivielage-loading" style="display: none;"><i class="fas fa-spinner fa-spin"></i> Logging in...</span>
-                            </button>
-                        </form>
-                    </div>
-                </div>
-            `;
-        }
-        
-        async function handleLogin(e) {
-            e.preventDefault();
-            const password = document.getElementById('admin-password').value;
-            const submitBtn = document.getElementById('alwydivielage-text');
-            const loadingBtn = document.getElementById('alwydivielage-loading');
-            const messageDiv = document.getElementById('alwydivielage-message');
-            
-            submitBtn.style.display = 'none';
-            loadingBtn.style.display = 'inline';
-            messageDiv.style.display = 'none';
-            
-            if (password === ADMIN_PASSWORD) {
-                isAdmin = true;
-                sessionStorage.setItem('isAdmin', 'true');
-                showToast('✅ Login successful!');
-                setTimeout(() => navigate('/admin'), 500);
-            } else {
-                messageDiv.style.display = 'block';
-                messageDiv.style.background = '#fee2e2';
-                messageDiv.style.color = '#991b1b';
-                messageDiv.style.border = '1px solid #fca5a5';
-                messageDiv.innerHTML = '❌ Incorrect password';
-                submitBtn.style.display = 'inline';
-                loadingBtn.style.display = 'none';
-            }
         }
         
         function renderHome() {
@@ -803,52 +499,6 @@
                         </div>
                     </div>
                     
-<!-- About Us Section -->
-<div style="background: white; border-radius: 20px; padding: 40px; margin: 40px 0; box-shadow: 0 2px 10px rgba(0,0,0,0.06);">
-    <h2 style="font-size: 32px; font-weight: 800; color: #1a1a1a; text-align: center; margin-bottom: 12px;">
-        About HomeLink Cameroon 🇨🇲
-    </h2>
-    <p style="max-width: 800px; margin: 0 auto 24px; text-align: center; color: #4a4a4a; line-height: 1.8; font-size: 17px;">
-        HomeLink is Cameroon's #1 direct real estate platform connecting homeowners directly to tenants. 
-        We eliminate agents and commissions, making it easy to find and list properties in Buea, Douala, 
-        and Yaoundé. Every property is verified, and you can contact owners directly via WhatsApp.
-    </p>
-    
-    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 24px; max-width: 800px; margin: 0 auto;">
-        <div style="text-align: center; padding: 16px; background: #f8fafc; border-radius: 12px;">
-            <div style="font-size: 36px; color: #FF385C;">🏠</div>
-            <p style="font-weight: 600; color: #1a1a1a; margin-top: 8px;">Direct Listings</p>
-            <p style="font-size: 14px; color: #64748b;">No agents, no middlemen</p>
-        </div>
-        <div style="text-align: center; padding: 16px; background: #f8fafc; border-radius: 12px;">
-            <div style="font-size: 36px; color: #FF385C;">📱</div>
-            <p style="font-weight: 600; color: #1a1a1a; margin-top: 8px;">WhatsApp Contact</p>
-            <p style="font-size: 14px; color: #64748b;">Connect directly with owners</p>
-        </div>
-        <div style="text-align: center; padding: 16px; background: #f8fafc; border-radius: 12px;">
-            <div style="font-size: 36px; color: #FF385C;">💰</div>
-            <p style="font-weight: 600; color: #1a1a1a; margin-top: 8px;">Zero Commission</p>
-            <p style="font-size: 14px; color: #64748b;">Save money on both sides</p>
-        </div>
-        <div style="text-align: center; padding: 16px; background: #f8fafc; border-radius: 12px;">
-            <div style="font-size: 36px; color: #FF385C;">✅</div>
-            <p style="font-weight: 600; color: #1a1a1a; margin-top: 8px;">Verified Properties</p>
-            <p style="font-size: 14px; color: #64748b;">Trusted and authentic listings</p>
-        </div>
-    </div>
-    
-    <div style="text-align: center; margin-top: 24px; padding: 20px; background: linear-gradient(135deg, #f8fafc, #f1f5f9); border-radius: 12px; max-width: 500px; margin-left: auto; margin-right: auto;">
-        <p style="font-weight: 600; color: #1a1a1a; margin-bottom: 4px;">
-            📞 Contact Us
-        </p>
-        <a href="https://wa.me/237672751769" target="_blank" style="color: #25D366; font-weight: 700; font-size: 18px; text-decoration: none;">
-            <i class="fab fa-whatsapp"></i> +237 6 72 75 17 69
-        </a>
-        <p style="font-size: 13px; color: #94a3b8; margin-top: 4px;">
-            Available 7 days a week
-        </p>
-    </div>
-</div>
                     <div id="listings-container">
                         <div style="text-align: center; padding: 60px 0;">
                             <div class="spinner"></div>
@@ -859,9 +509,71 @@
             `;
         }
         
+        function renderAbout() {
+            return `
+                <div class="container">
+                    <div class="about-section">
+                        <div style="text-align: center; margin-bottom: 32px;">
+                            <div style="font-size: 48px; margin-bottom: 12px;">🏠</div>
+                            <h1>About HomeLink Cameroon</h1>
+                            <p class="subtitle">Cameroon's #1 Direct Real Estate Platform</p>
+                        </div>
+                        
+                        <p class="description">
+                            HomeLink is Cameroon's leading real estate platform that connects homeowners directly to tenants. 
+                            We eliminate agents and commissions, making it easy to find and list properties in Buea, Douala, 
+                            and Yaoundé.
+                        </p>
+                        
+                        <h2 style="font-size: 22px; font-weight: 700; color: #1a1a1a; text-align: center; margin-top: 32px; margin-bottom: 16px;">
+                            Our Mission
+                        </h2>
+                        <p style="color: #4a4a4a; line-height: 1.8; font-size: 16px; max-width: 700px; margin: 0 auto 24px; text-align: center;">
+                            To make finding a home easy, transparent, and affordable for everyone in Cameroon. 
+                            We believe in connecting people directly, saving money, and building trust.
+                        </p>
+                        
+                        <h2 style="font-size: 22px; font-weight: 700; color: #1a1a1a; text-align: center; margin-top: 32px; margin-bottom: 16px;">
+                            Why HomeLink?
+                        </h2>
+                        
+                        <div class="feature-grid">
+                            <div class="feature-item">
+                                <div class="icon">🏠</div>
+                                <p class="label">Direct Listings</p>
+                                <p class="desc">No agents, no middlemen</p>
+                            </div>
+                            <div class="feature-item">
+                                <div class="icon">📱</div>
+                                <p class="label">WhatsApp Contact</p>
+                                <p class="desc">Connect with owners directly</p>
+                            </div>
+                            <div class="feature-item">
+                                <div class="icon">💰</div>
+                                <p class="label">Zero Commission</p>
+                                <p class="desc">Save money on both sides</p>
+                            </div>
+                            <div class="feature-item">
+                                <div class="icon">✅</div>
+                                <p class="label">Verified Properties</p>
+                                <p class="desc">Trusted and authentic</p>
+                            </div>
+                        </div>
+                        
+                        <div class="contact-box">
+                            <p class="label">📞 Contact Us</p>
+                            <a href="https://wa.me/237672751769" target="_blank" class="phone">
+                                <i class="fab fa-whatsapp"></i> +237 6 72 75 17 69
+                            </a>
+                            <p class="hours">Available 7 days a week</p>
+                        </div>
+                    </div>
+                </div>
+            `;
+        }
+        
         function renderAdd() {
             const houseTypes = ['Single Room', 'Studio', '1 Bedroom', '2 Bedroom', '3 Bedroom', 'Apartment', 'Other'];
-            
             return `
                 <div class="container" style="padding: 32px 0; max-width: 768px;">
                     <div class="form-card">
@@ -870,20 +582,16 @@
                             <h1 style="font-size: 28px; font-weight: 700; color: #0f172a;">Add New Listing</h1>
                         </div>
                         <p style="color: #64748b; margin-bottom: 24px; font-size: 16px;">Fill in the information to list your property</p>
-                        
                         <div id="form-message" style="display: none; padding: 14px 16px; border-radius: 12px; margin-bottom: 20px; font-size: 14px;"></div>
-                        
                         <form id="listing-form" onsubmit="submitListing(event)">
                             <div style="margin-bottom: 18px;">
                                 <label style="display: block; font-weight: 600; margin-bottom: 6px; color: #0f172a; font-size: 14px;">Title *</label>
                                 <input type="text" id="title" required placeholder="e.g., Beautiful 2-bedroom apartment in Molyko" class="input-field">
                             </div>
-                            
                             <div style="margin-bottom: 18px;">
                                 <label style="display: block; font-weight: 600; margin-bottom: 6px; color: #0f172a; font-size: 14px;">Description *</label>
                                 <textarea id="description" required rows="4" placeholder="Describe your property in detail..." class="input-field" style="resize: vertical;"></textarea>
                             </div>
-                            
                             <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-bottom: 18px;">
                                 <div>
                                     <label style="display: block; font-weight: 600; margin-bottom: 6px; color: #0f172a; font-size: 14px;">Price (FCFA/month) *</label>
@@ -895,82 +603,12 @@
                                     <span style="font-size: 12px; color: #94a3b8; margin-top: 4px; display: block;">Enter city or neighborhood</span>
                                 </div>
                             </div>
-                            
                             <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-bottom: 18px;">
                                 <div>
                                     <label style="display: block; font-weight: 600; margin-bottom: 6px; color: #0f172a; font-size: 14px;">Property Type *</label>
                                     <select id="houseType" required class="input-field">
                                         <option value="">Select type</option>
                                         ${houseTypes.map(t => `<option value="${t}">${t}</option>`).join('')}
-
-function renderAbout() {
-    return `
-        <div class="container" style="padding: 32px 0; max-width: 900px;">
-            <div style="background: white; border-radius: 20px; padding: 50px 40px; box-shadow: 0 2px 10px rgba(0,0,0,0.06);">
-                <div style="text-align: center; margin-bottom: 32px;">
-                    <div style="font-size: 48px; margin-bottom: 12px;">🏠</div>
-                    <h1 style="font-size: 38px; font-weight: 800; color: #1a1a1a;">About HomeLink Cameroon</h1>
-                    <p style="color: #64748b; font-size: 18px; margin-top: 4px;">Cameroon's #1 Direct Real Estate Platform</p>
-                </div>
-                
-                <div style="max-width: 700px; margin: 0 auto;">
-                    <p style="color: #4a4a4a; line-height: 1.8; font-size: 17px; margin-bottom: 24px;">
-                        HomeLink is Cameroon's leading real estate platform that connects homeowners directly to tenants. 
-                        We eliminate agents and commissions, making it easy to find and list properties in Buea, Douala, 
-                        and Yaoundé.
-                    </p>
-                    
-                    <h2 style="font-size: 22px; font-weight: 700; color: #1a1a1a; margin-top: 32px; margin-bottom: 16px;">
-                        Our Mission
-                    </h2>
-                    <p style="color: #4a4a4a; line-height: 1.8; font-size: 16px; margin-bottom: 24px;">
-                        To make finding a home easy, transparent, and affordable for everyone in Cameroon. 
-                        We believe in connecting people directly, saving money, and building trust.
-                    </p>
-                    
-                    <h2 style="font-size: 22px; font-weight: 700; color: #1a1a1a; margin-top: 32px; margin-bottom: 16px;">
-                        Why HomeLink?
-                    </h2>
-                    
-                    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-bottom: 32px;">
-                        <div style="padding: 16px; background: #f8fafc; border-radius: 12px;">
-                            <div style="font-size: 24px; margin-bottom: 4px;">🏠</div>
-                            <p style="font-weight: 600; color: #1a1a1a;">Direct Listings</p>
-                            <p style="font-size: 14px; color: #64748b;">No agents, no middlemen</p>
-                        </div>
-                        <div style="padding: 16px; background: #f8fafc; border-radius: 12px;">
-                            <div style="font-size: 24px; margin-bottom: 4px;">📱</div>
-                            <p style="font-weight: 600; color: #1a1a1a;">WhatsApp Contact</p>
-                            <p style="font-size: 14px; color: #64748b;">Connect with owners directly</p>
-                        </div>
-                        <div style="padding: 16px; background: #f8fafc; border-radius: 12px;">
-                            <div style="font-size: 24px; margin-bottom: 4px;">💰</div>
-                            <p style="font-weight: 600; color: #1a1a1a;">Zero Commission</p>
-                            <p style="font-size: 14px; color: #64748b;">Save money on both sides</p>
-                        </div>
-                        <div style="padding: 16px; background: #f8fafc; border-radius: 12px;">
-                            <div style="font-size: 24px; margin-bottom: 4px;">✅</div>
-                            <p style="font-weight: 600; color: #1a1a1a;">Verified Properties</p>
-                            <p style="font-size: 14px; color: #64748b;">Trusted and authentic</p>
-                        </div>
-                    </div>
-                    
-                    <div style="background: linear-gradient(135deg, #f8fafc, #f1f5f9); border-radius: 12px; padding: 24px; text-align: center;">
-                        <p style="font-weight: 600; color: #1a1a1a; margin-bottom: 4px;">
-                            📞 Contact Us
-                        </p>
-                        <a href="https://wa.me/237672751769" target="_blank" style="color: #25D366; font-weight: 700; font-size: 20px; text-decoration: none;">
-                            <i class="fab fa-whatsapp"></i> +237 6 72 75 17 69
-                        </a>
-                        <p style="font-size: 13px; color: #94a3b8; margin-top: 4px;">
-                            Available 7 days a week
-                        </p>
-                    </div>
-                </div>
-            </div>
-        </div>
-    `;
-}
                                     </select>
                                 </div>
                                 <div>
@@ -979,19 +617,16 @@ function renderAbout() {
                                     <span style="font-size: 12px; color: #94a3b8; margin-top: 4px; display: block;">Format: 690123456 (without country code)</span>
                                 </div>
                             </div>
-                            
                             <div style="margin-bottom: 18px;">
                                 <label style="display: block; font-weight: 600; margin-bottom: 6px; color: #0f172a; font-size: 14px;">TikTok Video Link *</label>
                                 <input type="url" id="video-url" required placeholder="https://www.tiktok.com/@user/video/123456789" class="input-field">
                                 <span style="font-size: 12px; color: #94a3b8; margin-top: 4px; display: block;">Paste the TikTok video link</span>
                             </div>
-                            
                             <div style="margin-bottom: 18px;">
                                 <label style="display: block; font-weight: 600; margin-bottom: 6px; color: #0f172a; font-size: 14px;">Image Link (optional)</label>
                                 <input type="url" id="image-url" placeholder="https://i.imgur.com/xxxxx.jpg" class="input-field">
                                 <span style="font-size: 12px; color: #94a3b8; margin-top: 4px; display: block;">Use free hosting like Imgur or Postimage</span>
                             </div>
-                            
                             <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-bottom: 24px;">
                                 <div style="display: flex; align-items: center; gap: 12px;">
                                     <input type="checkbox" id="available" checked style="width: 20px; height: 20px; accent-color: #FF385C;">
@@ -1002,7 +637,6 @@ function renderAbout() {
                                     <label style="font-weight: 500; color: #0f172a;">⭐ Featured</label>
                                 </div>
                             </div>
-                            
                             <button type="submit" class="btn-primary" style="width: 100%; padding: 16px; font-size: 18px;">
                                 <span id="submit-text"><i class="fas fa-plus"></i> Publish Listing</span>
                                 <span id="submit-loading" style="display: none;"><i class="fas fa-spinner fa-spin"></i> Publishing...</span>
@@ -1029,7 +663,6 @@ function renderAbout() {
                             </a>
                         </div>
                     </div>
-                    
                     <div class="stats-bar">
                         <div class="stat-item">
                             <i class="fas fa-home"></i>
@@ -1048,12 +681,38 @@ function renderAbout() {
                             <span class="stat-number" id="admin-rented">0</span> <span style="color: #94a3b8; font-weight: 400;">rented</span>
                         </div>
                     </div>
-                    
                     <div id="admin-listings">
                         <div style="text-align: center; padding: 60px 0;">
                             <div class="spinner"></div>
                             <p style="margin-top: 20px; color: #94a3b8; font-size: 16px;">Loading...</p>
                         </div>
+                    </div>
+                </div>
+            `;
+        }
+        
+        function renderLogin() {
+            return `
+                <div class="container" style="padding: 80px 0; max-width: 420px;">
+                    <div class="form-card">
+                        <div style="text-align: center; margin-bottom: 32px;">
+                            <div style="width: 72px; height: 72px; background: linear-gradient(135deg, #FF385C, #e0314f); border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto 16px;">
+                                <i class="fas fa-lock" style="font-size: 28px; color: white;"></i>
+                            </div>
+                            <h1 style="font-size: 24px; font-weight: 700; color: #0f172a;">Admin Login</h1>
+                            <p style="color: #64748b; font-size: 15px; margin-top: 4px;">Enter the password to manage listings</p>
+                        </div>
+                        <div id="login-message" style="display: none; padding: 12px 16px; border-radius: 8px; margin-bottom: 16px; font-size: 14px;"></div>
+                        <form id="login-form" onsubmit="handleLogin(event)">
+                            <div style="margin-bottom: 16px;">
+                                <label style="display: block; font-weight: 600; margin-bottom: 6px; color: #0f172a; font-size: 14px;">Password</label>
+                                <input type="password" id="admin-password" required placeholder="Enter password" class="input-field">
+                            </div>
+                            <button type="submit" class="btn-primary" style="width: 100%; padding: 16px; font-size: 18px;">
+                                <span id="login-text"><i class="fas fa-sign-in-alt"></i> Login</span>
+                                <span id="login-loading" style="display: none;"><i class="fas fa-spinner fa-spin"></i> Logging in...</span>
+                            </button>
+                        </form>
                     </div>
                 </div>
             `;
@@ -1076,7 +735,7 @@ function renderAbout() {
             const id = window.location.pathname.split('/')[2];
             return `
                 <div class="container" style="padding: 32px 0;">
-                    <a href="/" style="color: #64748b; text-decoration: none; display: inline-flex; align-items: center; gap: 8px; margin-bottom: 20px; font-size: 15px; transition: all 0.2s;" onclick="event.preventDefault(); navigate('/')">
+                    <a href="/" style="color: #64748b; text-decoration: none; display: inline-flex; align-items: center; gap: 8px; margin-bottom: 20px; font-size: 15px;" onclick="event.preventDefault(); navigate('/')">
                         <i class="fas fa-arrow-left"></i> Back to listings
                     </a>
                     <div id="detail-container">
@@ -1089,6 +748,7 @@ function renderAbout() {
             `;
         }
         
+        // ============= LOAD FUNCTIONS =============
         async function loadListings(containerId, keyword = '') {
             try {
                 const url = keyword ? `${API_URL}/listings?search=${encodeURIComponent(keyword)}` : `${API_URL}/listings`;
@@ -1131,7 +791,7 @@ function renderAbout() {
                         ${allListings.map(listing => `
                             <div class="card" onclick="navigate('/listing/${listing._id}')">
                                 <div class="card-image-area">
-                                    ${listing.featured ? `<span class="badge-featured" style="position:absolute;top:12px;left:12px;">⭐ Featured</span>` : ''}
+                                    ${listing.featured ? `<span class="badge-featured">⭐ Featured</span>` : ''}
                                     <i class="fab fa-tiktok tiktok-icon"></i>
                                     <div style="position: absolute; bottom: 12px; left: 12px;">
                                         <span class="price-tag">
@@ -1174,7 +834,6 @@ function renderAbout() {
                     </div>
                 `;
             } catch(e) {
-                console.error('Error:', e);
                 document.getElementById(containerId).innerHTML = `
                     <div class="empty-state">
                         <i class="fas fa-exclamation-triangle" style="color: #ef4444; opacity: 1;"></i>
@@ -1190,7 +849,6 @@ function renderAbout() {
             const total = listings.length;
             const views = listings.reduce((sum, l) => sum + (l.views || 0), 0);
             const locations = new Set(listings.map(l => l.location)).size;
-            
             document.getElementById('total-listings').textContent = total;
             document.getElementById('total-views').textContent = views;
             document.getElementById('total-locations').textContent = locations;
@@ -1201,7 +859,6 @@ function renderAbout() {
             const views = listings.reduce((sum, l) => sum + (l.views || 0), 0);
             const available = listings.filter(l => l.isAvailable).length;
             const rented = listings.filter(l => !l.isAvailable).length;
-            
             document.getElementById('admin-total').textContent = total;
             document.getElementById('admin-views').textContent = views;
             document.getElementById('admin-available').textContent = available;
@@ -1215,9 +872,7 @@ function renderAbout() {
                 allListings = data.data || [];
                 const container = document.getElementById('admin-listings');
                 if (!container) return;
-                
                 updateAdminStats(allListings);
-                
                 if (allListings.length === 0) {
                     container.innerHTML = `
                         <div class="empty-state">
@@ -1228,19 +883,11 @@ function renderAbout() {
                     `;
                     return;
                 }
-                
                 container.innerHTML = `
                     <div style="overflow-x: auto;">
                         <table class="admin-table">
                             <thead>
-                                <tr>
-                                    <th>Title</th>
-                                    <th>Location</th>
-                                    <th>Price</th>
-                                    <th>Status</th>
-                                    <th>Views</th>
-                                    <th style="text-align: center;">Actions</th>
-                                </tr>
+                                <tr><th>Title</th><th>Location</th><th>Price</th><th>Status</th><th>Views</th><th style="text-align: center;">Actions</th></tr>
                             </thead>
                             <tbody>
                                 ${allListings.map(listing => `
@@ -1275,104 +922,69 @@ function renderAbout() {
                     </div>
                 `;
             } catch(e) {
-                console.error('Error:', e);
                 container.innerHTML = '<div class="empty-state"><i class="fas fa-exclamation-triangle" style="color: #ef4444;"></i><h2>Error loading</h2></div>';
             }
         }
         
         async function toggleAvailability(id) {
             if (!confirm('Change the status of this listing?')) return;
-            
             try {
                 const listing = allListings.find(l => l._id === id);
                 if (!listing) return;
-                
-                const updated = {
-                    ...listing,
-                    isAvailable: !listing.isAvailable
-                };
-                
+                const updated = { ...listing, isAvailable: !listing.isAvailable };
                 const response = await fetch(`${API_URL}/listings/${id}`, {
                     method: 'PUT',
                     headers: { 'Content-Type': 'application/json' },
                     body: JSON.stringify(updated)
                 });
-                
                 if (response.ok) {
                     showToast('✅ Status updated!');
                     loadAdminListings();
                     loadListings('listings-container');
-                } else {
-                    showToast('❌ Error updating status', 'error');
                 }
-            } catch(e) {
-                showToast('❌ Connection error', 'error');
-            }
+            } catch(e) { showToast('❌ Error', 'error'); }
         }
         
         async function deleteListing(id) {
             if (!confirm('⚠️ Delete this listing? This action cannot be undone!')) return;
-            
             try {
-                const response = await fetch(`${API_URL}/listings/${id}`, {
-                    method: 'DELETE'
-                });
-                
+                const response = await fetch(`${API_URL}/listings/${id}`, { method: 'DELETE' });
                 if (response.ok) {
                     showToast('✅ Listing deleted!');
                     loadAdminListings();
                     loadListings('listings-container');
-                } else {
-                    showToast('❌ Error deleting', 'error');
                 }
-            } catch(e) {
-                showToast('❌ Connection error', 'error');
-            }
+            } catch(e) { showToast('❌ Error', 'error'); }
         }
         
-        function editListing(id) {
-            navigate(`/edit/${id}`);
-        }
+        function editListing(id) { navigate(`/edit/${id}`); }
         
         async function loadEditForm(id) {
             const container = document.getElementById('edit-container');
             if (!container) return;
-            
             try {
                 const response = await fetch(`${API_URL}/listings/${id}`);
                 const data = await response.json();
                 const listing = data.data;
-                
                 if (!listing) {
                     container.innerHTML = '<div class="empty-state"><i class="fas fa-exclamation-circle"></i><h2>Listing not found</h2></div>';
                     return;
                 }
-                
                 const houseTypes = ['Single Room', 'Studio', '1 Bedroom', '2 Bedroom', '3 Bedroom', 'Apartment', 'Other'];
-                
                 container.innerHTML = `
                     <div class="form-card">
-                        <div style="display: flex; align-items: center; gap: 12px; margin-bottom: 8px;">
-                            <i class="fas fa-edit" style="color: #FF385C; font-size: 28px;"></i>
-                            <h1 style="font-size: 28px; font-weight: 700; color: #0f172a;">Edit Listing</h1>
-                        </div>
-                        <p style="color: #64748b; margin-bottom: 24px; font-size: 16px;">Update the information</p>
-                        
+                        <h1 style="font-size: 28px; font-weight: 700; color: #0f172a;">Edit Listing</h1>
                         <div id="edit-message" style="display: none; padding: 14px 16px; border-radius: 12px; margin-bottom: 20px; font-size: 14px;"></div>
-                        
                         <form id="edit-form" onsubmit="updateListing(event)">
                             <input type="hidden" id="edit-id" value="${listing._id}">
-                            
                             <div style="margin-bottom: 18px;">
                                 <label style="display: block; font-weight: 600; margin-bottom: 6px; color: #0f172a; font-size: 14px;">Title *</label>
                                 <input type="text" id="edit-title" required value="${listing.title}" class="input-field">
                             </div>
-                            
                             <div style="margin-bottom: 18px;">
                                 <label style="display: block; font-weight: 600; margin-bottom: 6px; color: #0f172a; font-size: 14px;">Description *</label>
                                 <textarea id="edit-description" required rows="4" class="input-field" style="resize: vertical;">${listing.description}</textarea>
                             </div>
-                            
                             <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-bottom: 18px;">
                                 <div>
                                     <label style="display: block; font-weight: 600; margin-bottom: 6px; color: #0f172a; font-size: 14px;">Price (FCFA/month) *</label>
@@ -1380,10 +992,9 @@ function renderAbout() {
                                 </div>
                                 <div>
                                     <label style="display: block; font-weight: 600; margin-bottom: 6px; color: #0f172a; font-size: 14px;">Location *</label>
-                                    <input type="text" id="edit-location" required value="${listing.location}" placeholder="e.g., Molyko, Buea" class="input-field">
+                                    <input type="text" id="edit-location" required value="${listing.location}" class="input-field">
                                 </div>
                             </div>
-                            
                             <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-bottom: 18px;">
                                 <div>
                                     <label style="display: block; font-weight: 600; margin-bottom: 6px; color: #0f172a; font-size: 14px;">Property Type *</label>
@@ -1396,17 +1007,14 @@ function renderAbout() {
                                     <input type="tel" id="edit-whatsapp" required value="${listing.whatsappNumber}" class="input-field">
                                 </div>
                             </div>
-                            
                             <div style="margin-bottom: 18px;">
                                 <label style="display: block; font-weight: 600; margin-bottom: 6px; color: #0f172a; font-size: 14px;">TikTok Video Link *</label>
                                 <input type="url" id="edit-video" required value="${listing.videoUrl}" class="input-field">
                             </div>
-                            
                             <div style="margin-bottom: 18px;">
                                 <label style="display: block; font-weight: 600; margin-bottom: 6px; color: #0f172a; font-size: 14px;">Image Link</label>
                                 <input type="url" id="edit-image" value="${listing.images && listing.images[0] ? listing.images[0] : ''}" class="input-field">
                             </div>
-                            
                             <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-bottom: 24px;">
                                 <div style="display: flex; align-items: center; gap: 12px;">
                                     <input type="checkbox" id="edit-available" ${listing.isAvailable ? 'checked' : ''} style="width: 20px; height: 20px; accent-color: #FF385C;">
@@ -1417,22 +1025,17 @@ function renderAbout() {
                                     <label style="font-weight: 500; color: #0f172a;">⭐ Featured</label>
                                 </div>
                             </div>
-                            
                             <div style="display: flex; gap: 12px;">
                                 <button type="submit" class="btn-primary" style="flex: 1; padding: 16px; font-size: 18px;">
                                     <span id="edit-submit-text"><i class="fas fa-save"></i> Update</span>
                                     <span id="edit-submit-loading" style="display: none;"><i class="fas fa-spinner fa-spin"></i> Updating...</span>
                                 </button>
-                                <button type="button" onclick="navigate('/admin')" style="padding: 16px 24px; border: 2px solid #e2e8f0; border-radius: 12px; background: white; cursor: pointer; font-weight: 500; color: #64748b; transition: all 0.2s;">
-                                    Cancel
-                                </button>
+                                <button type="button" onclick="navigate('/admin')" style="padding: 16px 24px; border: 2px solid #e2e8f0; border-radius: 12px; background: white; cursor: pointer; font-weight: 500; color: #64748b;">Cancel</button>
                             </div>
                         </form>
                     </div>
                 `;
-            } catch(e) {
-                container.innerHTML = '<div class="empty-state"><i class="fas fa-exclamation-triangle" style="color: #ef4444;"></i><h2>Error loading</h2></div>';
-            }
+            } catch(e) { container.innerHTML = '<div class="empty-state"><i class="fas fa-exclamation-triangle" style="color: #ef4444;"></i><h2>Error loading</h2></div>'; }
         }
         
         async function updateListing(e) {
@@ -1441,13 +1044,10 @@ function renderAbout() {
             const submitBtn = document.getElementById('edit-submit-text');
             const loadingBtn = document.getElementById('edit-submit-loading');
             const messageDiv = document.getElementById('edit-message');
-            
             submitBtn.style.display = 'none';
             loadingBtn.style.display = 'inline';
             messageDiv.style.display = 'none';
-            
             const imageUrl = document.getElementById('edit-image').value.trim();
-            
             const data = {
                 title: document.getElementById('edit-title').value,
                 description: document.getElementById('edit-description').value,
@@ -1460,38 +1060,26 @@ function renderAbout() {
                 isAvailable: document.getElementById('edit-available').checked,
                 featured: document.getElementById('edit-featured').checked
             };
-            
             try {
                 const response = await fetch(`${API_URL}/listings/${id}`, {
                     method: 'PUT',
                     headers: { 'Content-Type': 'application/json' },
                     body: JSON.stringify(data)
                 });
-                
                 if (response.ok) {
                     messageDiv.style.display = 'block';
                     messageDiv.style.background = '#dcfce7';
                     messageDiv.style.color = '#166534';
-                    messageDiv.style.border = '1px solid #86efac';
                     messageDiv.innerHTML = '✅ Listing updated successfully!';
                     showToast('✅ Listing updated!');
                     setTimeout(() => navigate('/admin'), 1000);
-                } else {
-                    const error = await response.json();
-                    messageDiv.style.display = 'block';
-                    messageDiv.style.background = '#fee2e2';
-                    messageDiv.style.color = '#991b1b';
-                    messageDiv.style.border = '1px solid #fca5a5';
-                    messageDiv.innerHTML = '❌ ' + (error.message || 'Error updating');
                 }
             } catch(e) {
                 messageDiv.style.display = 'block';
                 messageDiv.style.background = '#fee2e2';
                 messageDiv.style.color = '#991b1b';
-                messageDiv.style.border = '1px solid #fca5a5';
                 messageDiv.innerHTML = '❌ Connection error';
             }
-            
             submitBtn.style.display = 'inline';
             loadingBtn.style.display = 'none';
         }
@@ -1500,46 +1088,33 @@ function renderAbout() {
             const id = window.location.pathname.split('/')[2];
             const container = document.getElementById('detail-container');
             if (!container) return;
-            
             try {
                 const response = await fetch(`${API_URL}/listings/${id}`);
                 const data = await response.json();
                 const listing = data.data;
-                
                 if (!listing) {
                     container.innerHTML = `<div class="empty-state"><i class="fas fa-exclamation-circle"></i><h2>Listing not found</h2></div>`;
                     return;
                 }
-                
                 container.innerHTML = `
                     <div class="detail-card">
                         <div class="detail-image-area">
-                            ${listing.featured ? `
-                                <div style="position: absolute; top: 16px; left: 16px;">
-                                    <span class="badge-featured">⭐ Featured</span>
-                                </div>
-                            ` : ''}
+                            ${listing.featured ? `<div style="position:absolute;top:16px;left:16px;"><span class="badge-featured">⭐ Featured</span></div>` : ''}
                             <i class="fab fa-tiktok tiktok-icon"></i>
-                            <div style="position: absolute; bottom: 16px; left: 16px;">
-                                <span class="price-tag" style="font-size: 20px; padding: 8px 24px;">
-                                    <i class="fas fa-coins"></i>
-                                    ${formatPrice(listing.price)} <span style="font-size: 14px; font-weight: 400; color: #94a3b8;">${CURRENCY}/month</span>
+                            <div style="position:absolute;bottom:16px;left:16px;">
+                                <span class="price-tag" style="font-size:20px;padding:8px 24px;">
+                                    <i class="fas fa-coins"></i> ${formatPrice(listing.price)} <span style="font-size:14px;font-weight:400;color:#94a3b8;">${CURRENCY}/month</span>
                                 </span>
                             </div>
-                            <div style="position: absolute; top: 16px; right: 16px;">
-                                <span class="${listing.isAvailable ? 'badge-available' : 'badge-rented'}">
-                                    ${listing.isAvailable ? '✓ Available' : '✗ Rented'}
-                                </span>
+                            <div style="position:absolute;top:16px;right:16px;">
+                                <span class="${listing.isAvailable ? 'badge-available' : 'badge-rented'}">${listing.isAvailable ? '✓ Available' : '✗ Rented'}</span>
                             </div>
-                            <div style="position: absolute; bottom: 16px; right: 16px;">
-                                <span class="view-count" style="font-size: 14px; color: #94a3b8;">
-                                    <i class="fas fa-eye"></i> ${listing.views || 0} views
-                                </span>
+                            <div style="position:absolute;bottom:16px;right:16px;">
+                                <span style="font-size:14px;color:#94a3b8;"><i class="fas fa-eye"></i> ${listing.views || 0} views</span>
                             </div>
                         </div>
-                        
                         <div class="detail-content">
-                            <div style="display: flex; justify-content: space-between; align-items: flex-start; flex-wrap: wrap; gap: 16px; margin-bottom: 16px;">
+                            <div style="display:flex;justify-content:space-between;align-items:flex-start;flex-wrap:wrap;gap:16px;margin-bottom:16px;">
                                 <div>
                                     <h1 class="detail-title">${listing.title}</h1>
                                     <div class="detail-meta">
@@ -1547,62 +1122,47 @@ function renderAbout() {
                                         <span><i class="fas fa-bed"></i> ${listing.houseType}</span>
                                     </div>
                                 </div>
-                                <div style="text-align: right;">
-                                    <div class="detail-price">
-                                        ${formatPrice(listing.price)} <span class="currency">${CURRENCY}/month</span>
-                                    </div>
+                                <div style="text-align:right;">
+                                    <div class="detail-price">${formatPrice(listing.price)} <span class="currency">${CURRENCY}/month</span></div>
                                 </div>
                             </div>
-                            
-                            <div style="border-top: 1px solid #f1f5f9; padding-top: 24px; margin-top: 8px;">
-                                <h2 style="font-size: 18px; font-weight: 600; color: #0f172a; margin-bottom: 12px;">📝 Description</h2>
+                            <div style="border-top:1px solid #f1f5f9;padding-top:24px;margin-top:8px;">
+                                <h2 style="font-size:18px;font-weight:600;color:#0f172a;margin-bottom:12px;">📝 Description</h2>
                                 <p class="detail-description">${listing.description}</p>
                             </div>
-                            
-                            <div style="border-top: 1px solid #f1f5f9; padding-top: 24px; margin-top: 24px;">
-                                <h2 style="font-size: 18px; font-weight: 600; color: #0f172a; margin-bottom: 12px;">🎬 Video Walkthrough</h2>
+                            <div style="border-top:1px solid #f1f5f9;padding-top:24px;margin-top:24px;">
+                                <h2 style="font-size:18px;font-weight:600;color:#0f172a;margin-bottom:12px;">🎬 Video Walkthrough</h2>
                                 <div class="tiktok-video-container">
                                     <i class="fab fa-tiktok"></i>
                                     <p>🎥 Video available on TikTok</p>
                                     <a href="${listing.videoUrl}" target="_blank" class="btn-tiktok">
-                                        <i class="fab fa-tiktok" style="font-size: 24px;"></i>
-                                        Watch on TikTok
-                                        <i class="fas fa-external-link-alt" style="font-size: 14px;"></i>
+                                        <i class="fab fa-tiktok" style="font-size:24px;"></i> Watch on TikTok <i class="fas fa-external-link-alt" style="font-size:14px;"></i>
                                     </a>
-                                    <p style="color: rgba(255,255,255,0.4); font-size: 13px; margin-top: 12px;">
-                                        Click to watch the video in the TikTok app
-                                    </p>
+                                    <p style="color:rgba(255,255,255,0.4);font-size:13px;margin-top:12px;">Click to watch the video in the TikTok app</p>
                                 </div>
                             </div>
-                            
-                            <div style="border-top: 1px solid #f1f5f9; padding-top: 24px; margin-top: 24px; display: flex; flex-wrap: wrap; gap: 12px;">
-                                <a href="https://wa.me/237${listing.whatsappNumber}" target="_blank" class="btn-whatsapp" style="font-size: 18px; padding: 14px 32px;">
+                            <div style="border-top:1px solid #f1f5f9;padding-top:24px;margin-top:24px;display:flex;flex-wrap:wrap;gap:12px;">
+                                <a href="https://wa.me/237${listing.whatsappNumber}" target="_blank" class="btn-whatsapp" style="font-size:18px;padding:14px 32px;">
                                     <i class="fab fa-whatsapp"></i> Contact Owner
                                 </a>
-                                <button onclick="navigator.clipboard.writeText('237${listing.whatsappNumber}'); showToast('📋 Number copied!');" style="padding: 14px 24px; border: 2px solid #e2e8f0; border-radius: 12px; background: white; cursor: pointer; font-weight: 500; color: #64748b; transition: all 0.2s;">
+                                <button onclick="navigator.clipboard.writeText('237${listing.whatsappNumber}'); showToast('📋 Number copied!');" style="padding:14px 24px;border:2px solid #e2e8f0;border-radius:12px;background:white;cursor:pointer;font-weight:500;color:#64748b;">
                                     <i class="fas fa-copy"></i> Copy Number
                                 </button>
                             </div>
-                            
-                            <div style="border-top: 1px solid #f1f5f9; padding-top: 16px; margin-top: 16px; display: flex; justify-content: space-between; flex-wrap: wrap; gap: 8px; font-size: 14px; color: #94a3b8;">
+                            <div style="border-top:1px solid #f1f5f9;padding-top:16px;margin-top:16px;display:flex;justify-content:space-between;flex-wrap:wrap;gap:8px;font-size:14px;color:#94a3b8;">
                                 <span><i class="far fa-calendar-alt"></i> Listed on ${new Date(listing.createdAt).toLocaleDateString('en-CM', { year: 'numeric', month: 'long', day: 'numeric' })}</span>
                                 <span><i class="fas fa-eye"></i> ${listing.views || 0} views</span>
                             </div>
                         </div>
                     </div>
                 `;
-            } catch(e) {
-                container.innerHTML = `<div class="empty-state"><i class="fas fa-exclamation-triangle" style="color: #ef4444;"></i><h2>Error loading</h2></div>`;
-            }
+            } catch(e) { container.innerHTML = `<div class="empty-state"><i class="fas fa-exclamation-triangle" style="color:#ef4444;"></i><h2>Error loading</h2></div>`; }
         }
         
         function handleSearch() {
             const keyword = document.getElementById('search-input').value.trim();
-            if (keyword) {
-                loadListings('listings-container', keyword);
-            } else {
-                loadListings('listings-container');
-            }
+            if (keyword) loadListings('listings-container', keyword);
+            else loadListings('listings-container');
         }
         
         function clearSearch() {
@@ -1615,17 +1175,12 @@ function renderAbout() {
             const submitBtn = document.getElementById('submit-text');
             const loadingBtn = document.getElementById('submit-loading');
             const messageDiv = document.getElementById('form-message');
-            
             submitBtn.style.display = 'none';
             loadingBtn.style.display = 'inline';
             messageDiv.style.display = 'none';
-            
-            let whatsapp = document.getElementById('whatsapp').value.trim();
-            whatsapp = whatsapp.replace(/\D/g, '');
-            
+            let whatsapp = document.getElementById('whatsapp').value.trim().replace(/\D/g, '');
             const imageUrl = document.getElementById('image-url').value.trim();
             const videoUrl = document.getElementById('video-url').value.trim();
-            
             const data = {
                 title: document.getElementById('title').value,
                 description: document.getElementById('description').value,
@@ -1638,40 +1193,52 @@ function renderAbout() {
                 images: imageUrl ? [imageUrl] : ['https://example.com/image.jpg'],
                 videoUrl: videoUrl || 'https://example.com/video.mp4'
             };
-            
             try {
                 const response = await fetch(`${API_URL}/listings`, {
                     method: 'POST',
                     headers: { 'Content-Type': 'application/json' },
                     body: JSON.stringify(data)
                 });
-                
                 if (response.ok) {
                     messageDiv.style.display = 'block';
                     messageDiv.style.background = '#dcfce7';
                     messageDiv.style.color = '#166534';
-                    messageDiv.style.border = '1px solid #86efac';
                     messageDiv.innerHTML = '✅ Listing published successfully! Redirecting...';
                     showToast('✅ Listing published successfully!');
                     setTimeout(() => navigate('/'), 1500);
-                } else {
-                    const error = await response.json();
-                    messageDiv.style.display = 'block';
-                    messageDiv.style.background = '#fee2e2';
-                    messageDiv.style.color = '#991b1b';
-                    messageDiv.style.border = '1px solid #fca5a5';
-                    messageDiv.innerHTML = '❌ ' + (error.message || 'Error publishing');
                 }
             } catch(e) {
                 messageDiv.style.display = 'block';
                 messageDiv.style.background = '#fee2e2';
                 messageDiv.style.color = '#991b1b';
-                messageDiv.style.border = '1px solid #fca5a5';
                 messageDiv.innerHTML = '❌ Cannot connect to server. Make sure the backend is running.';
             }
-            
             submitBtn.style.display = 'inline';
             loadingBtn.style.display = 'none';
+        }
+        
+        async function handleLogin(e) {
+            e.preventDefault();
+            const password = document.getElementById('admin-password').value;
+            const submitBtn = document.getElementById('login-text');
+            const loadingBtn = document.getElementById('login-loading');
+            const messageDiv = document.getElementById('login-message');
+            submitBtn.style.display = 'none';
+            loadingBtn.style.display = 'inline';
+            messageDiv.style.display = 'none';
+            if (password === ADMIN_PASSWORD) {
+                isAdmin = true;
+                sessionStorage.setItem('isAdmin', 'true');
+                showToast('✅ Login successful!');
+                setTimeout(() => navigate('/admin'), 500);
+            } else {
+                messageDiv.style.display = 'block';
+                messageDiv.style.background = '#fee2e2';
+                messageDiv.style.color = '#991b1b';
+                messageDiv.innerHTML = '❌ Incorrect password';
+                submitBtn.style.display = 'inline';
+                loadingBtn.style.display = 'none';
+            }
         }
         
         function logout() {
@@ -1681,6 +1248,7 @@ function renderAbout() {
             navigate('/');
         }
         
+        // ============= RENDER APP =============
         function renderApp() {
             const path = window.location.pathname;
             let content = '';
@@ -1689,32 +1257,23 @@ function renderAbout() {
                 content = renderHome();
                 document.getElementById('app').innerHTML = renderNavbar() + content;
                 setTimeout(() => loadListings('listings-container'), 100);
+            } else if (path === '/about') {
+                content = renderAbout();
+                document.getElementById('app').innerHTML = renderNavbar() + content;
             } else if (path === '/alwydivielage') {
                 content = renderLogin();
                 document.getElementById('app').innerHTML = renderNavbar() + content;
             } else if (path === '/admin') {
-                if (!isAdmin) {
-                    navigate('/alwydivielage');
-                    return;
-                }
+                if (!isAdmin) { navigate('/alwydivielage'); return; }
                 content = renderAdmin();
                 document.getElementById('app').innerHTML = renderNavbar() + content;
                 setTimeout(() => loadAdminListings(), 100);
-            } else if (path === '/about') {
-                content = renderAbout();
-                document.getElementById('app').innerHTML = renderNavbar() + content;
             } else if (path === '/add') {
-                if (!isAdmin) {
-                    navigate('/alwydivielage');
-                    return;
-                }
+                if (!isAdmin) { navigate('/alwydivielage'); return; }
                 content = renderAdd();
                 document.getElementById('app').innerHTML = renderNavbar() + content;
             } else if (path.startsWith('/edit/')) {
-                if (!isAdmin) {
-                    navigate('/alwydivielage');
-                    return;
-                }
+                if (!isAdmin) { navigate('/alwydivielage'); return; }
                 const id = path.split('/')[2];
                 content = renderEdit(id);
                 document.getElementById('app').innerHTML = renderNavbar() + content;
