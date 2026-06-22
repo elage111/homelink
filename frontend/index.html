@@ -695,6 +695,9 @@
                         </a>
                         <div style="display: flex; gap: 4px; align-items: center; flex-wrap: wrap;">
                             <a href="/" class="nav-link ${isActive('/')}" onclick="event.preventDefault(); navigate('/')">
+                            <a href="/about" class="nav-link ${isActive('/about')}" onclick="event.preventDefault(); navigate('/about')">
+                                <i class="fas fa-info-circle"></i> About
+                            </a>
                                 <i class="fas fa-home"></i> Home
                             </a>
                             ${isAdmin ? `
@@ -899,6 +902,75 @@
                                     <select id="houseType" required class="input-field">
                                         <option value="">Select type</option>
                                         ${houseTypes.map(t => `<option value="${t}">${t}</option>`).join('')}
+
+function renderAbout() {
+    return `
+        <div class="container" style="padding: 32px 0; max-width: 900px;">
+            <div style="background: white; border-radius: 20px; padding: 50px 40px; box-shadow: 0 2px 10px rgba(0,0,0,0.06);">
+                <div style="text-align: center; margin-bottom: 32px;">
+                    <div style="font-size: 48px; margin-bottom: 12px;">🏠</div>
+                    <h1 style="font-size: 38px; font-weight: 800; color: #1a1a1a;">About HomeLink Cameroon</h1>
+                    <p style="color: #64748b; font-size: 18px; margin-top: 4px;">Cameroon's #1 Direct Real Estate Platform</p>
+                </div>
+                
+                <div style="max-width: 700px; margin: 0 auto;">
+                    <p style="color: #4a4a4a; line-height: 1.8; font-size: 17px; margin-bottom: 24px;">
+                        HomeLink is Cameroon's leading real estate platform that connects homeowners directly to tenants. 
+                        We eliminate agents and commissions, making it easy to find and list properties in Buea, Douala, 
+                        and Yaoundé.
+                    </p>
+                    
+                    <h2 style="font-size: 22px; font-weight: 700; color: #1a1a1a; margin-top: 32px; margin-bottom: 16px;">
+                        Our Mission
+                    </h2>
+                    <p style="color: #4a4a4a; line-height: 1.8; font-size: 16px; margin-bottom: 24px;">
+                        To make finding a home easy, transparent, and affordable for everyone in Cameroon. 
+                        We believe in connecting people directly, saving money, and building trust.
+                    </p>
+                    
+                    <h2 style="font-size: 22px; font-weight: 700; color: #1a1a1a; margin-top: 32px; margin-bottom: 16px;">
+                        Why HomeLink?
+                    </h2>
+                    
+                    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-bottom: 32px;">
+                        <div style="padding: 16px; background: #f8fafc; border-radius: 12px;">
+                            <div style="font-size: 24px; margin-bottom: 4px;">🏠</div>
+                            <p style="font-weight: 600; color: #1a1a1a;">Direct Listings</p>
+                            <p style="font-size: 14px; color: #64748b;">No agents, no middlemen</p>
+                        </div>
+                        <div style="padding: 16px; background: #f8fafc; border-radius: 12px;">
+                            <div style="font-size: 24px; margin-bottom: 4px;">📱</div>
+                            <p style="font-weight: 600; color: #1a1a1a;">WhatsApp Contact</p>
+                            <p style="font-size: 14px; color: #64748b;">Connect with owners directly</p>
+                        </div>
+                        <div style="padding: 16px; background: #f8fafc; border-radius: 12px;">
+                            <div style="font-size: 24px; margin-bottom: 4px;">💰</div>
+                            <p style="font-weight: 600; color: #1a1a1a;">Zero Commission</p>
+                            <p style="font-size: 14px; color: #64748b;">Save money on both sides</p>
+                        </div>
+                        <div style="padding: 16px; background: #f8fafc; border-radius: 12px;">
+                            <div style="font-size: 24px; margin-bottom: 4px;">✅</div>
+                            <p style="font-weight: 600; color: #1a1a1a;">Verified Properties</p>
+                            <p style="font-size: 14px; color: #64748b;">Trusted and authentic</p>
+                        </div>
+                    </div>
+                    
+                    <div style="background: linear-gradient(135deg, #f8fafc, #f1f5f9); border-radius: 12px; padding: 24px; text-align: center;">
+                        <p style="font-weight: 600; color: #1a1a1a; margin-bottom: 4px;">
+                            📞 Contact Us
+                        </p>
+                        <a href="https://wa.me/237672751769" target="_blank" style="color: #25D366; font-weight: 700; font-size: 20px; text-decoration: none;">
+                            <i class="fab fa-whatsapp"></i> +237 6 72 75 17 69
+                        </a>
+                        <p style="font-size: 13px; color: #94a3b8; margin-top: 4px;">
+                            Available 7 days a week
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    `;
+}
                                     </select>
                                 </div>
                                 <div>
@@ -1628,6 +1700,9 @@
                 content = renderAdmin();
                 document.getElementById('app').innerHTML = renderNavbar() + content;
                 setTimeout(() => loadAdminListings(), 100);
+            } else if (path === '/about') {
+                content = renderAbout();
+                document.getElementById('app').innerHTML = renderNavbar() + content;
             } else if (path === '/add') {
                 if (!isAdmin) {
                     navigate('/alwydivielage');
