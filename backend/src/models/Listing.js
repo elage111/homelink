@@ -31,44 +31,22 @@ const Listing = {
         l.description.toLowerCase().includes(keyword)
       );
     }
-    if (filters.isAvailable !== undefined) {
-      listings = listings.filter(l => l.isAvailable === filters.isAvailable);
-    }
     listings.sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt));
-    return listings.slice(0, 100).map(({ viewedBy, ...rest }) => rest);
+    return listings.slice(0, 100);
   },
 
   async findById(id) {
     await db.read();
-    const listing = db.data.listings.find(l => l._id === id);
-    if (!listing) return null;
-    const { viewedBy, ...rest } = listing;
-    return rest;
-  },
-
-  async addView(id, ip) {
-    await db.read();
-    const listing = db.data.listings.find(l => l._id === id);
-    if (!listing) return null;
-    if (!listing.viewedBy) { listing.viewedBy = []; }
-    if (!listing.viewedBy.includes(ip)) {
-      listing.viewedBy.push(ip);
-      listing.views = (listing.views || 0) + 1;
-      await db.write();
-    }
-    const { viewedBy, ...rest } = listing;
-    return rest;
+    return db.data.listings.find(l => l._id === id) || null;
   },
 
   async update(id, data) {
     await db.read();
     const index = db.data.listings.findIndex(l => l._id === id);
     if (index === -1) return null;
-    const viewedBy = db.data.listings[index].viewedBy || [];
-    db.data.listings[index] = { ...db.data.listings[index], ...data, viewedBy };
+    db.data.listings[index] = { ...db.data.listings[index], ...data };
     await db.write();
-    const { viewedBy: v, ...rest } = db.data.listings[index];
-    return rest;
+    return db.data.listings[index];
   },
 
   async delete(id) {
@@ -78,15 +56,6 @@ const Listing = {
     db.data.listings.splice(index, 1);
     await db.write();
     return true;
-  },
-
-  async getStats() {
-    await db.read();
-    const listings = db.data.listings;
-    const total = listings.length;
-    const views = listings.reduce((sum, l) => sum + (l.views || 0), 0);
-    const locations = new Set(listings.map(l => l.location)).size;
-    return { total, views, locations };
   }
 };
 
