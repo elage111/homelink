@@ -1,0 +1,6 @@
+                                    <!-- Badges -->
+                                    <div class="badge-container">
+                                        ${listing.badges && listing.badges.includes('verified') ? '<span class="badge-verified">✅ Verified</span>' : ''}
+                                        ${listing.badges && listing.badges.includes('owner') ? '<span class="badge-owner">🏠 Owner</span>' : ''}
+                                        ${listing.badges && listing.badges.includes('agent') ? '<span class="badge-agent">👔 Agent</span>' : ''}
+                                    </div>

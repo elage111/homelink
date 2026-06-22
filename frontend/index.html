@@ -6,20 +6,102 @@
     <title>HomeLink - Find Your Perfect Home</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
-        body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; background: #f0f2f5; }
-        
-        .btn-primary { background: linear-gradient(135deg, #FF385C, #e0314f); color: white; padding: 14px 28px; border-radius: 12px; border: none; font-weight: 600; cursor: pointer; transition: all 0.3s; }
-        .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 8px 25px rgba(255,56,92,0.4); }
-        
-        .btn-whatsapp { background: linear-gradient(135deg, #25D366, #1da851); color: white; padding: 8px 16px; border-radius: 8px; border: none; font-weight: 600; cursor: pointer; display: inline-flex; align-items: center; gap: 6px; text-decoration: none; transition: all 0.3s; font-size: 13px; }
-        .btn-whatsapp:hover { transform: scale(1.05); }
-        
-        .btn-tiktok { background: linear-gradient(135deg, #000000, #fe2c55); color: white; padding: 14px 28px; border-radius: 12px; border: none; font-weight: 600; cursor: pointer; display: inline-flex; align-items: center; gap: 10px; text-decoration: none; transition: all 0.3s; }
-        .btn-tiktok:hover { transform: scale(1.05); }
+        body { font-family: 'Inter', sans-serif; background: #f1f5f9; }
         
         .container { max-width: 1280px; margin: 0 auto; padding: 0 24px; }
+        
+        .btn-primary {
+            background: linear-gradient(135deg, #FF385C, #e0314f);
+            color: white;
+            padding: 14px 28px;
+            border-radius: 12px;
+            border: none;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 8px 25px rgba(255,56,92,0.4); }
+        
+        .btn-whatsapp {
+            background: #25D366;
+            color: white;
+            padding: 8px 16px;
+            border-radius: 8px;
+            border: none;
+            font-weight: 600;
+            cursor: pointer;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            font-size: 13px;
+            transition: all 0.3s;
+        }
+        .btn-whatsapp:hover { transform: scale(1.05); }
+        
+        .nav-link {
+            color: #475569;
+            text-decoration: none;
+            padding: 10px 16px;
+            border-radius: 10px;
+            font-weight: 500;
+            transition: all 0.2s;
+        }
+        .nav-link:hover { background: #f1f5f9; color: #FF385C; }
+        .nav-link.active { color: #FF385C; background: #fff5f7; }
+        .nav-link-add {
+            background: linear-gradient(135deg, #FF385C, #e0314f);
+            color: white !important;
+            padding: 10px 20px;
+            border-radius: 9999px;
+            font-weight: 600;
+        }
+        
+        .card {
+            background: white;
+            border-radius: 16px;
+            overflow: hidden;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+            transition: all 0.3s;
+            cursor: pointer;
+        }
+        .card:hover { transform: translateY(-8px); box-shadow: 0 20px 60px rgba(0,0,0,0.12); }
+        
+        .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 28px; }
+        @media (max-width: 640px) { .grid { grid-template-columns: 1fr; } }
+        
+        .badge-available { background: #dcfce7; color: #166534; padding: 4px 12px; border-radius: 9999px; font-size: 12px; font-weight: 600; }
+        .badge-rented { background: #fee2e2; color: #991b1b; padding: 4px 12px; border-radius: 9999px; font-size: 12px; font-weight: 600; }
+        .badge-featured { background: #fef3c7; color: #92400e; padding: 4px 12px; border-radius: 9999px; font-size: 12px; font-weight: 600; }
+        
+        .badge-verified { background: #dcfce7; color: #166534; padding: 2px 10px; border-radius: 9999px; font-size: 10px; font-weight: 600; display: inline-block; }
+        .badge-owner { background: #dbeafe; color: #1e40af; padding: 2px 10px; border-radius: 9999px; font-size: 10px; font-weight: 600; display: inline-block; }
+        .badge-agent { background: #fef3c7; color: #92400e; padding: 2px 10px; border-radius: 9999px; font-size: 10px; font-weight: 600; display: inline-block; }
+        .badge-container { display: flex; flex-wrap: wrap; gap: 4px; margin-bottom: 8px; }
+        
+        .price-tag { background: white; padding: 4px 12px; border-radius: 9999px; box-shadow: 0 2px 10px rgba(0,0,0,0.08); font-weight: 700; color: #FF385C; font-size: 14px; display: inline-flex; align-items: center; gap: 4px; }
+        .price-tag .currency { font-size: 11px; color: #94a3b8; font-weight: 400; }
+        
+        .input-field {
+            width: 100%;
+            padding: 14px 16px;
+            border: 2px solid #e2e8f0;
+            border-radius: 12px;
+            font-size: 16px;
+            transition: all 0.3s;
+            background: white;
+        }
+        .input-field:focus { border-color: #FF385C; outline: none; box-shadow: 0 0 0 4px rgba(255,56,92,0.1); }
+        
+        .form-card {
+            background: white;
+            border-radius: 20px;
+            padding: 40px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.06);
+        }
         
         .hero {
             background: linear-gradient(135deg, #1a1a2e, #16213e, #0f3460, #e0314f);
@@ -29,167 +111,187 @@
             position: relative;
             overflow: hidden;
         }
-        .hero-content { position: relative; z-index: 1; max-width: 700px; }
-        .hero h1 { font-size: 48px; font-weight: 900; color: white; line-height: 1.1; margin-bottom: 16px; }
+        .hero h1 { font-size: 48px; font-weight: 900; color: white; line-height: 1.1; }
         .hero h1 span { background: linear-gradient(135deg, #FF385C, #f97316); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
-        .hero p { color: rgba(255,255,255,0.8); font-size: 20px; line-height: 1.6; margin-bottom: 24px; }
-        .hero .badge-tag { display: inline-block; background: rgba(255,255,255,0.12); backdrop-filter: blur(10px); color: white; padding: 6px 16px; border-radius: 9999px; font-size: 13px; font-weight: 500; margin-bottom: 16px; border: 1px solid rgba(255,255,255,0.08); }
+        .hero p { color: rgba(255,255,255,0.8); font-size: 20px; margin-top: 12px; }
+        .hero .badge-tag { display: inline-block; background: rgba(255,255,255,0.12); color: white; padding: 6px 16px; border-radius: 9999px; font-size: 13px; font-weight: 500; margin-bottom: 16px; border: 1px solid rgba(255,255,255,0.08); }
         
-        .search-wrapper { display: flex; gap: 12px; background: white; padding: 8px; border-radius: 16px; box-shadow: 0 8px 40px rgba(0,0,0,0.15); max-width: 600px; margin-top: 8px; }
-        .search-wrapper input { flex: 1; padding: 14px 20px; border: none; border-radius: 10px; font-size: 16px; outline: none; background: transparent; color: #1a1a1a; }
-        .search-wrapper input::placeholder { color: #94a3b8; }
-        .search-wrapper button { padding: 14px 28px; background: linear-gradient(135deg, #FF385C, #e0314f); color: white; border: none; border-radius: 10px; font-weight: 600; cursor: pointer; transition: all 0.3s; font-size: 15px; }
+        .search-wrapper {
+            display: flex;
+            gap: 12px;
+            background: white;
+            padding: 8px;
+            border-radius: 16px;
+            box-shadow: 0 8px 40px rgba(0,0,0,0.15);
+            max-width: 600px;
+            margin-top: 20px;
+        }
+        .search-wrapper input {
+            flex: 1;
+            padding: 14px 20px;
+            border: none;
+            border-radius: 10px;
+            font-size: 16px;
+            outline: none;
+        }
+        .search-wrapper button {
+            padding: 14px 28px;
+            background: linear-gradient(135deg, #FF385C, #e0314f);
+            color: white;
+            border: none;
+            border-radius: 10px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
         .search-wrapper button:hover { transform: scale(1.02); }
         .search-wrapper .clear-btn { background: transparent; color: #94a3b8; padding: 14px 18px; border: none; border-radius: 10px; cursor: pointer; font-size: 15px; }
-        .search-wrapper .clear-btn:hover { color: #1a1a1a; background: #f1f5f9; }
         
-        .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); gap: 32px; }
-        @media (max-width: 640px) { .grid { grid-template-columns: 1fr; gap: 24px; } }
-        
-        .card {
-            background: white; border-radius: 16px; overflow: hidden; box-shadow: 0 4px 20px rgba(0,0,0,0.08); transition: all 0.4s; cursor: pointer; height: 100%; display: flex; flex-direction: column; border: none;
+        .stats-bar {
+            display: flex;
+            gap: 32px;
+            padding: 20px 24px;
+            background: white;
+            border-radius: 16px;
+            margin-bottom: 32px;
+            flex-wrap: wrap;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.06);
         }
-        .card:hover { transform: translateY(-8px); box-shadow: 0 20px 60px rgba(0,0,0,0.12); }
-        
-        .card-image-area { padding: 24px 0; min-height: 100px; background: linear-gradient(135deg, #f8fafc, #f1f5f9); display: flex; align-items: center; justify-content: center; position: relative; }
-        .card-image-area .tiktok-icon { font-size: 44px; color: #fe2c55; opacity: 0.3; transition: all 0.3s; }
-        .card:hover .card-image-area .tiktok-icon { opacity: 0.5; transform: scale(1.1); }
-        
-        .card-body { padding: 24px 24px 20px; flex: 1; display: flex; flex-direction: column; }
-        .card-body h3 { font-weight: 700; font-size: 18px; color: #0f172a; margin-bottom: 6px; line-height: 1.3; }
-        .card-body .location { display: flex; align-items: center; gap: 6px; color: #64748b; font-size: 14px; margin-bottom: 4px; }
-        .card-body .location i { color: #FF385C; font-size: 12px; }
-        .card-body .property-type { display: flex; align-items: center; gap: 6px; color: #64748b; font-size: 14px; margin-bottom: 14px; }
-        .card-body .property-type i { color: #FF385C; font-size: 12px; }
-        
-        .card-footer { display: flex; justify-content: space-between; align-items: center; padding-top: 14px; margin-top: auto; border-top: 1px solid #f1f5f9; }
-        .card-footer .date { font-size: 12px; color: #94a3b8; }
-        
-        .badge-available { background: #dcfce7; color: #166534; padding: 4px 14px; border-radius: 9999px; font-size: 12px; font-weight: 600; }
-        .badge-rented { background: #fee2e2; color: #991b1b; padding: 4px 14px; border-radius: 9999px; font-size: 12px; font-weight: 600; }
-        .badge-featured { background: #fef3c7; color: #92400e; padding: 4px 14px; border-radius: 9999px; font-size: 12px; font-weight: 600; }
-        
-        /* BADGE STYLES */
-        .badge-verified { background: #dcfce7; color: #166534; padding: 2px 10px; border-radius: 9999px; font-size: 10px; font-weight: 600; display: inline-block; }
-        .badge-owner { background: #dbeafe; color: #1e40af; padding: 2px 10px; border-radius: 9999px; font-size: 10px; font-weight: 600; display: inline-block; }
-        .badge-agent { background: #fef3c7; color: #92400e; padding: 2px 10px; border-radius: 9999px; font-size: 10px; font-weight: 600; display: inline-block; }
-        .badge-container { display: flex; flex-wrap: wrap; gap: 4px; margin-bottom: 8px; }
-        
-        .price-tag { background: white; padding: 6px 16px; border-radius: 9999px; box-shadow: 0 2px 10px rgba(0,0,0,0.08); font-weight: 700; color: #FF385C; font-size: 15px; display: inline-flex; align-items: center; gap: 4px; }
-        .price-tag .currency { font-size: 12px; color: #94a3b8; font-weight: 400; }
-        .view-count { font-size: 12px; color: #94a3b8; display: flex; align-items: center; gap: 4px; }
-        
-        .nav-link { color: #475569; text-decoration: none; display: flex; align-items: center; gap: 8px; padding: 10px 16px; border-radius: 10px; transition: all 0.2s; font-weight: 500; font-size: 15px; }
-        .nav-link:hover { background: #f1f5f9; color: #FF385C; }
-        .nav-link.active { color: #FF385C; background: #fff5f7; }
-        .nav-link-add { background: linear-gradient(135deg, #FF385C, #e0314f); color: white !important; padding: 10px 20px; border-radius: 9999px; font-weight: 600; box-shadow: 0 4px 15px rgba(255,56,92,0.25); transition: all 0.3s; }
-        .nav-link-add:hover { transform: scale(1.05); box-shadow: 0 8px 25px rgba(255,56,92,0.35); }
-        
-        .input-field { width: 100%; padding: 14px 16px; border: 2px solid #e2e8f0; border-radius: 12px; transition: all 0.3s; font-size: 16px; background: white; font-family: inherit; }
-        .input-field:focus { border-color: #FF385C; outline: none; box-shadow: 0 0 0 4px rgba(255,56,92,0.1); }
-        .form-card { background: white; border-radius: 20px; padding: 40px; box-shadow: 0 4px 20px rgba(0,0,0,0.06); border: 1px solid rgba(0,0,0,0.04); }
-        
-        .stats-bar { display: flex; gap: 32px; padding: 20px 24px; background: white; border-radius: 16px; margin-bottom: 32px; flex-wrap: wrap; box-shadow: 0 1px 3px rgba(0,0,0,0.06); border: 1px solid rgba(0,0,0,0.04); }
-        .stat-item { display: flex; align-items: center; gap: 10px; color: #475569; font-size: 15px; }
-        .stat-item i { color: #FF385C; font-size: 18px; width: 24px; text-align: center; }
+        .stat-item { display: flex; align-items: center; gap: 10px; color: #475569; }
+        .stat-item i { color: #FF385C; font-size: 18px; }
         .stat-number { font-weight: 700; color: #0f172a; font-size: 18px; }
         
-        .empty-state { text-align: center; padding: 80px 20px; }
-        .empty-state i { font-size: 72px; color: #FF385C; opacity: 0.3; margin-bottom: 20px; }
-        .empty-state h2 { font-size: 28px; color: #0f172a; margin-bottom: 12px; font-weight: 700; }
-        .empty-state p { color: #64748b; font-size: 16px; }
+        .toast {
+            position: fixed;
+            bottom: 24px;
+            right: 24px;
+            background: #0f172a;
+            color: white;
+            padding: 16px 24px;
+            border-radius: 12px;
+            box-shadow: 0 8px 40px rgba(0,0,0,0.2);
+            z-index: 1000;
+            animation: slideUp 0.4s;
+            font-size: 15px;
+            font-weight: 500;
+        }
+        @keyframes slideUp {
+            from { transform: translateY(100px); opacity: 0; }
+            to { transform: translateY(0); opacity: 1; }
+        }
         
-        .toast { position: fixed; bottom: 24px; right: 24px; background: #0f172a; color: white; padding: 16px 24px; border-radius: 12px; box-shadow: 0 8px 40px rgba(0,0,0,0.2); z-index: 1000; animation: slideUp 0.4s; font-size: 15px; font-weight: 500; max-width: 400px; }
-        @keyframes slideUp { from { transform: translateY(100px); opacity: 0; } to { transform: translateY(0); opacity: 1; } }
-        @keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
-        .spinner { display: inline-block; width: 50px; height: 50px; border: 4px solid #f1f5f9; border-top-color: #FF385C; border-radius: 50%; animation: spin 0.8s linear infinite; }
+        .spinner {
+            display: inline-block;
+            width: 40px;
+            height: 40px;
+            border: 4px solid #f1f5f9;
+            border-top-color: #FF385C;
+            border-radius: 50%;
+            animation: spin 0.8s linear infinite;
+        }
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
         
-        .admin-table { width: 100%; background: white; border-radius: 12px; overflow: hidden; box-shadow: 0 1px 3px rgba(0,0,0,0.06); border: 1px solid rgba(0,0,0,0.04); }
-        .admin-table th { padding: 14px 16px; text-align: left; font-weight: 600; color: #475569; background: #f8fafc; font-size: 13px; text-transform: uppercase; letter-spacing: 0.5px; }
-        .admin-table td { padding: 14px 16px; border-bottom: 1px solid #f1f5f9; font-size: 14px; }
-        .admin-table tr:hover { background: #fafbfc; }
-        .admin-actions { display: flex; gap: 8px; flex-wrap: wrap; justify-content: center; }
+        .empty-state { text-align: center; padding: 60px 20px; }
+        .empty-state i { font-size: 72px; color: #FF385C; opacity: 0.3; margin-bottom: 16px; }
+        .empty-state h2 { font-size: 28px; color: #0f172a; margin-bottom: 8px; }
+        .empty-state p { color: #64748b; }
         
-        .detail-card { background: white; border-radius: 20px; overflow: hidden; box-shadow: 0 4px 20px rgba(0,0,0,0.06); border: 1px solid rgba(0,0,0,0.04); }
+        .admin-table { width: 100%; background: white; border-radius: 12px; overflow: hidden; border: 1px solid rgba(0,0,0,0.04); }
+        .admin-table th { padding: 12px 16px; text-align: left; font-weight: 600; color: #475569; background: #f8fafc; font-size: 13px; text-transform: uppercase; letter-spacing: 0.5px; }
+        .admin-table td { padding: 12px 16px; border-bottom: 1px solid #f1f5f9; font-size: 14px; }
+        
+        .detail-card { background: white; border-radius: 20px; overflow: hidden; box-shadow: 0 4px 20px rgba(0,0,0,0.06); }
         .detail-content { padding: 32px; }
-        .detail-title { font-size: 28px; font-weight: 700; color: #0f172a; margin-bottom: 8px; }
-        .detail-meta { display: flex; flex-wrap: wrap; gap: 16px; color: #64748b; font-size: 16px; }
+        .detail-title { font-size: 28px; font-weight: 700; color: #0f172a; }
+        .detail-meta { display: flex; gap: 16px; color: #64748b; font-size: 16px; margin-top: 8px; }
         .detail-meta i { color: #FF385C; width: 18px; }
-        .detail-description { color: #475569; line-height: 1.8; font-size: 16px; }
-        .detail-price { font-size: 36px; font-weight: 800; color: #FF385C; }
-        .detail-price .currency { font-size: 18px; font-weight: 400; color: #64748b; }
         
-        .detail-image-area { padding: 40px 0; min-height: 160px; background: linear-gradient(135deg, #f8fafc, #f1f5f9); display: flex; align-items: center; justify-content: center; position: relative; }
-        .detail-image-area .tiktok-icon { font-size: 72px; color: #fe2c55; opacity: 0.2; }
+        .detail-image-area {
+            padding: 40px 0;
+            min-height: 120px;
+            background: linear-gradient(135deg, #f8fafc, #f1f5f9);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+        }
+        .detail-image-area .tiktok-icon { font-size: 60px; color: #fe2c55; opacity: 0.2; }
         
-        .tiktok-video-container { background: linear-gradient(135deg, #0f0f1a, #1a1a2e); border-radius: 16px; padding: 48px 24px; text-align: center; min-height: 200px; display: flex; flex-direction: column; align-items: center; justify-content: center; width: 100%; border: 1px solid rgba(255,255,255,0.06); }
-        .tiktok-video-container i { font-size: 56px; color: #fe2c55; margin-bottom: 12px; }
-        .tiktok-video-container p { color: rgba(255,255,255,0.7); font-size: 16px; margin-bottom: 16px; }
+        .tiktok-btn {
+            background: linear-gradient(135deg, #000, #fe2c55);
+            color: white;
+            padding: 12px 24px;
+            border-radius: 12px;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            font-weight: 600;
+            transition: all 0.3s;
+        }
+        .tiktok-btn:hover { transform: scale(1.05); }
         
         .btn-admin { background: #4a4a4a; color: white; padding: 8px 16px; border-radius: 8px; border: none; font-weight: 500; cursor: pointer; transition: all 0.2s; font-size: 14px; }
         .btn-admin:hover { background: #333; }
+        .btn-delete { background: #ef4444; color: white; padding: 4px 12px; border: none; border-radius: 4px; cursor: pointer; font-size: 13px; }
+        .btn-delete:hover { background: #dc2626; }
     </style>
 </head>
 <body>
     <div id="app"></div>
     <script>
-        const API_URL = 'https://homelink-production.up.railway.app/api';
-        const CURRENCY = 'FCFA';
+        const API_URL = 'http://localhost:5000/api';
         const ADMIN_PASSWORD = 'elage123@123';
         
         let isAdmin = sessionStorage.getItem('isAdmin') === 'true';
         let allListings = [];
-        
-        function formatPrice(price) {
-            return new Intl.NumberFormat('en-CM').format(price);
-        }
         
         function navigate(path) {
             window.history.pushState({}, '', path);
             renderApp();
         }
         
-        function showToast(message, type = 'success') {
-            const colors = { success: '#22c55e', error: '#ef4444', info: '#3b82f6' };
+        function showToast(message) {
             const toast = document.createElement('div');
             toast.className = 'toast';
-            toast.style.borderLeft = '4px solid ' + colors[type];
-            toast.innerHTML = message;
+            toast.textContent = message;
             document.body.appendChild(toast);
-            setTimeout(() => { toast.remove(); }, 3500);
+            setTimeout(() => toast.remove(), 3000);
         }
         
         function renderNavbar() {
-            const currentPath = window.location.pathname;
-            const isActive = (path) => currentPath === path ? 'active' : '';
-            const isAdmin = sessionStorage.getItem('isAdmin') === 'true';
+            const path = window.location.pathname;
+            const isActive = (p) => path === p ? 'active' : '';
             
             return `
-                <nav style="background: white; box-shadow: 0 1px 3px rgba(0,0,0,0.06); position: sticky; top: 0; z-index: 50; border-bottom: 1px solid rgba(0,0,0,0.04);">
-                    <div class="container" style="padding: 14px 0; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 12px;">
-                        <a href="/" style="font-size: 28px; font-weight: 800; color: #FF385C; text-decoration: none; letter-spacing: -0.5px;">
+                <nav style="background:white;box-shadow:0 1px 3px rgba(0,0,0,0.06);position:sticky;top:0;z-index:50;border-bottom:1px solid rgba(0,0,0,0.04);">
+                    <div class="container" style="padding:14px 0;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:12px;">
+                        <a href="/" style="font-size:28px;font-weight:800;color:#FF385C;text-decoration:none;letter-spacing:-0.5px;">
                             🏠 HomeLink
-                            <span style="font-size: 14px; font-weight: 400; color: #94a3b8; letter-spacing: 0;">🇨🇲</span>
+                            <span style="font-size:14px;font-weight:400;color:#94a3b8;letter-spacing:0;">🇨🇲</span>
                         </a>
-                        <div style="display: flex; gap: 4px; align-items: center; flex-wrap: wrap;">
-                            <a href="/" class="nav-link ${isActive('/')}" onclick="event.preventDefault(); navigate('/')">
+                        <div style="display:flex;gap:4px;align-items:center;flex-wrap:wrap;">
+                            <a href="/" class="nav-link ${isActive('/')}" onclick="event.preventDefault();navigate('/')">
                                 <i class="fas fa-home"></i> Home
                             </a>
-                            <a href="/about" class="nav-link ${isActive('/about')}" onclick="event.preventDefault(); navigate('/about')">
+                            <a href="/about" class="nav-link ${isActive('/about')}" onclick="event.preventDefault();navigate('/about')">
                                 <i class="fas fa-info-circle"></i> About
                             </a>
                             ${isAdmin ? `
-                                <a href="/admin" class="nav-link ${isActive('/admin')}" onclick="event.preventDefault(); navigate('/admin')">
+                                <a href="/admin" class="nav-link ${isActive('/admin')}" onclick="event.preventDefault();navigate('/admin')">
                                     <i class="fas fa-cog"></i> Dashboard
                                 </a>
-                                <a href="/add" class="nav-link-add" onclick="event.preventDefault(); navigate('/add')">
-                                    <i class="fas fa-plus-circle"></i> Add Listing
+                                <a href="/add" class="nav-link-add" onclick="event.preventDefault();navigate('/add')">
+                                    <i class="fas fa-plus-circle"></i> Add
                                 </a>
-                                <button onclick="logout()" class="btn-admin" style="background: #ef4444; padding: 8px 16px; border-radius: 8px; border: none; color: white; cursor: pointer; font-weight: 500;">
+                                <button onclick="logout()" class="btn-admin" style="background:#ef4444;">
                                     <i class="fas fa-sign-out-alt"></i> Logout
                                 </button>
                             ` : `
-                                <a href="/alwydivielage" class="nav-link ${isActive('/alwydivielage')}" onclick="event.preventDefault(); navigate('/alwydivielage')">
+                                <a href="/login" class="nav-link ${isActive('/login')}" onclick="event.preventDefault();navigate('/login')">
                                     <i class="fas fa-lock"></i> Admin
                                 </a>
                             `}
@@ -201,15 +303,15 @@
         
         function renderHome() {
             return `
-                <div class="container" style="padding: 0 0 32px 0;">
+                <div class="container" style="padding:0 0 32px 0;">
                     <div class="hero">
                         <div class="hero-content">
                             <div class="badge-tag">🏠 Direct from Homeowners</div>
                             <h1>Find Your <span>Perfect Home</span> in Cameroon</h1>
                             <p>Discover verified properties directly from homeowners. No agents, no commissions.</p>
                             <div class="search-wrapper">
-                                <input type="text" id="search-input" placeholder="🔍 Search by city or neighborhood..." onkeyup="if(event.key==='Enter') handleSearch()">
-                                <button onclick="handleSearch()"><i class="fas fa-search"></i> Search</button>
+                                <input type="text" id="search-input" placeholder="🔍 Search by city..." onkeyup="if(event.key==='Enter') searchListings()">
+                                <button onclick="searchListings()"><i class="fas fa-search"></i> Search</button>
                                 <button class="clear-btn" onclick="clearSearch()"><i class="fas fa-times"></i></button>
                             </div>
                         </div>
@@ -222,10 +324,7 @@
                     </div>
                     
                     <div id="listings-container">
-                        <div style="text-align: center; padding: 60px 0;">
-                            <div class="spinner"></div>
-                            <p style="margin-top: 20px; color: #94a3b8; font-size: 16px;">Loading listings...</p>
-                        </div>
+                        <div style="text-align:center;padding:60px 0;"><div class="spinner"></div><p style="margin-top:16px;color:#94a3b8;">Loading listings...</p></div>
                     </div>
                 </div>
             `;
@@ -233,148 +332,130 @@
         
         function renderAbout() {
             return `
-                <div class="container" style="padding: 32px 0; max-width: 900px;">
-                    <div style="background: white; border-radius: 20px; padding: 50px 40px; box-shadow: 0 2px 10px rgba(0,0,0,0.06);">
-                        <div style="text-align: center; margin-bottom: 32px;">
-                            <div style="font-size: 48px; margin-bottom: 12px;">🏠</div>
-                            <h1 style="font-size: 38px; font-weight: 800; color: #1a1a1a;">About HomeLink Cameroon</h1>
-                            <p style="color: #64748b; font-size: 18px; margin-top: 4px;">Cameroon's #1 Direct Real Estate Platform</p>
+                <div class="container" style="padding:32px 0;max-width:900px;">
+                    <div style="background:white;border-radius:20px;padding:40px;box-shadow:0 2px 10px rgba(0,0,0,0.06);">
+                        <h1 style="font-size:32px;font-weight:800;color:#0f172a;text-align:center;">About HomeLink</h1>
+                        <p style="color:#64748b;text-align:center;font-size:18px;margin-top:4px;">Cameroon's #1 Direct Real Estate Platform</p>
+                        <p style="color:#4a4a4a;line-height:1.8;font-size:16px;margin-top:24px;">
+                            HomeLink connects homeowners directly to tenants. No agents, no commissions.
+                            We make finding a home easy, transparent, and affordable for everyone in Cameroon.
+                        </p>
+                        <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-top:24px;">
+                            <div style="padding:16px;background:#f8fafc;border-radius:12px;text-align:center;">
+                                <div style="font-size:28px;">🏠</div>
+                                <p style="font-weight:600;">Direct Listings</p>
+                                <p style="font-size:14px;color:#64748b;">No agents, no middlemen</p>
+                            </div>
+                            <div style="padding:16px;background:#f8fafc;border-radius:12px;text-align:center;">
+                                <div style="font-size:28px;">📱</div>
+                                <p style="font-weight:600;">WhatsApp Contact</p>
+                                <p style="font-size:14px;color:#64748b;">Connect with owners directly</p>
+                            </div>
                         </div>
-                        <div style="max-width: 700px; margin: 0 auto;">
-                            <p style="color: #4a4a4a; line-height: 1.8; font-size: 17px; margin-bottom: 24px;">
-                                HomeLink is Cameroon's leading real estate platform that connects homeowners directly to tenants. 
-                                We eliminate agents and commissions, making it easy to find and list properties in Buea, Douala, 
-                                and Yaoundé.
-                            </p>
-                            <h2 style="font-size: 22px; font-weight: 700; color: #1a1a1a; margin-top: 32px; margin-bottom: 16px;">Our Mission</h2>
-                            <p style="color: #4a4a4a; line-height: 1.8; font-size: 16px; margin-bottom: 24px;">
-                                To make finding a home easy, transparent, and affordable for everyone in Cameroon.
-                            </p>
-                            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-bottom: 32px;">
-                                <div style="padding: 16px; background: #f8fafc; border-radius: 12px; text-align: center;">
-                                    <div style="font-size: 24px; margin-bottom: 4px;">🏠</div>
-                                    <p style="font-weight: 600; color: #1a1a1a;">Direct Listings</p>
-                                    <p style="font-size: 14px; color: #64748b;">No agents, no middlemen</p>
-                                </div>
-                                <div style="padding: 16px; background: #f8fafc; border-radius: 12px; text-align: center;">
-                                    <div style="font-size: 24px; margin-bottom: 4px;">📱</div>
-                                    <p style="font-weight: 600; color: #1a1a1a;">WhatsApp Contact</p>
-                                    <p style="font-size: 14px; color: #64748b;">Connect with owners directly</p>
-                                </div>
-                                <div style="padding: 16px; background: #f8fafc; border-radius: 12px; text-align: center;">
-                                    <div style="font-size: 24px; margin-bottom: 4px;">💰</div>
-                                    <p style="font-weight: 600; color: #1a1a1a;">Zero Commission</p>
-                                    <p style="font-size: 14px; color: #64748b;">Save money on both sides</p>
-                                </div>
-                                <div style="padding: 16px; background: #f8fafc; border-radius: 12px; text-align: center;">
-                                    <div style="font-size: 24px; margin-bottom: 4px;">✅</div>
-                                    <p style="font-weight: 600; color: #1a1a1a;">Verified Properties</p>
-                                    <p style="font-size: 14px; color: #64748b;">Trusted and authentic</p>
-                                </div>
-                            </div>
-                            <div style="background: linear-gradient(135deg, #f8fafc, #f1f5f9); border-radius: 12px; padding: 24px; text-align: center;">
-                                <p style="font-weight: 600; color: #1a1a1a; margin-bottom: 4px;">📞 Contact Us</p>
-                                <a href="https://wa.me/237672751769" target="_blank" style="color: #25D366; font-weight: 700; font-size: 20px; text-decoration: none;">
-                                    <i class="fab fa-whatsapp"></i> +237 6 72 75 17 69
-                                </a>
-                                <p style="font-size: 13px; color: #94a3b8; margin-top: 4px;">Available 7 days a week</p>
-                            </div>
+                        <div style="text-align:center;margin-top:24px;padding:16px;background:#f8fafc;border-radius:12px;">
+                            <p style="font-weight:600;color:#0f172a;">📞 Contact Us</p>
+                            <a href="https://wa.me/237672751769" target="_blank" style="color:#25D366;font-weight:700;font-size:18px;text-decoration:none;">
+                                <i class="fab fa-whatsapp"></i> +237 6 72 75 17 69
+                            </a>
                         </div>
                     </div>
                 </div>
             `;
         }
         
-        function renderAdd() {
-            const houseTypes = ['Single Room', 'Studio', '1 Bedroom', '2 Bedroom', '3 Bedroom', 'Apartment', 'Other'];
+        function renderLogin() {
             return `
-                <div class="container" style="padding: 32px 0; max-width: 768px;">
+                <div class="container" style="padding:60px 0;max-width:420px;">
                     <div class="form-card">
-                        <div style="display: flex; align-items: center; gap: 12px; margin-bottom: 8px;">
-                            <i class="fas fa-plus-circle" style="color: #FF385C; font-size: 28px;"></i>
-                            <h1 style="font-size: 28px; font-weight: 700; color: #0f172a;">Add New Listing</h1>
+                        <div style="text-align:center;margin-bottom:24px;">
+                            <div style="width:60px;height:60px;background:linear-gradient(135deg,#FF385C,#e0314f);border-radius:50%;display:flex;align-items:center;justify-content:center;margin:0 auto 12px;">
+                                <i class="fas fa-lock" style="font-size:24px;color:white;"></i>
+                            </div>
+                            <h1 style="font-size:24px;font-weight:700;color:#0f172a;">Admin Login</h1>
+                            <p style="color:#64748b;">Enter password to manage listings</p>
                         </div>
-                        <p style="color: #64748b; margin-bottom: 24px; font-size: 16px;">Fill in the information to list your property</p>
-                        <div id="form-message" style="display: none; padding: 14px 16px; border-radius: 12px; margin-bottom: 20px; font-size: 14px;"></div>
-                        <form id="listing-form" onsubmit="submitListing(event)">
-                            <div style="margin-bottom: 18px;">
-                                <label style="display: block; font-weight: 600; margin-bottom: 6px; color: #0f172a; font-size: 14px;">Title *</label>
-                                <input type="text" id="title" required placeholder="e.g., Beautiful 2-bedroom apartment" class="input-field">
+                        <div id="login-message" style="display:none;padding:12px;border-radius:8px;margin-bottom:16px;background:#fee2e2;color:#991b1b;"></div>
+                        <form id="login-form" onsubmit="handleLogin(event)">
+                            <input type="password" id="password" placeholder="Enter password" class="input-field" style="margin-bottom:16px;">
+                            <button type="submit" class="btn-primary" style="width:100%;">Login</button>
+                        </form>
+                    </div>
+                </div>
+            `;
+        }
+        
+        function renderAdd() {
+            const types = ['Single Room', 'Studio', '1 Bedroom', '2 Bedroom', '3 Bedroom', 'Apartment', 'Other'];
+            return `
+                <div class="container" style="padding:32px 0;max-width:768px;">
+                    <div class="form-card">
+                        <h1 style="font-size:28px;font-weight:700;color:#0f172a;">Add Listing</h1>
+                        <p style="color:#64748b;margin-bottom:24px;">Fill in the details to list your property</p>
+                        <div id="form-message" style="display:none;padding:12px 16px;border-radius:12px;margin-bottom:20px;"></div>
+                        <form id="add-form" onsubmit="submitListing(event)">
+                            <div style="margin-bottom:16px;">
+                                <label style="display:block;font-weight:600;margin-bottom:4px;">Title *</label>
+                                <input type="text" id="title" required placeholder="Beautiful 2-bedroom apartment" class="input-field">
                             </div>
-                            <div style="margin-bottom: 18px;">
-                                <label style="display: block; font-weight: 600; margin-bottom: 6px; color: #0f172a; font-size: 14px;">Description *</label>
-                                <textarea id="description" required rows="4" placeholder="Describe your property..." class="input-field" style="resize: vertical;"></textarea>
+                            <div style="margin-bottom:16px;">
+                                <label style="display:block;font-weight:600;margin-bottom:4px;">Description *</label>
+                                <textarea id="description" required rows="4" placeholder="Describe your property..." class="input-field" style="resize:vertical;"></textarea>
                             </div>
-                            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-bottom: 18px;">
+                            <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-bottom:16px;">
                                 <div>
-                                    <label style="display: block; font-weight: 600; margin-bottom: 6px; color: #0f172a; font-size: 14px;">Price (FCFA/month) *</label>
-                                    <input type="number" id="price" required min="0" placeholder="150000" class="input-field">
+                                    <label style="display:block;font-weight:600;margin-bottom:4px;">Price (FCFA) *</label>
+                                    <input type="number" id="price" required placeholder="150000" class="input-field">
                                 </div>
                                 <div>
-                                    <label style="display: block; font-weight: 600; margin-bottom: 6px; color: #0f172a; font-size: 14px;">Location *</label>
-                                    <input type="text" id="location" required placeholder="e.g., Molyko, Buea" class="input-field">
-                                    <span style="font-size: 12px; color: #94a3b8; margin-top: 4px; display: block;">Enter city or neighborhood</span>
+                                    <label style="display:block;font-weight:600;margin-bottom:4px;">Location *</label>
+                                    <input type="text" id="location" required placeholder="Molyko, Buea" class="input-field">
                                 </div>
                             </div>
-                            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-bottom: 18px;">
+                            <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-bottom:16px;">
                                 <div>
-                                    <label style="display: block; font-weight: 600; margin-bottom: 6px; color: #0f172a; font-size: 14px;">Property Type *</label>
-                                    <select id="houseType" required class="input-field">
-                                        <option value="">Select type</option>
-                                        ${houseTypes.map(t => `<option value="${t}">${t}</option>`).join('')}
+                                    <label style="display:block;font-weight:600;margin-bottom:4px;">Property Type</label>
+                                    <select id="houseType" class="input-field">
+                                        <option value="Apartment">Apartment</option>
+                                        ${types.map(t => `<option value="${t}">${t}</option>`).join('')}
                                     </select>
                                 </div>
                                 <div>
-                                    <label style="display: block; font-weight: 600; margin-bottom: 6px; color: #0f172a; font-size: 14px;">WhatsApp Number *</label>
-                                    <input type="tel" id="whatsapp" required placeholder="690123456" class="input-field">
-                                    <span style="font-size: 12px; color: #94a3b8; margin-top: 4px; display: block;">Format: 690123456 (without country code)</span>
+                                    <label style="display:block;font-weight:600;margin-bottom:4px;">WhatsApp *</label>
+                                    <input type="text" id="whatsapp" required placeholder="690123456" class="input-field">
                                 </div>
                             </div>
-                            <div style="margin-bottom: 18px;">
-                                <label style="display: block; font-weight: 600; margin-bottom: 6px; color: #0f172a; font-size: 14px;">TikTok Video Link *</label>
-                                <input type="url" id="video-url" required placeholder="https://www.tiktok.com/@user/video/123456789" class="input-field">
-                                <span style="font-size: 12px; color: #94a3b8; margin-top: 4px; display: block;">Paste the TikTok video link</span>
-                            </div>
-                            <div style="margin-bottom: 18px;">
-                                <label style="display: block; font-weight: 600; margin-bottom: 6px; color: #0f172a; font-size: 14px;">Image Link (optional)</label>
-                                <input type="url" id="image-url" placeholder="https://i.imgur.com/xxxxx.jpg" class="input-field">
-                                <span style="font-size: 12px; color: #94a3b8; margin-top: 4px; display: block;">Use free hosting like Imgur or Postimage</span>
+                            <div style="margin-bottom:16px;">
+                                <label style="display:block;font-weight:600;margin-bottom:4px;">TikTok Video Link</label>
+                                <input type="url" id="video" placeholder="https://www.tiktok.com/@user/video/123456789" class="input-field">
                             </div>
                             
                             <!-- BADGES SECTION -->
-                            <div style="margin-bottom: 18px;">
-                                <label style="display: block; font-weight: 600; margin-bottom: 8px; color: #0f172a; font-size: 14px;">Property Badges</label>
-                                <div style="display: flex; flex-wrap: wrap; gap: 10px;">
-                                    <label style="display: flex; align-items: center; gap: 6px; background: #f0fdf4; padding: 8px 14px; border-radius: 8px; cursor: pointer; border: 2px solid #dcfce7;">
-                                        <input type="checkbox" value="verified" id="badge-verified" class="badge-checkbox" style="width: 18px; height: 18px; accent-color: #22c55e;">
-                                        <span style="font-size: 13px; font-weight: 500;">✅ Verified by HomeVN</span>
+                            <div style="margin-bottom:18px;">
+                                <label style="display:block;font-weight:600;margin-bottom:8px;color:#0f172a;font-size:14px;">Property Badges</label>
+                                <div style="display:flex;flex-wrap:wrap;gap:10px;">
+                                    <label style="display:flex;align-items:center;gap:6px;background:#f0fdf4;padding:8px 14px;border-radius:8px;cursor:pointer;border:2px solid #dcfce7;">
+                                        <input type="checkbox" value="verified" id="badge-verified" class="badge-checkbox" style="width:18px;height:18px;accent-color:#22c55e;">
+                                        <span style="font-size:13px;font-weight:500;">✅ Verified by HomeVN</span>
                                     </label>
-                                    <label style="display: flex; align-items: center; gap: 6px; background: #eff6ff; padding: 8px 14px; border-radius: 8px; cursor: pointer; border: 2px solid #dbeafe;">
-                                        <input type="checkbox" value="owner" id="badge-owner" class="badge-checkbox" style="width: 18px; height: 18px; accent-color: #3b82f6;">
-                                        <span style="font-size: 13px; font-weight: 500;">🏠 Owner Listed</span>
+                                    <label style="display:flex;align-items:center;gap:6px;background:#eff6ff;padding:8px 14px;border-radius:8px;cursor:pointer;border:2px solid #dbeafe;">
+                                        <input type="checkbox" value="owner" id="badge-owner" class="badge-checkbox" style="width:18px;height:18px;accent-color:#3b82f6;">
+                                        <span style="font-size:13px;font-weight:500;">🏠 Owner Listed</span>
                                     </label>
-                                    <label style="display: flex; align-items: center; gap: 6px; background: #fef3c7; padding: 8px 14px; border-radius: 8px; cursor: pointer; border: 2px solid #fde68a;">
-                                        <input type="checkbox" value="agent" id="badge-agent" class="badge-checkbox" style="width: 18px; height: 18px; accent-color: #f59e0b;">
-                                        <span style="font-size: 13px; font-weight: 500;">👔 Agent Listed</span>
+                                    <label style="display:flex;align-items:center;gap:6px;background:#fef3c7;padding:8px 14px;border-radius:8px;cursor:pointer;border:2px solid #fde68a;">
+                                        <input type="checkbox" value="agent" id="badge-agent" class="badge-checkbox" style="width:18px;height:18px;accent-color:#f59e0b;">
+                                        <span style="font-size:13px;font-weight:500;">👔 Agent Listed</span>
                                     </label>
                                 </div>
-                                <span style="font-size: 12px; color: #94a3b8; margin-top: 4px; display: block;">Select the badges that apply to this property</span>
+                                <span style="font-size:12px;color:#94a3b8;margin-top:4px;display:block;">Select the badges that apply to this property</span>
                             </div>
                             
-                            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-bottom: 24px;">
-                                <div style="display: flex; align-items: center; gap: 12px;">
-                                    <input type="checkbox" id="available" checked style="width: 20px; height: 20px; accent-color: #FF385C;">
-                                    <label style="font-weight: 500; color: #0f172a;">Available</label>
-                                </div>
-                                <div style="display: flex; align-items: center; gap: 12px;">
-                                    <input type="checkbox" id="featured" style="width: 20px; height: 20px; accent-color: #f59e0b;">
-                                    <label style="font-weight: 500; color: #0f172a;">⭐ Featured</label>
-                                </div>
+                            <div style="display:flex;gap:16px;margin-bottom:24px;">
+                                <label style="display:flex;align-items:center;gap:8px;"><input type="checkbox" id="available" checked> Available</label>
+                                <label style="display:flex;align-items:center;gap:8px;"><input type="checkbox" id="featured"> Featured</label>
                             </div>
-                            
-                            <button type="submit" class="btn-primary" style="width: 100%; padding: 16px; font-size: 18px;">
-                                <span id="submit-text"><i class="fas fa-plus"></i> Publish Listing</span>
-                                <span id="submit-loading" style="display: none;"><i class="fas fa-spinner fa-spin"></i> Publishing...</span>
+                            <button type="submit" class="btn-primary" style="width:100%;padding:16px;font-size:18px;">
+                                <span id="submit-text">Publish Listing</span>
+                                <span id="submit-loading" style="display:none;">Publishing...</span>
                             </button>
                         </form>
                     </div>
@@ -384,206 +465,145 @@
         
         function renderAdmin() {
             return `
-                <div class="container" style="padding: 32px 0;">
-                    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 32px; flex-wrap: wrap; gap: 12px;">
-                        <div>
-                            <h1 style="font-size: 32px; font-weight: 800; color: #0f172a;"><i class="fas fa-cog" style="color: #FF385C;"></i> Dashboard</h1>
-                            <p style="color: #64748b; font-size: 16px;">Manage all your listings</p>
-                        </div>
-                        <div>
-                            <a href="/add" class="btn-primary" style="padding: 10px 20px; font-size: 14px; text-decoration: none;" onclick="event.preventDefault(); navigate('/add')">
-                                <i class="fas fa-plus"></i> New Listing
-                            </a>
-                        </div>
+                <div class="container" style="padding:32px 0;">
+                    <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:24px;flex-wrap:wrap;gap:12px;">
+                        <h1 style="font-size:28px;font-weight:800;color:#0f172a;"><i class="fas fa-cog" style="color:#FF385C;"></i> Dashboard</h1>
+                        <a href="/add" class="btn-primary" style="padding:10px 20px;font-size:14px;text-decoration:none;" onclick="event.preventDefault();navigate('/add')"><i class="fas fa-plus"></i> New</a>
                     </div>
-                    <div class="stats-bar">
-                        <div class="stat-item"><i class="fas fa-home"></i><span class="stat-number" id="admin-total">0</span> listings</div>
-                        <div class="stat-item"><i class="fas fa-eye"></i><span class="stat-number" id="admin-views">0</span> views</div>
-                        <div class="stat-item"><i class="fas fa-check-circle" style="color: #22c55e;"></i><span class="stat-number" id="admin-available">0</span> available</div>
-                        <div class="stat-item"><i class="fas fa-times-circle" style="color: #ef4444;"></i><span class="stat-number" id="admin-rented">0</span> rented</div>
-                    </div>
-                    <div id="admin-listings"><div style="text-align:center;padding:60px 0;"><div class="spinner"></div></div></div>
-                </div>
-            `;
-        }
-        
-        function renderLogin() {
-            return `
-                <div class="container" style="padding: 80px 0; max-width: 420px;">
-                    <div class="form-card">
-                        <div style="text-align:center;margin-bottom:32px;">
-                            <div style="width:72px;height:72px;background:linear-gradient(135deg,#FF385C,#e0314f);border-radius:50%;display:flex;align-items:center;justify-content:center;margin:0 auto 16px;">
-                                <i class="fas fa-lock" style="font-size:28px;color:white;"></i>
-                            </div>
-                            <h1 style="font-size:24px;font-weight:700;color:#0f172a;">Admin Login</h1>
-                            <p style="color:#64748b;font-size:15px;">Enter the password to manage listings</p>
-                        </div>
-                        <div id="login-message" style="display:none;padding:12px 16px;border-radius:8px;margin-bottom:16px;font-size:14px;"></div>
-                        <form id="login-form" onsubmit="handleLogin(event)">
-                            <div style="margin-bottom:16px;">
-                                <label style="display:block;font-weight:600;margin-bottom:6px;color:#0f172a;font-size:14px;">Password</label>
-                                <input type="password" id="admin-password" required placeholder="Enter password" class="input-field">
-                            </div>
-                            <button type="submit" class="btn-primary" style="width:100%;padding:16px;font-size:18px;">
-                                <span id="login-text"><i class="fas fa-sign-in-alt"></i> Login</span>
-                                <span id="login-loading" style="display:none;"><i class="fas fa-spinner fa-spin"></i> Logging in...</span>
-                            </button>
-                        </form>
+                    <div id="admin-listings">
+                        <div style="text-align:center;padding:60px 0;"><div class="spinner"></div></div>
                     </div>
                 </div>
             `;
         }
         
-        function renderEdit(listingId) {
+        function renderDetail() {
             return `
-                <div class="container" style="padding: 32px 0; max-width: 768px;">
-                    <div id="edit-container"><div style="text-align:center;padding:60px 0;"><div class="spinner"></div></div></div>
-                </div>
-            `;
-        }
-        
-        function renderListingDetail() {
-            return `
-                <div class="container" style="padding: 32px 0;">
-                    <a href="/" style="color:#64748b;text-decoration:none;display:inline-flex;align-items:center;gap:8px;margin-bottom:20px;font-size:15px;" onclick="event.preventDefault(); navigate('/')">
-                        <i class="fas fa-arrow-left"></i> Back to listings
+                <div class="container" style="padding:32px 0;">
+                    <a href="/" style="color:#64748b;text-decoration:none;display:inline-flex;align-items:center;gap:8px;margin-bottom:20px;" onclick="event.preventDefault();navigate('/')">
+                        <i class="fas fa-arrow-left"></i> Back
                     </a>
                     <div id="detail-container"><div style="text-align:center;padding:60px 0;"><div class="spinner"></div></div></div>
                 </div>
             `;
         }
         
-        async function loadListings(containerId, keyword = '') {
+        function formatPrice(price) {
+            return new Intl.NumberFormat('en-CM').format(price);
+        }
+        
+        // ============ API FUNCTIONS ============
+        
+        async function loadListings(keyword = '') {
             try {
                 const url = keyword ? `${API_URL}/listings?search=${encodeURIComponent(keyword)}` : `${API_URL}/listings`;
-                const response = await fetch(url);
-                const data = await response.json();
+                const res = await fetch(url);
+                const data = await res.json();
                 allListings = data.data || [];
-                const container = document.getElementById(containerId);
-                if (!container) return;
-                
-                updateStats(allListings);
-                
-                if (allListings.length === 0) {
-                    container.innerHTML = `
-                        <div class="empty-state">
-                            <i class="fas fa-home"></i>
-                            <h2>${keyword ? 'No results for "' + keyword + '"' : 'No listings found'}</h2>
-                            <p>${keyword ? 'Try a different search' : 'Be the first to list your property!'}</p>
-                            ${!keyword ? `<br><a href="/add" class="btn-primary" style="display:inline-block;text-decoration:none;margin-top:16px;" onclick="event.preventDefault(); navigate('/add')"><i class="fas fa-plus"></i> Add Listing</a>` : `<br><button onclick="clearSearch()" class="btn-primary" style="display:inline-block;margin-top:16px;"><i class="fas fa-times"></i> Clear Search</button>`}
-                        </div>
-                    `;
-                    return;
-                }
-                
-                container.innerHTML = `
-                    <div style="margin-bottom:16px;color:#64748b;font-size:14px;">
-                        ${keyword ? '🔍 Results for "' + keyword + '" : ' : ''}
-                        <strong style="color:#0f172a;">${allListings.length}</strong> listing${allListings.length > 1 ? 's' : ''} found
-                    </div>
-                    <div class="grid">
-                        ${allListings.map(listing => `
-                            <div class="card" onclick="navigate('/listing/${listing._id}')">
-                                <div class="card-image-area">
-                                    ${listing.featured ? `<span class="badge-featured" style="position:absolute;top:12px;left:12px;">⭐ Featured</span>` : ''}
-                                    <i class="fab fa-tiktok tiktok-icon"></i>
-                                    <div style="position:absolute;bottom:12px;left:12px;">
-                                        <span class="price-tag"><i class="fas fa-coins" style="font-size:12px;"></i> ${formatPrice(listing.price)} <span class="currency">${CURRENCY}/mo</span></span>
-                                    </div>
-                                    <div style="position:absolute;top:12px;right:12px;">
-                                        <span class="${listing.isAvailable ? 'badge-available' : 'badge-rented'}">${listing.isAvailable ? '✓ Available' : '✗ Rented'}</span>
-                                    </div>
-                                    <div style="position:absolute;bottom:12px;right:12px;">
-                                        <span class="view-count"><i class="fas fa-eye"></i> ${listing.views || 0}</span>
-                                    </div>
-                                </div>
-                                <div class="card-body">
-                                    <div class="badge-container">
-                                        ${listing.badges && listing.badges.includes('verified') ? '<span class="badge-verified">✅ Verified</span>' : ''}
-                                        ${listing.badges && listing.badges.includes('owner') ? '<span class="badge-owner">🏠 Owner</span>' : ''}
-                                        ${listing.badges && listing.badges.includes('agent') ? '<span class="badge-agent">👔 Agent</span>' : ''}
-                                    </div>
-                                    <h3>${listing.title}</h3>
-                                    <div class="location"><i class="fas fa-map-marker-alt"></i> ${listing.location}</div>
-                                    <div class="property-type"><i class="fas fa-bed"></i> ${listing.houseType}</div>
-                                    <div class="card-footer">
-                                        <span class="date"><i class="far fa-calendar-alt"></i> ${new Date(listing.createdAt).toLocaleDateString('en-CM')}</span>
-                                        <a href="https://wa.me/237${listing.whatsappNumber}" target="_blank" class="btn-whatsapp" style="font-size:13px;padding:6px 14px;" onclick="event.stopPropagation();">
-                                            <i class="fab fa-whatsapp"></i> Contact
-                                        </a>
-                                    </div>
-                                </div>
-                            </div>
-                        `).join('')}
-                    </div>
-                `;
+                renderListings();
+                updateStats();
             } catch(e) {
-                document.getElementById(containerId).innerHTML = `
+                document.getElementById('listings-container').innerHTML = `
                     <div class="empty-state">
                         <i class="fas fa-exclamation-triangle" style="color:#ef4444;opacity:1;"></i>
                         <h2>Unable to load listings</h2>
-                        <p style="color:#ef4444;">Make sure the backend is running.</p>
+                        <p>Make sure the backend is running on port 5000</p>
                     </div>
                 `;
             }
         }
         
-        function updateStats(listings) {
-            const total = listings.length;
-            const views = listings.reduce((sum, l) => sum + (l.views || 0), 0);
-            const locations = new Set(listings.map(l => l.location)).size;
+        function updateStats() {
+            const total = allListings.length;
+            const views = allListings.reduce((sum, l) => sum + (l.views || 0), 0);
+            const locations = new Set(allListings.map(l => l.location)).size;
             document.getElementById('total-listings').textContent = total;
             document.getElementById('total-views').textContent = views;
             document.getElementById('total-locations').textContent = locations;
         }
         
-        function updateAdminStats(listings) {
-            const total = listings.length;
-            const views = listings.reduce((sum, l) => sum + (l.views || 0), 0);
-            const available = listings.filter(l => l.isAvailable).length;
-            const rented = listings.filter(l => !l.isAvailable).length;
-            document.getElementById('admin-total').textContent = total;
-            document.getElementById('admin-views').textContent = views;
-            document.getElementById('admin-available').textContent = available;
-            document.getElementById('admin-rented').textContent = rented;
+        function renderListings() {
+            const container = document.getElementById('listings-container');
+            if (!container) return;
+            
+            if (allListings.length === 0) {
+                container.innerHTML = `
+                    <div class="empty-state">
+                        <i class="fas fa-home"></i>
+                        <h2>No listings found</h2>
+                        <p>Be the first to list your property!</p>
+                        ${isAdmin ? `<a href="/add" class="btn-primary" style="display:inline-block;margin-top:16px;text-decoration:none;" onclick="event.preventDefault();navigate('/add')"><i class="fas fa-plus"></i> Add Listing</a>` : ''}
+                    </div>
+                `;
+                return;
+            }
+            
+            container.innerHTML = `
+                <div class="grid">
+                    ${allListings.map(l => `
+                        <div class="card" onclick="navigate('/listing/${l._id}')">
+                            <div style="padding:20px 0;min-height:80px;background:linear-gradient(135deg,#f8fafc,#f1f5f9);display:flex;align-items:center;justify-content:center;position:relative;">
+                                ${l.featured ? `<span class="badge-featured" style="position:absolute;top:8px;left:8px;">⭐ Featured</span>` : ''}
+                                <i class="fab fa-tiktok" style="font-size:40px;color:#fe2c55;opacity:0.3;"></i>
+                                <div style="position:absolute;bottom:8px;left:8px;background:white;padding:4px 12px;border-radius:9999px;box-shadow:0 2px 10px rgba(0,0,0,0.08);font-weight:700;color:#FF385C;font-size:14px;">
+                                    ${formatPrice(l.price)} <span style="font-size:11px;color:#94a3b8;font-weight:400;">FCFA/mo</span>
+                                </div>
+                                <div style="position:absolute;top:8px;right:8px;">
+                                    <span class="${l.isAvailable ? 'badge-available' : 'badge-rented'}">${l.isAvailable ? '✓ Available' : '✗ Rented'}</span>
+                                </div>
+                            </div>
+                            <div style="padding:16px;">
+                                <!-- BADGES ON CARD -->
+                                <div class="badge-container">
+                                    ${l.badges && l.badges.includes('verified') ? '<span class="badge-verified">✅ Verified</span>' : ''}
+                                    ${l.badges && l.badges.includes('owner') ? '<span class="badge-owner">🏠 Owner</span>' : ''}
+                                    ${l.badges && l.badges.includes('agent') ? '<span class="badge-agent">👔 Agent</span>' : ''}
+                                </div>
+                                <h3 style="font-weight:700;font-size:17px;color:#0f172a;margin-bottom:4px;">${l.title}</h3>
+                                <div style="display:flex;align-items:center;gap:6px;color:#64748b;font-size:14px;margin-bottom:4px;">
+                                    <i class="fas fa-map-marker-alt" style="color:#FF385C;font-size:12px;"></i> ${l.location}
+                                </div>
+                                <div style="display:flex;align-items:center;gap:6px;color:#64748b;font-size:14px;margin-bottom:12px;">
+                                    <i class="fas fa-bed" style="color:#FF385C;font-size:12px;"></i> ${l.houseType || 'Apartment'}
+                                </div>
+                                <div style="display:flex;justify-content:space-between;align-items:center;padding-top:12px;border-top:1px solid #f1f5f9;">
+                                    <span style="font-size:12px;color:#94a3b8;"><i class="far fa-calendar-alt"></i> ${new Date(l.createdAt).toLocaleDateString()}</span>
+                                    <a href="https://wa.me/${l.whatsappNumber}" target="_blank" class="btn-whatsapp" style="font-size:12px;padding:4px 12px;" onclick="event.stopPropagation();">
+                                        <i class="fab fa-whatsapp"></i> Contact
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    `).join('')}
+                </div>
+            `;
         }
         
         async function loadAdminListings() {
             try {
-                const response = await fetch(`${API_URL}/listings`);
-                const data = await response.json();
-                allListings = data.data || [];
+                const res = await fetch(`${API_URL}/listings`);
+                const data = await res.json();
+                const listings = data.data || [];
                 const container = document.getElementById('admin-listings');
                 if (!container) return;
-                updateAdminStats(allListings);
-                if (allListings.length === 0) {
+                
+                if (listings.length === 0) {
                     container.innerHTML = `<div class="empty-state"><i class="fas fa-home"></i><h2>No listings</h2><p>Start publishing listings</p></div>`;
                     return;
                 }
+                
                 container.innerHTML = `
                     <div style="overflow-x:auto;">
                         <table class="admin-table">
-                            <thead><tr><th>Title</th><th>Location</th><th>Price</th><th>Status</th><th>Views</th><th style="text-align:center;">Actions</th></tr></thead>
+                            <thead><tr><th>Title</th><th>Price</th><th>Status</th><th style="text-align:center;">Actions</th></tr></thead>
                             <tbody>
-                                ${allListings.map(listing => `
+                                ${listings.map(l => `
                                     <tr>
-                                        <td><strong>${listing.title}</strong></td>
-                                        <td>${listing.location}</td>
-                                        <td style="font-weight:600;color:#FF385C;">${formatPrice(listing.price)} FCFA</td>
-                                        <td><span class="${listing.isAvailable ? 'badge-available' : 'badge-rented'}">${listing.isAvailable ? 'Available' : 'Rented'}</span></td>
-                                        <td>${listing.views || 0}</td>
-                                        <td>
-                                            <div class="admin-actions">
-                                                <button onclick="event.stopPropagation(); toggleAvailability('${listing._id}')" class="btn-edit" style="background:${listing.isAvailable ? '#f59e0b' : '#22c55e'};padding:6px 12px;border:none;border-radius:6px;color:white;cursor:pointer;font-size:12px;">
-                                                    ${listing.isAvailable ? 'Rent' : 'Avail'}
-                                                </button>
-                                                <button onclick="event.stopPropagation(); editListing('${listing._id}')" class="btn-edit" style="background:#3b82f6;padding:6px 12px;border:none;border-radius:6px;color:white;cursor:pointer;font-size:12px;">
-                                                    <i class="fas fa-edit"></i>
-                                                </button>
-                                                <button onclick="event.stopPropagation(); deleteListing('${listing._id}')" class="btn-delete" style="background:#ef4444;padding:6px 12px;border:none;border-radius:6px;color:white;cursor:pointer;font-size:12px;">
-                                                    <i class="fas fa-trash"></i>
-                                                </button>
-                                            </div>
+                                        <td><strong>${l.title}</strong></td>
+                                        <td style="color:#FF385C;font-weight:600;">${formatPrice(l.price)} FCFA</td>
+                                        <td><span class="${l.isAvailable ? 'badge-available' : 'badge-rented'}">${l.isAvailable ? 'Available' : 'Rented'}</span></td>
+                                        <td style="text-align:center;">
+                                            <button onclick="deleteListing('${l._id}')" class="btn-delete">Delete</button>
                                         </td>
                                     </tr>
                                 `).join('')}
@@ -592,258 +612,68 @@
                     </div>
                 `;
             } catch(e) {
-                container.innerHTML = '<div class="empty-state"><i class="fas fa-exclamation-triangle" style="color:#ef4444;"></i><h2>Error loading</h2></div>';
+                container.innerHTML = `<div class="empty-state"><i class="fas fa-exclamation-triangle" style="color:#ef4444;"></i><h2>Error loading</h2></div>`;
             }
         }
         
-        async function toggleAvailability(id) {
-            if (!confirm('Change the status of this listing?')) return;
+        async function loadListingDetail(id) {
             try {
-                const listing = allListings.find(l => l._id === id);
-                if (!listing) return;
-                const updated = { ...listing, isAvailable: !listing.isAvailable };
-                const response = await fetch(`${API_URL}/listings/${id}`, {
-                    method: 'PUT',
-                    headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify(updated)
-                });
-                if (response.ok) {
-                    showToast('✅ Status updated!');
-                    loadAdminListings();
-                    loadListings('listings-container');
-                }
-            } catch(e) { showToast('❌ Error', 'error'); }
-        }
-        
-        async function deleteListing(id) {
-            if (!confirm('⚠️ Delete this listing? This action cannot be undone!')) return;
-            try {
-                const response = await fetch(`${API_URL}/listings/${id}`, { method: 'DELETE' });
-                if (response.ok) {
-                    showToast('✅ Listing deleted!');
-                    loadAdminListings();
-                    loadListings('listings-container');
-                }
-            } catch(e) { showToast('❌ Error', 'error'); }
-        }
-        
-        function editListing(id) { navigate(`/edit/${id}`); }
-        
-        async function loadEditForm(id) {
-            const container = document.getElementById('edit-container');
-            if (!container) return;
-            try {
-                const response = await fetch(`${API_URL}/listings/${id}`);
-                const data = await response.json();
-                const listing = data.data;
-                if (!listing) {
-                    container.innerHTML = '<div class="empty-state"><i class="fas fa-exclamation-circle"></i><h2>Listing not found</h2></div>';
-                    return;
-                }
-                const houseTypes = ['Single Room', 'Studio', '1 Bedroom', '2 Bedroom', '3 Bedroom', 'Apartment', 'Other'];
-                container.innerHTML = `
-                    <div class="form-card">
-                        <h1 style="font-size:28px;font-weight:700;color:#0f172a;">Edit Listing</h1>
-                        <div id="edit-message" style="display:none;padding:14px 16px;border-radius:12px;margin-bottom:20px;font-size:14px;"></div>
-                        <form id="edit-form" onsubmit="updateListing(event)">
-                            <input type="hidden" id="edit-id" value="${listing._id}">
-                            <div style="margin-bottom:18px;">
-                                <label style="display:block;font-weight:600;margin-bottom:6px;color:#0f172a;font-size:14px;">Title *</label>
-                                <input type="text" id="edit-title" required value="${listing.title}" class="input-field">
-                            </div>
-                            <div style="margin-bottom:18px;">
-                                <label style="display:block;font-weight:600;margin-bottom:6px;color:#0f172a;font-size:14px;">Description *</label>
-                                <textarea id="edit-description" required rows="4" class="input-field" style="resize:vertical;">${listing.description}</textarea>
-                            </div>
-                            <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-bottom:18px;">
-                                <div>
-                                    <label style="display:block;font-weight:600;margin-bottom:6px;color:#0f172a;font-size:14px;">Price (FCFA/month) *</label>
-                                    <input type="number" id="edit-price" required min="0" value="${listing.price}" class="input-field">
-                                </div>
-                                <div>
-                                    <label style="display:block;font-weight:600;margin-bottom:6px;color:#0f172a;font-size:14px;">Location *</label>
-                                    <input type="text" id="edit-location" required value="${listing.location}" class="input-field">
-                                </div>
-                            </div>
-                            <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-bottom:18px;">
-                                <div>
-                                    <label style="display:block;font-weight:600;margin-bottom:6px;color:#0f172a;font-size:14px;">Property Type *</label>
-                                    <select id="edit-houseType" required class="input-field">
-                                        ${houseTypes.map(t => `<option value="${t}" ${listing.houseType === t ? 'selected' : ''}>${t}</option>`).join('')}
-                                    </select>
-                                </div>
-                                <div>
-                                    <label style="display:block;font-weight:600;margin-bottom:6px;color:#0f172a;font-size:14px;">WhatsApp *</label>
-                                    <input type="tel" id="edit-whatsapp" required value="${listing.whatsappNumber}" class="input-field">
-                                </div>
-                            </div>
-                            <div style="margin-bottom:18px;">
-                                <label style="display:block;font-weight:600;margin-bottom:6px;color:#0f172a;font-size:14px;">TikTok Video Link *</label>
-                                <input type="url" id="edit-video" required value="${listing.videoUrl}" class="input-field">
-                            </div>
-                            <div style="margin-bottom:18px;">
-                                <label style="display:block;font-weight:600;margin-bottom:6px;color:#0f172a;font-size:14px;">Image Link</label>
-                                <input type="url" id="edit-image" value="${listing.images && listing.images[0] ? listing.images[0] : ''}" class="input-field">
-                            </div>
-                            <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-bottom:24px;">
-                                <div style="display:flex;align-items:center;gap:12px;">
-                                    <input type="checkbox" id="edit-available" ${listing.isAvailable ? 'checked' : ''} style="width:20px;height:20px;accent-color:#FF385C;">
-                                    <label style="font-weight:500;color:#0f172a;">Available</label>
-                                </div>
-                                <div style="display:flex;align-items:center;gap:12px;">
-                                    <input type="checkbox" id="edit-featured" ${listing.featured ? 'checked' : ''} style="width:20px;height:20px;accent-color:#f59e0b;">
-                                    <label style="font-weight:500;color:#0f172a;">⭐ Featured</label>
-                                </div>
-                            </div>
-                            <div style="display:flex;gap:12px;">
-                                <button type="submit" class="btn-primary" style="flex:1;padding:16px;font-size:18px;">
-                                    <span id="edit-submit-text"><i class="fas fa-save"></i> Update</span>
-                                    <span id="edit-submit-loading" style="display:none;"><i class="fas fa-spinner fa-spin"></i> Updating...</span>
-                                </button>
-                                <button type="button" onclick="navigate('/admin')" style="padding:16px 24px;border:2px solid #e2e8f0;border-radius:12px;background:white;cursor:pointer;font-weight:500;color:#64748b;">Cancel</button>
-                            </div>
-                        </form>
-                    </div>
-                `;
-            } catch(e) { container.innerHTML = '<div class="empty-state"><i class="fas fa-exclamation-triangle" style="color:#ef4444;"></i><h2>Error loading</h2></div>'; }
-        }
-        
-        async function updateListing(e) {
-            e.preventDefault();
-            const id = document.getElementById('edit-id').value;
-            const submitBtn = document.getElementById('edit-submit-text');
-            const loadingBtn = document.getElementById('edit-submit-loading');
-            const messageDiv = document.getElementById('edit-message');
-            submitBtn.style.display = 'none';
-            loadingBtn.style.display = 'inline';
-            messageDiv.style.display = 'none';
-            const imageUrl = document.getElementById('edit-image').value.trim();
-            const data = {
-                title: document.getElementById('edit-title').value,
-                description: document.getElementById('edit-description').value,
-                price: parseFloat(document.getElementById('edit-price').value),
-                location: document.getElementById('edit-location').value,
-                houseType: document.getElementById('edit-houseType').value,
-                whatsappNumber: document.getElementById('edit-whatsapp').value.replace(/\D/g, ''),
-                videoUrl: document.getElementById('edit-video').value,
-                images: imageUrl ? [imageUrl] : ['https://example.com/image.jpg'],
-                isAvailable: document.getElementById('edit-available').checked,
-                featured: document.getElementById('edit-featured').checked
-            };
-            try {
-                const response = await fetch(`${API_URL}/listings/${id}`, {
-                    method: 'PUT',
-                    headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify(data)
-                });
-                if (response.ok) {
-                    messageDiv.style.display = 'block';
-                    messageDiv.style.background = '#dcfce7';
-                    messageDiv.style.color = '#166534';
-                    messageDiv.innerHTML = '✅ Listing updated successfully!';
-                    showToast('✅ Listing updated!');
-                    setTimeout(() => navigate('/admin'), 1000);
-                }
-            } catch(e) {
-                messageDiv.style.display = 'block';
-                messageDiv.style.background = '#fee2e2';
-                messageDiv.style.color = '#991b1b';
-                messageDiv.innerHTML = '❌ Connection error';
-            }
-            submitBtn.style.display = 'inline';
-            loadingBtn.style.display = 'none';
-        }
-        
-        async function loadListingDetail() {
-            const id = window.location.pathname.split('/')[2];
-            const container = document.getElementById('detail-container');
-            if (!container) return;
-            try {
-                const response = await fetch(`${API_URL}/listings/${id}`);
-                const data = await response.json();
-                const listing = data.data;
-                if (!listing) {
-                    container.innerHTML = `<div class="empty-state"><i class="fas fa-exclamation-circle"></i><h2>Listing not found</h2></div>`;
-                    return;
-                }
+                const res = await fetch(`${API_URL}/listings/${id}`);
+                const data = await res.json();
+                const l = data.data;
+                const container = document.getElementById('detail-container');
+                if (!container) return;
+                
                 container.innerHTML = `
                     <div class="detail-card">
                         <div class="detail-image-area">
-                            ${listing.featured ? `<div style="position:absolute;top:16px;left:16px;"><span class="badge-featured">⭐ Featured</span></div>` : ''}
+                            ${l.featured ? `<span class="badge-featured" style="position:absolute;top:12px;left:12px;">⭐ Featured</span>` : ''}
                             <i class="fab fa-tiktok tiktok-icon"></i>
-                            <div style="position:absolute;bottom:16px;left:16px;">
-                                <span class="price-tag" style="font-size:20px;padding:8px 24px;">
-                                    <i class="fas fa-coins"></i> ${formatPrice(listing.price)} <span style="font-size:14px;font-weight:400;color:#94a3b8;">${CURRENCY}/month</span>
+                            <div style="position:absolute;bottom:12px;left:12px;">
+                                <span style="background:white;padding:6px 20px;border-radius:9999px;box-shadow:0 2px 10px rgba(0,0,0,0.08);font-weight:700;color:#FF385C;font-size:20px;">
+                                    ${formatPrice(l.price)} <span style="font-size:14px;font-weight:400;color:#94a3b8;">FCFA/mo</span>
                                 </span>
                             </div>
-                            <div style="position:absolute;top:16px;right:16px;">
-                                <span class="${listing.isAvailable ? 'badge-available' : 'badge-rented'}">${listing.isAvailable ? '✓ Available' : '✗ Rented'}</span>
-                            </div>
-                            <div style="position:absolute;bottom:16px;right:16px;">
-                                <span style="font-size:14px;color:#94a3b8;"><i class="fas fa-eye"></i> ${listing.views || 0} views</span>
+                            <div style="position:absolute;top:12px;right:12px;">
+                                <span class="${l.isAvailable ? 'badge-available' : 'badge-rented'}">${l.isAvailable ? '✓ Available' : '✗ Rented'}</span>
                             </div>
                         </div>
                         <div class="detail-content">
+                            <!-- BADGES ON DETAIL -->
                             <div class="badge-container">
-                                ${listing.badges && listing.badges.includes('verified') ? '<span class="badge-verified">✅ Verified by HomeVN</span>' : ''}
-                                ${listing.badges && listing.badges.includes('owner') ? '<span class="badge-owner">🏠 Owner Listed</span>' : ''}
-                                ${listing.badges && listing.badges.includes('agent') ? '<span class="badge-agent">👔 Agent Listed</span>' : ''}
+                                ${l.badges && l.badges.includes('verified') ? '<span class="badge-verified">✅ Verified by HomeVN</span>' : ''}
+                                ${l.badges && l.badges.includes('owner') ? '<span class="badge-owner">🏠 Owner Listed</span>' : ''}
+                                ${l.badges && l.badges.includes('agent') ? '<span class="badge-agent">👔 Agent Listed</span>' : ''}
                             </div>
-                            <div style="display:flex;justify-content:space-between;align-items:flex-start;flex-wrap:wrap;gap:16px;margin-bottom:16px;">
-                                <div>
-                                    <h1 class="detail-title">${listing.title}</h1>
-                                    <div class="detail-meta">
-                                        <span><i class="fas fa-map-marker-alt"></i> ${listing.location}</span>
-                                        <span><i class="fas fa-bed"></i> ${listing.houseType}</span>
-                                    </div>
-                                </div>
-                                <div style="text-align:right;">
-                                    <div class="detail-price">${formatPrice(listing.price)} <span class="currency">${CURRENCY}/month</span></div>
-                                </div>
+                            <h1 class="detail-title">${l.title}</h1>
+                            <div class="detail-meta">
+                                <span><i class="fas fa-map-marker-alt"></i> ${l.location}</span>
+                                <span><i class="fas fa-bed"></i> ${l.houseType || 'Apartment'}</span>
                             </div>
-                            <div style="border-top:1px solid #f1f5f9;padding-top:24px;margin-top:8px;">
-                                <h2 style="font-size:18px;font-weight:600;color:#0f172a;margin-bottom:12px;">📝 Description</h2>
-                                <p class="detail-description">${listing.description}</p>
+                            <div style="border-top:1px solid #f1f5f9;padding-top:24px;margin-top:16px;">
+                                <h2 style="font-size:18px;font-weight:600;color:#0f172a;margin-bottom:8px;">📝 Description</h2>
+                                <p style="color:#4a4a4a;line-height:1.8;">${l.description}</p>
                             </div>
-                            <div style="border-top:1px solid #f1f5f9;padding-top:24px;margin-top:24px;">
-                                <h2 style="font-size:18px;font-weight:600;color:#0f172a;margin-bottom:12px;">🎬 Video Walkthrough</h2>
-                                <div class="tiktok-video-container">
-                                    <i class="fab fa-tiktok"></i>
-                                    <p>🎥 Video available on TikTok</p>
-                                    <a href="${listing.videoUrl}" target="_blank" class="btn-tiktok">
-                                        <i class="fab fa-tiktok" style="font-size:24px;"></i> Watch on TikTok <i class="fas fa-external-link-alt" style="font-size:14px;"></i>
+                            ${l.videoUrl && l.videoUrl !== 'https://example.com/video.mp4' ? `
+                                <div style="border-top:1px solid #f1f5f9;padding-top:24px;margin-top:24px;">
+                                    <h2 style="font-size:18px;font-weight:600;color:#0f172a;margin-bottom:12px;">🎬 Video</h2>
+                                    <a href="${l.videoUrl}" target="_blank" class="tiktok-btn">
+                                        <i class="fab fa-tiktok"></i> Watch on TikTok
                                     </a>
-                                    <p style="color:rgba(255,255,255,0.4);font-size:13px;margin-top:12px;">Click to watch the video in the TikTok app</p>
                                 </div>
-                            </div>
-                            <div style="border-top:1px solid #f1f5f9;padding-top:24px;margin-top:24px;display:flex;flex-wrap:wrap;gap:12px;">
-                                <a href="https://wa.me/237${listing.whatsappNumber}" target="_blank" class="btn-whatsapp" style="font-size:18px;padding:14px 32px;">
-                                    <i class="fab fa-whatsapp"></i> Contact Owner
-                                </a>
-                                <button onclick="navigator.clipboard.writeText('237${listing.whatsappNumber}'); showToast('📋 Number copied!');" style="padding:14px 24px;border:2px solid #e2e8f0;border-radius:12px;background:white;cursor:pointer;font-weight:500;color:#64748b;">
-                                    <i class="fas fa-copy"></i> Copy Number
-                                </button>
-                            </div>
-                            <div style="border-top:1px solid #f1f5f9;padding-top:16px;margin-top:16px;display:flex;justify-content:space-between;flex-wrap:wrap;gap:8px;font-size:14px;color:#94a3b8;">
-                                <span><i class="far fa-calendar-alt"></i> Listed on ${new Date(listing.createdAt).toLocaleDateString('en-CM', { year: 'numeric', month: 'long', day: 'numeric' })}</span>
-                                <span><i class="fas fa-eye"></i> ${listing.views || 0} views</span>
+                            ` : ''}
+                            <div style="border-top:1px solid #f1f5f9;padding-top:24px;margin-top:24px;display:flex;gap:12px;flex-wrap:wrap;">
+                                <a href="https://wa.me/${l.whatsappNumber}" target="_blank" class="btn-whatsapp" style="font-size:16px;padding:12px 24px;">Contact Owner</a>
                             </div>
                         </div>
                     </div>
                 `;
-            } catch(e) { container.innerHTML = `<div class="empty-state"><i class="fas fa-exclamation-triangle" style="color:#ef4444;"></i><h2>Error loading</h2></div>`; }
+            } catch(e) {
+                container.innerHTML = `<div class="empty-state"><i class="fas fa-exclamation-triangle" style="color:#ef4444;"></i><h2>Error loading</h2></div>`;
+            }
         }
         
-        function handleSearch() {
-            const keyword = document.getElementById('search-input').value.trim();
-            if (keyword) loadListings('listings-container', keyword);
-            else loadListings('listings-container');
-        }
-        
-        function clearSearch() {
-            document.getElementById('search-input').value = '';
-            loadListings('listings-container');
-        }
+        // ============ SUBMIT FUNCTIONS ============
         
         async function submitListing(e) {
             e.preventDefault();
@@ -852,14 +682,8 @@
             const messageDiv = document.getElementById('form-message');
             submitBtn.style.display = 'none';
             loadingBtn.style.display = 'inline';
-            messageDiv.style.display = 'none';
             
-            let whatsapp = document.getElementById('whatsapp').value.trim();
-            whatsapp = whatsapp.replace(/\D/g, '');
-            const imageUrl = document.getElementById('image-url').value.trim();
-            const videoUrl = document.getElementById('video-url').value.trim();
-            
-            // THIS IS THE KEY - Collect badges
+            // Get badges
             const badgeCheckboxes = document.querySelectorAll('.badge-checkbox:checked');
             const badges = Array.from(badgeCheckboxes).map(cb => cb.value);
             
@@ -869,67 +693,55 @@
                 price: parseFloat(document.getElementById('price').value),
                 location: document.getElementById('location').value,
                 houseType: document.getElementById('houseType').value,
-                whatsappNumber: whatsapp,
+                whatsappNumber: document.getElementById('whatsapp').value.replace(/\D/g, ''),
+                videoUrl: document.getElementById('video').value || 'https://example.com/video.mp4',
+                images: ['https://example.com/image.jpg'],
                 isAvailable: document.getElementById('available').checked,
                 featured: document.getElementById('featured').checked,
-                images: imageUrl ? [imageUrl] : ['https://example.com/image.jpg'],
-                videoUrl: videoUrl || 'https://example.com/video.mp4',
                 badges: badges
             };
             
             try {
-                const response = await fetch(`${API_URL}/listings`, {
+                const res = await fetch(`${API_URL}/listings`, {
                     method: 'POST',
                     headers: { 'Content-Type': 'application/json' },
                     body: JSON.stringify(data)
                 });
-                
-                if (response.ok) {
+                if (res.ok) {
                     messageDiv.style.display = 'block';
                     messageDiv.style.background = '#dcfce7';
                     messageDiv.style.color = '#166534';
-                    messageDiv.innerHTML = '✅ Listing published successfully! Redirecting...';
-                    showToast('✅ Listing published successfully!');
+                    messageDiv.textContent = '✅ Listing published! Redirecting...';
+                    showToast('✅ Listing published!');
                     setTimeout(() => navigate('/'), 1500);
                 } else {
-                    const error = await response.json();
+                    const err = await res.json();
                     messageDiv.style.display = 'block';
                     messageDiv.style.background = '#fee2e2';
                     messageDiv.style.color = '#991b1b';
-                    messageDiv.innerHTML = '❌ ' + (error.message || 'Error publishing');
+                    messageDiv.textContent = '❌ ' + (err.message || 'Error');
                 }
             } catch(e) {
                 messageDiv.style.display = 'block';
                 messageDiv.style.background = '#fee2e2';
                 messageDiv.style.color = '#991b1b';
-                messageDiv.innerHTML = '❌ Cannot connect to server.';
+                messageDiv.textContent = '❌ Cannot connect to server';
             }
-            
             submitBtn.style.display = 'inline';
             loadingBtn.style.display = 'none';
         }
         
         async function handleLogin(e) {
             e.preventDefault();
-            const password = document.getElementById('admin-password').value;
-            const submitBtn = document.getElementById('login-text');
-            const loadingBtn = document.getElementById('login-loading');
-            const messageDiv = document.getElementById('login-message');
-            submitBtn.style.display = 'none';
-            loadingBtn.style.display = 'inline';
-            messageDiv.style.display = 'none';
+            const password = document.getElementById('password').value;
             if (password === ADMIN_PASSWORD) {
                 isAdmin = true;
                 sessionStorage.setItem('isAdmin', 'true');
                 showToast('✅ Login successful!');
-                setTimeout(() => navigate('/admin'), 500);
+                navigate('/admin');
             } else {
-                messageDiv.style.display = 'block';
-                messageDiv.style.background = '#fee2e2';
-                messageDiv.style.color = '#991b1b';
-                messageDiv.innerHTML = '❌ Incorrect password';
-                submitBtn.style.display = 'inline';
-                loadingBtn.style.display = 'none';
+                document.getElementById('login-message').style.display = 'block';
+                document.getElementById('login-message').textContent = '❌ Incorrect password';
             }
         }
         
@@ -940,46 +752,70 @@
             navigate('/');
         }
         
+        function searchListings() {
+            const keyword = document.getElementById('search-input').value.trim();
+            if (keyword) loadListings(keyword);
+        }
+        
+        function clearSearch() {
+            document.getElementById('search-input').value = '';
+            loadListings();
+        }
+        
+        async function deleteListing(id) {
+            if (!confirm('Delete this listing?')) return;
+            try {
+                await fetch(`${API_URL}/listings/${id}`, { method: 'DELETE' });
+                showToast('✅ Listing deleted');
+                loadAdminListings();
+                loadListings();
+            } catch(e) {
+                showToast('❌ Error deleting');
+            }
+        }
+        
+        // ============ RENDER APP ============
+        
         function renderApp() {
             const path = window.location.pathname;
             let content = '';
+            
             if (path === '/' || path === '') {
                 content = renderHome();
                 document.getElementById('app').innerHTML = renderNavbar() + content;
-                setTimeout(() => loadListings('listings-container'), 100);
+                loadListings();
             } else if (path === '/about') {
                 content = renderAbout();
                 document.getElementById('app').innerHTML = renderNavbar() + content;
-            } else if (path === '/alwydivielage') {
+            } else if (path === '/login') {
                 content = renderLogin();
                 document.getElementById('app').innerHTML = renderNavbar() + content;
             } else if (path === '/admin') {
-                if (!isAdmin) { navigate('/alwydivielage'); return; }
+                if (!isAdmin) { navigate('/login'); return; }
                 content = renderAdmin();
                 document.getElementById('app').innerHTML = renderNavbar() + content;
-                setTimeout(() => loadAdminListings(), 100);
+                loadAdminListings();
             } else if (path === '/add') {
-                if (!isAdmin) { navigate('/alwydivielage'); return; }
+                if (!isAdmin) { navigate('/login'); return; }
                 content = renderAdd();
                 document.getElementById('app').innerHTML = renderNavbar() + content;
-            } else if (path.startsWith('/edit/')) {
-                if (!isAdmin) { navigate('/alwydivielage'); return; }
-                const id = path.split('/')[2];
-                content = renderEdit(id);
-                document.getElementById('app').innerHTML = renderNavbar() + content;
-                setTimeout(() => loadEditForm(id), 100);
             } else if (path.startsWith('/listing/')) {
-                content = renderListingDetail();
+                content = renderDetail();
                 document.getElementById('app').innerHTML = renderNavbar() + content;
-                setTimeout(() => loadListingDetail(), 100);
+                loadListingDetail(path.split('/')[2]);
             } else {
                 content = renderHome();
                 document.getElementById('app').innerHTML = renderNavbar() + content;
-                setTimeout(() => loadListings('listings-container'), 100);
+                loadListings();
             }
         }
         
         window.addEventListener('popstate', renderApp);
+        
+        if (sessionStorage.getItem('isAdmin') === 'true') {
+            isAdmin = true;
+        }
+        
         renderApp();
     </script>
 </body>

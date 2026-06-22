@@ -1,0 +1,19 @@
+                            <!-- Badges Section -->
+                            <div style="margin-bottom: 18px;">
+                                <label style="display: block; font-weight: 600; margin-bottom: 8px; color: #0f172a; font-size: 14px;">Property Badges</label>
+                                <div style="display: flex; flex-wrap: wrap; gap: 10px;">
+                                    <label style="display: flex; align-items: center; gap: 6px; background: #f0fdf4; padding: 8px 14px; border-radius: 8px; cursor: pointer; border: 2px solid #dcfce7; transition: all 0.2s;">
+                                        <input type="checkbox" value="verified" class="badge-checkbox" style="width: 18px; height: 18px; accent-color: #22c55e;">
+                                        <span style="font-size: 13px; font-weight: 500;">✅ Verified by HomeVN</span>
+                                    </label>
+                                    <label style="display: flex; align-items: center; gap: 6px; background: #eff6ff; padding: 8px 14px; border-radius: 8px; cursor: pointer; border: 2px solid #dbeafe; transition: all 0.2s;">
+                                        <input type="checkbox" value="owner" class="badge-checkbox" style="width: 18px; height: 18px; accent-color: #3b82f6;">
+                                        <span style="font-size: 13px; font-weight: 500;">🏠 Owner Listed</span>
+                                    </label>
+                                    <label style="display: flex; align-items: center; gap: 6px; background: #fef3c7; padding: 8px 14px; border-radius: 8px; cursor: pointer; border: 2px solid #fde68a; transition: all 0.2s;">
+                                        <input type="checkbox" value="agent" class="badge-checkbox" style="width: 18px; height: 18px; accent-color: #f59e0b;">
+                                        <span style="font-size: 13px; font-weight: 500;">👔 Agent Listed</span>
+                                    </label>
+                                </div>
+                                <span style="font-size: 12px; color: #94a3b8; margin-top: 4px; display: block;">Select the badges that apply to this property</span>
+                            </div>
