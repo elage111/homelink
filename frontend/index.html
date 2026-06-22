@@ -447,20 +447,17 @@
                             <a href="/about" class="nav-link ${isActive('/about')}" onclick="event.preventDefault(); navigate('/about')">
                                 <i class="fas fa-info-circle"></i> About
                             </a>
-                            ${isAdmin ? `
-                                <a href="/admin" class="nav-link ${isActive('/admin')}" onclick="event.preventDefault(); navigate('/admin')">
-                                    <i class="fas fa-cog"></i> Dashboard
-                                </a>
-                                <a href="/add" class="nav-link-add" onclick="event.preventDefault(); navigate('/add')">
-                                    <i class="fas fa-plus-circle"></i> Add Listing
-                                </a>
-                                <button onclick="logout()" class="btn-admin" style="background: #ef4444; padding: 8px 16px; border-radius: 8px; border: none; color: white; cursor: pointer; font-weight: 500;">
-                                    <i class="fas fa-sign-out-alt"></i> Logout
-                                </button>
-                            ` : `
-                                    <i class="fas fa-lock"></i> Admin
-                                </a>
-                            `}
+                ${isAdmin ? `
+                    <a href="/admin" class="nav-link ${isActive('/admin')}" onclick="event.preventDefault(); navigate('/admin')">
+                        <i class="fas fa-cog"></i> Dashboard
+                    </a>
+                    <a href="/add" class="nav-link-add" onclick="event.preventDefault(); navigate('/add')">
+                        <i class="fas fa-plus-circle"></i> Add Listing
+                    </a>
+                    <button onclick="logout()" class="btn-admin" style="background: #ef4444; padding: 8px 16px; border-radius: 8px; border: none; color: white; cursor: pointer; font-weight: 500;">
+                        <i class="fas fa-sign-out-alt"></i> Logout
+                    </button>
+                ` : }
                         </div>
                     </div>
                 </nav>
