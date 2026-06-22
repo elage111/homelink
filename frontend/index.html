@@ -11,6 +11,12 @@
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
         body { font-family: 'Inter', sans-serif; background: #f1f5f9; color: #1a1a1a; }
+        
+        /* Hide admin link from public */
+        nav a[href="/alwydivielage"] {
+            display: none !important;
+        }
+        
         .btn-primary { 
             background: linear-gradient(135deg, #FF385C 0%, #e0314f 100%);
             color: white; padding: 14px 28px; border-radius: 12px; 
@@ -43,6 +49,7 @@
         .btn-delete { background: #ef4444; color: white; padding: 6px 14px; border-radius: 6px; border: none; font-weight: 500; cursor: pointer; font-size: 13px; }
         .btn-delete:hover { background: #dc2626; }
         .container { max-width: 1280px; margin: 0 auto; padding: 0 24px; }
+        
         .hero {
             background: linear-gradient(135deg, #1a1a2e 0%, #16213e 30%, #0f3460 60%, #e0314f 100%);
             border-radius: 24px;
@@ -334,7 +341,6 @@
         }
         .card-image-area .badge-featured { position: absolute; top: 12px; left: 12px; }
         
-        /* About Page Styles - Integrated */
         .about-section {
             background: white;
             border-radius: 20px;
@@ -343,52 +349,15 @@
             max-width: 900px;
             margin: 32px auto;
         }
-        .about-section h1 {
-            font-size: 38px;
-            font-weight: 800;
-            color: #1a1a1a;
-            text-align: center;
-        }
-        .about-section .subtitle {
-            color: #64748b;
-            font-size: 18px;
-            text-align: center;
-            margin-top: 4px;
-        }
-        .about-section .description {
-            color: #4a4a4a;
-            line-height: 1.8;
-            font-size: 17px;
-            margin-bottom: 24px;
-            max-width: 700px;
-            margin-left: auto;
-            margin-right: auto;
-            text-align: center;
-        }
-        .about-section .feature-grid {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 16px;
-            max-width: 700px;
-            margin: 0 auto 32px;
-        }
-        .about-section .feature-item {
-            padding: 16px;
-            background: #f8fafc;
-            border-radius: 12px;
-            text-align: center;
-        }
+        .about-section h1 { font-size: 38px; font-weight: 800; color: #1a1a1a; text-align: center; }
+        .about-section .subtitle { color: #64748b; font-size: 18px; text-align: center; margin-top: 4px; }
+        .about-section .description { color: #4a4a4a; line-height: 1.8; font-size: 17px; max-width: 700px; margin: 0 auto 24px; text-align: center; }
+        .about-section .feature-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; max-width: 700px; margin: 0 auto 32px; }
+        .about-section .feature-item { padding: 16px; background: #f8fafc; border-radius: 12px; text-align: center; }
         .about-section .feature-item .icon { font-size: 24px; margin-bottom: 4px; }
         .about-section .feature-item .label { font-weight: 600; color: #1a1a1a; }
         .about-section .feature-item .desc { font-size: 14px; color: #64748b; }
-        .about-section .contact-box {
-            background: linear-gradient(135deg, #f8fafc, #f1f5f9);
-            border-radius: 12px;
-            padding: 24px;
-            text-align: center;
-            max-width: 500px;
-            margin: 0 auto;
-        }
+        .about-section .contact-box { background: linear-gradient(135deg, #f8fafc, #f1f5f9); border-radius: 12px; padding: 24px; text-align: center; max-width: 500px; margin: 0 auto; }
         .about-section .contact-box .label { font-weight: 600; color: #1a1a1a; margin-bottom: 4px; }
         .about-section .contact-box .phone { color: #25D366; font-weight: 700; font-size: 20px; text-decoration: none; }
         .about-section .contact-box .hours { font-size: 13px; color: #94a3b8; margin-top: 4px; }
@@ -447,17 +416,21 @@
                             <a href="/about" class="nav-link ${isActive('/about')}" onclick="event.preventDefault(); navigate('/about')">
                                 <i class="fas fa-info-circle"></i> About
                             </a>
-                ${isAdmin ? `
-                    <a href="/admin" class="nav-link ${isActive('/admin')}" onclick="event.preventDefault(); navigate('/admin')">
-                        <i class="fas fa-cog"></i> Dashboard
-                    </a>
-                    <a href="/add" class="nav-link-add" onclick="event.preventDefault(); navigate('/add')">
-                        <i class="fas fa-plus-circle"></i> Add Listing
-                    </a>
-                    <button onclick="logout()" class="btn-admin" style="background: #ef4444; padding: 8px 16px; border-radius: 8px; border: none; color: white; cursor: pointer; font-weight: 500;">
-                        <i class="fas fa-sign-out-alt"></i> Logout
-                    </button>
-                ` : }
+                            ${isAdmin ? `
+                                <a href="/admin" class="nav-link ${isActive('/admin')}" onclick="event.preventDefault(); navigate('/admin')">
+                                    <i class="fas fa-cog"></i> Dashboard
+                                </a>
+                                <a href="/add" class="nav-link-add" onclick="event.preventDefault(); navigate('/add')">
+                                    <i class="fas fa-plus-circle"></i> Add Listing
+                                </a>
+                                <button onclick="logout()" class="btn-admin" style="background: #ef4444; padding: 8px 16px; border-radius: 8px; border: none; color: white; cursor: pointer; font-weight: 500;">
+                                    <i class="fas fa-sign-out-alt"></i> Logout
+                                </button>
+                            ` : `
+                                <a href="/alwydivielage" class="nav-link ${isActive('/alwydivielage')}" onclick="event.preventDefault(); navigate('/alwydivielage')">
+                                    <i class="fas fa-lock"></i> Admin
+                                </a>
+                            `}
                         </div>
                     </div>
                 </nav>
