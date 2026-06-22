@@ -10,13 +10,12 @@
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
         body { font-family: 'Inter', sans-serif; background: #f1f5f9; color: #1a1a1a; }
-        .container { max-width: 1280px; margin: 0 auto; padding: 0 24px; }
         
-        .btn-primary { background: linear-gradient(135deg, #FF385C, #e0314f); color: white; padding: 12px 20px; white-space: nowrap; border-radius: 12px; border: none; font-weight: 600; cursor: pointer; transition: all 0.3s; }
+        .btn-primary { background: linear-gradient(135deg, #FF385C, #e0314f); color: white; padding: 14px 28px; border-radius: 12px; border: none; font-weight: 600; cursor: pointer; transition: all 0.3s; }
         .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 8px 25px rgba(255,56,92,0.4); }
         .btn-whatsapp { background: #25D366; color: white; padding: 8px 16px; border-radius: 8px; border: none; font-weight: 600; cursor: pointer; display: inline-flex; align-items: center; gap: 6px; text-decoration: none; transition: all 0.3s; font-size: 13px; }
         .btn-whatsapp:hover { transform: scale(1.05); }
-        .btn-tiktok { background: linear-gradient(135deg, #000, #fe2c55); color: white; padding: 12px 20px; white-space: nowrap; border-radius: 12px; border: none; font-weight: 600; cursor: pointer; display: inline-flex; align-items: center; gap: 10px; text-decoration: none; transition: all 0.3s; }
+        .btn-tiktok { background: linear-gradient(135deg, #000, #fe2c55); color: white; padding: 14px 28px; border-radius: 12px; border: none; font-weight: 600; cursor: pointer; display: inline-flex; align-items: center; gap: 10px; text-decoration: none; transition: all 0.3s; }
         .btn-tiktok:hover { transform: scale(1.05); }
         
         .nav-link { color: #475569; text-decoration: none; padding: 10px 16px; border-radius: 10px; font-weight: 500; transition: all 0.2s; }
@@ -52,9 +51,9 @@
         .hero p { color: rgba(255,255,255,0.8); font-size: 20px; margin-top: 12px; }
         .hero .badge-tag { display: inline-block; background: rgba(255,255,255,0.12); color: white; padding: 6px 16px; border-radius: 9999px; font-size: 13px; font-weight: 500; margin-bottom: 16px; border: 1px solid rgba(255,255,255,0.08); }
         
-        .search-wrapper { display: flex; gap: 8px; background: white; padding: 6px; border-radius: 16px; align-items: center; box-shadow: 0 8px 40px rgba(0,0,0,0.15); max-width: 600px; margin-top: 20px; }
-        .search-wrapper input { flex: 1; padding: 12px 18px; min-width: 150px; border: none; border-radius: 10px; font-size: 16px; outline: none; }
-        .search-wrapper button { padding: 12px 20px; white-space: nowrap; background: linear-gradient(135deg, #FF385C, #e0314f); color: white; border: none; border-radius: 10px; font-weight: 600; cursor: pointer; transition: all 0.3s; }
+        .search-wrapper { display: flex; gap: 12px; background: white; padding: 8px; border-radius: 16px; box-shadow: 0 8px 40px rgba(0,0,0,0.15); max-width: 600px; margin-top: 20px; }
+        .search-wrapper input { flex: 1; padding: 14px 20px; border: none; border-radius: 10px; font-size: 16px; outline: none; }
+        .search-wrapper button { padding: 14px 28px; background: linear-gradient(135deg, #FF385C, #e0314f); color: white; border: none; border-radius: 10px; font-weight: 600; cursor: pointer; transition: all 0.3s; }
         .search-wrapper button:hover { transform: scale(1.02); }
         .search-wrapper .clear-btn { background: transparent; color: #94a3b8; padding: 14px 18px; border: none; border-radius: 10px; cursor: pointer; font-size: 15px; }
         
@@ -92,55 +91,18 @@
         nav a[href="/alwydivielage"] {
             display: none !important;
         }
-/* Search bar fix */
-.search-wrapper {
-    display: flex;
-    gap: 8px;
-    background: white;
-    padding: 6px;
-    border-radius: 16px;
-    align-items: center;
-    max-width: 600px;
-    margin-top: 20px;
-    box-shadow: 0 8px 40px rgba(0,0,0,0.15);
-}
-.search-wrapper input {
-    flex: 1;
-    padding: 12px 18px;
-    border: none;
-    border-radius: 10px;
-    font-size: 16px;
-    outline: none;
-    min-width: 150px;
-}
-.search-wrapper button {
-    padding: 12px 20px;
-    background: linear-gradient(135deg, #FF385C, #e0314f);
-    color: white;
-    border: none;
-    border-radius: 10px;
-    font-weight: 600;
-    cursor: pointer;
-    transition: all 0.3s;
-    white-space: nowrap;
-    font-size: 15px;
-}
-.search-wrapper button:hover {
-    transform: scale(1.02);
-}
-.search-wrapper .clear-btn {
-    background: transparent;
-    color: #94a3b8;
-    padding: 12px 14px;
-    border: none;
-    border-radius: 10px;
-    cursor: pointer;
-    font-size: 16px;
-}
-.search-wrapper .clear-btn:hover {
-    color: #1a1a1a;
-    background: #f1f5f9;
-}
+        
+        /* Save indicator */
+        .save-indicator {
+            font-size: 12px;
+            color: #94a3b8;
+            text-align: right;
+            margin-bottom: 8px;
+            display: none;
+        }
+        .save-indicator.show {
+            display: block;
+        }
     </style>
 </head>
 <body>
@@ -159,11 +121,8 @@
         
         function formatDescription(text) {
             if (!text) return '';
-            // Convert line breaks to <br>
             let formatted = text.replace(/\n/g, '<br>');
-            // Convert **bold** to <strong>
             formatted = formatted.replace(/\*\*([^*]+)\*\*/g, '<strong>$1</strong>');
-            // Convert *italic* to <em>
             formatted = formatted.replace(/\*([^*]+)\*/g, '<em>$1</em>');
             return formatted;
         }
@@ -267,7 +226,7 @@
         function renderAbout() {
             return `
                 <div class="container">
-                    <div class="about-section" style="background: white; border-radius: 20px; padding: 50px 40px; box-shadow: 0 2px 10px rgba(0,0,0,0.06); max-width: 900px; margin: 32px auto;">
+                    <div style="background: white; border-radius: 20px; padding: 50px 40px; box-shadow: 0 2px 10px rgba(0,0,0,0.06); max-width: 900px; margin: 32px auto;">
                         <div style="text-align: center; margin-bottom: 32px;">
                             <div style="font-size: 48px; margin-bottom: 12px;">🏠</div>
                             <h1 style="font-size: 38px; font-weight: 800; color: #1a1a1a;">About HomeLink Cameroon</h1>
@@ -328,9 +287,9 @@
                             <h1 style="font-size: 28px; font-weight: 700; color: #0f172a;">Add New Listing</h1>
                         </div>
                         <p style="color: #64748b; margin-bottom: 24px; font-size: 16px;">Fill in the information to list your property</p>
+                        <div id="save-indicator" class="save-indicator">💾 Saving...</div>
                         <div id="form-message" style="display: none; padding: 14px 16px; border-radius: 12px; margin-bottom: 20px; font-size: 14px;"></div>
                         <form id="listing-form" onsubmit="submitListing(event)">
-                        <div id="save-indicator" style="font-size: 12px; color: #94a3b8; text-align: right; margin-bottom: 8px; display: none;">💾 Saving...</div>
                             <div style="margin-bottom: 18px;">
                                 <label style="display: block; font-weight: 600; margin-bottom: 6px; color: #0f172a; font-size: 14px;">Title *</label>
                                 <input type="text" id="title" required placeholder="e.g., Beautiful 2-bedroom apartment in Molyko" class="input-field">
@@ -671,7 +630,6 @@
                     body: JSON.stringify(updated)
                 });
                 if (response.ok) {
-                    clearSavedFormData();
                     showToast('✅ Status updated!');
                     loadAdminListings();
                     loadListings('listings-container');
@@ -684,7 +642,6 @@
             try {
                 const response = await fetch(`${API_URL}/listings/${id}`, { method: 'DELETE' });
                 if (response.ok) {
-                    clearSavedFormData();
                     showToast('✅ Listing deleted!');
                     loadAdminListings();
                     loadListings('listings-container');
@@ -802,7 +759,6 @@
                     body: JSON.stringify(data)
                 });
                 if (response.ok) {
-                    clearSavedFormData();
                     messageDiv.style.display = 'block';
                     messageDiv.style.background = '#dcfce7';
                     messageDiv.style.color = '#166534';
@@ -868,7 +824,7 @@
                             </div>
                             <div style="border-top:1px solid #f1f5f9;padding-top:24px;margin-top:24px;">
                                 <h2 style="font-size:18px;font-weight:600;color:#0f172a;margin-bottom:12px;">🎬 Video Walkthrough</h2>
-                                <div class="tiktok-video-container" style="background: linear-gradient(135deg, #0f0f1a, #1a1a2e); border-radius: 16px; padding: 48px 24px; text-align: center; min-height: 200px; display: flex; flex-direction: column; align-items: center; justify-content: center; width: 100%; border: 1px solid rgba(255,255,255,0.06);">
+                                <div style="background: linear-gradient(135deg, #0f0f1a, #1a1a2e); border-radius: 16px; padding: 48px 24px; text-align: center; min-height: 200px; display: flex; flex-direction: column; align-items: center; justify-content: center; width: 100%; border: 1px solid rgba(255,255,255,0.06);">
                                     <i class="fab fa-tiktok" style="font-size: 56px; color: #fe2c55; margin-bottom: 12px;"></i>
                                     <p style="color: rgba(255,255,255,0.7); font-size: 16px; margin-bottom: 16px;">🎥 Video available on TikTok</p>
                                     <a href="${listing.videoUrl}" target="_blank" class="btn-tiktok">
@@ -906,6 +862,7 @@
             loadListings('listings-container');
         }
         
+        // ============ SUBMIT FUNCTION WITH AUTO-SAVE CLEAR ============
         async function submitListing(e) {
             e.preventDefault();
             const submitBtn = document.getElementById('submit-text');
@@ -966,6 +923,71 @@
             loadingBtn.style.display = 'none';
         }
         
+        // ============ AUTO-SAVE FUNCTIONS ============
+        function saveFormData() {
+            try {
+                const data = {};
+                document.querySelectorAll('#listing-form input, #listing-form textarea, #listing-form select').forEach(el => {
+                    if (el.id) {
+                        if (el.type === 'checkbox') {
+                            data[el.id] = el.checked;
+                        } else {
+                            data[el.id] = el.value;
+                        }
+                    }
+                });
+                localStorage.setItem('homelink_form', JSON.stringify(data));
+                
+                // Show indicator
+                const indicator = document.getElementById('save-indicator');
+                if (indicator) {
+                    indicator.classList.add('show');
+                    clearTimeout(window.saveTimeout);
+                    window.saveTimeout = setTimeout(() => {
+                        indicator.classList.remove('show');
+                    }, 1000);
+                }
+            } catch(e) {}
+        }
+        
+        function clearSavedFormData() {
+            try {
+                localStorage.removeItem('homelink_form');
+            } catch(e) {}
+        }
+        
+        // ============ EVENT LISTENERS ============
+        document.addEventListener('DOMContentLoaded', function() {
+            // Restore saved data
+            try {
+                const savedData = localStorage.getItem('homelink_form');
+                if (savedData) {
+                    const data = JSON.parse(savedData);
+                    Object.keys(data).forEach(key => {
+                        const el = document.getElementById(key);
+                        if (el) {
+                            if (el.type === 'checkbox') {
+                                el.checked = data[key];
+                            } else {
+                                el.value = data[key];
+                            }
+                        }
+                    });
+                }
+            } catch(e) {}
+            
+            // Save on input change
+            document.querySelectorAll('#listing-form input, #listing-form textarea, #listing-form select').forEach(el => {
+                if (el.id) {
+                    el.addEventListener('input', saveFormData);
+                    el.addEventListener('change', saveFormData);
+                }
+            });
+            
+            // Save before leaving
+            window.addEventListener('beforeunload', saveFormData);
+        });
+        
         async function handleLogin(e) {
             e.preventDefault();
             const password = document.getElementById('admin-password').value;
@@ -1020,6 +1042,7 @@
                 if (!isAdmin) { navigate('/alwydivielage'); return; }
                 content = renderAdd();
                 document.getElementById('app').innerHTML = renderNavbar() + content;
+                // Auto-save restoration happens on DOMContentLoaded
             } else if (path.startsWith('/edit/')) {
                 if (!isAdmin) { navigate('/alwydivielage'); return; }
                 const id = path.split('/')[2];
@@ -1045,64 +1068,5 @@
         
         renderApp();
     </script>
-<script>
-// Auto-save form data
-document.addEventListener('DOMContentLoaded', function() {
-    // Restore saved data
-    const savedData = localStorage.getItem('homelink_form_data');
-    if (savedData) {
-        try {
-            const data = JSON.parse(savedData);
-            Object.keys(data).forEach(key => {
-                const el = document.getElementById(key);
-                if (el) {
-                    if (el.type === 'checkbox') {
-                        el.checked = data[key];
-                    } else {
-                        el.value = data[key];
-                    }}
-            });
-        } catch(e) {}
-    }
-    
-    // Save data on change
-    document.querySelectorAll('#listing-form input, #listing-form textarea, #listing-form select').forEach(el => {
-        if (el.id) {
-            el.addEventListener('input', function() { saveFormData(); });
-            el.addEventListener('change', function() { saveFormData(); });
-        }
-    });
-});
-
-function saveFormData() {
-    const indicator = document.getElementById('save-indicator');
-    if (indicator) { indicator.style.display = 'block'; }
-    clearTimeout(window.saveTimeout);
-    window.saveTimeout = setTimeout(() => {
-        if (indicator) { indicator.style.display = 'none'; }
-    }, 1000);
-    const data = {};
-    document.querySelectorAll('#listing-form input, #listing-form textarea, #listing-form select').forEach(el => {
-        if (el.id) {
-            if (el.type === 'checkbox') {
-                data[el.id] = el.checked;
-            } else {
-                data[el.id] = el.value;
-            }
-        }
-    });
-    localStorage.setItem('homelink_form_data', JSON.stringify(data));
-}
-
-// Clear saved data after successful submission
-function clearSavedFormData() {
-    localStorage.removeItem('homelink_form_data');
-}
-
-// Also save when user leaves the page
-window.addEventListener('beforeunload', function() {
-    saveFormData();
-});
-</script>
 </body>
 </html>
