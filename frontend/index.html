@@ -362,11 +362,6 @@
         nav a[href="/alwydivielage"] {
             display: none !important;
         }
-/* Badge styles */
-.badge-verified { background: #dcfce7; color: #166534; padding: 2px 10px; border-radius: 9999px; font-size: 10px; font-weight: 600; display: inline-block; }
-.badge-owner { background: #dbeafe; color: #1e40af; padding: 2px 10px; border-radius: 9999px; font-size: 10px; font-weight: 600; display: inline-block; }
-.badge-agent { background: #fef3c7; color: #92400e; padding: 2px 10px; border-radius: 9999px; font-size: 10px; font-weight: 600; display: inline-block; }
-.badge-container { display: flex; flex-wrap: wrap; gap: 4px; margin-bottom: 8px; }
     </style>
 </head>
 <body>
@@ -607,25 +602,6 @@
                                     <label style="font-weight: 500; color: #0f172a;">⭐ Featured</label>
                                 </div>
                             </div>
-                            <!-- Badges Section -->
-                            <div style="margin-bottom: 18px;">
-                                <label style="display: block; font-weight: 600; margin-bottom: 8px; color: #0f172a; font-size: 14px;">Property Badges</label>
-                                <div style="display: flex; flex-wrap: wrap; gap: 10px;">
-                                    <label style="display: flex; align-items: center; gap: 6px; background: #f0fdf4; padding: 8px 14px; border-radius: 8px; cursor: pointer; border: 2px solid #dcfce7;">
-                                        <input type="checkbox" value="verified" class="badge-checkbox" style="width: 18px; height: 18px; accent-color: #22c55e;">
-                                        <span style="font-size: 13px; font-weight: 500;">✅ Verified by HomeVN</span>
-                                    </label>
-                                    <label style="display: flex; align-items: center; gap: 6px; background: #eff6ff; padding: 8px 14px; border-radius: 8px; cursor: pointer; border: 2px solid #dbeafe;">
-                                        <input type="checkbox" value="owner" class="badge-checkbox" style="width: 18px; height: 18px; accent-color: #3b82f6;">
-                                        <span style="font-size: 13px; font-weight: 500;">🏠 Owner Listed</span>
-                                    </label>
-                                    <label style="display: flex; align-items: center; gap: 6px; background: #fef3c7; padding: 8px 14px; border-radius: 8px; cursor: pointer; border: 2px solid #fde68a;">
-                                        <input type="checkbox" value="agent" class="badge-checkbox" style="width: 18px; height: 18px; accent-color: #f59e0b;">
-                                        <span style="font-size: 13px; font-weight: 500;">👔 Agent Listed</span>
-                                    </label>
-                                </div>
-                                <span style="font-size: 12px; color: #94a3b8; margin-top: 4px; display: block;">Select the badges that apply to this property</span>
-                            </div>
                             <button type="submit" class="btn-primary" style="width: 100%; padding: 16px; font-size: 18px;">
                                 <span id="submit-text"><i class="fas fa-plus"></i> Publish Listing</span>
                                 <span id="submit-loading" style="display: none;"><i class="fas fa-spinner fa-spin"></i> Publishing...</span>
@@ -696,25 +672,6 @@
                             <div style="margin-bottom: 16px;">
                                 <label style="display: block; font-weight: 600; margin-bottom: 6px; color: #0f172a; font-size: 14px;">Password</label>
                                 <input type="password" id="admin-password" required placeholder="Enter password" class="input-field">
-                            </div>
-                            <!-- Badges Section -->
-                            <div style="margin-bottom: 18px;">
-                                <label style="display: block; font-weight: 600; margin-bottom: 8px; color: #0f172a; font-size: 14px;">Property Badges</label>
-                                <div style="display: flex; flex-wrap: wrap; gap: 10px;">
-                                    <label style="display: flex; align-items: center; gap: 6px; background: #f0fdf4; padding: 8px 14px; border-radius: 8px; cursor: pointer; border: 2px solid #dcfce7;">
-                                        <input type="checkbox" value="verified" class="badge-checkbox" style="width: 18px; height: 18px; accent-color: #22c55e;">
-                                        <span style="font-size: 13px; font-weight: 500;">✅ Verified by HomeVN</span>
-                                    </label>
-                                    <label style="display: flex; align-items: center; gap: 6px; background: #eff6ff; padding: 8px 14px; border-radius: 8px; cursor: pointer; border: 2px solid #dbeafe;">
-                                        <input type="checkbox" value="owner" class="badge-checkbox" style="width: 18px; height: 18px; accent-color: #3b82f6;">
-                                        <span style="font-size: 13px; font-weight: 500;">🏠 Owner Listed</span>
-                                    </label>
-                                    <label style="display: flex; align-items: center; gap: 6px; background: #fef3c7; padding: 8px 14px; border-radius: 8px; cursor: pointer; border: 2px solid #fde68a;">
-                                        <input type="checkbox" value="agent" class="badge-checkbox" style="width: 18px; height: 18px; accent-color: #f59e0b;">
-                                        <span style="font-size: 13px; font-weight: 500;">👔 Agent Listed</span>
-                                    </label>
-                                </div>
-                                <span style="font-size: 12px; color: #94a3b8; margin-top: 4px; display: block;">Select the badges that apply to this property</span>
                             </div>
                             <button type="submit" class="btn-primary" style="width: 100%; padding: 16px; font-size: 18px;">
                                 <span id="login-text"><i class="fas fa-sign-in-alt"></i> Login</span>
@@ -818,11 +775,6 @@
                                     </div>
                                 </div>
                                 <div class="card-body">
-                                    <div class="badge-container">
-                                        ${listing.badges && listing.badges.includes('verified') ? '<span class="badge-verified">✅ Verified</span>' : ''}
-                                        ${listing.badges && listing.badges.includes('owner') ? '<span class="badge-owner">🏠 Owner</span>' : ''}
-                                        ${listing.badges && listing.badges.includes('agent') ? '<span class="badge-agent">👔 Agent</span>' : ''}
-                                    </div>
                                     <h3>${listing.title}</h3>
                                     <div class="location">
                                         <i class="fas fa-map-marker-alt"></i>
@@ -1038,25 +990,6 @@
                                 </div>
                             </div>
                             <div style="display: flex; gap: 12px;">
-                            <!-- Badges Section -->
-                            <div style="margin-bottom: 18px;">
-                                <label style="display: block; font-weight: 600; margin-bottom: 8px; color: #0f172a; font-size: 14px;">Property Badges</label>
-                                <div style="display: flex; flex-wrap: wrap; gap: 10px;">
-                                    <label style="display: flex; align-items: center; gap: 6px; background: #f0fdf4; padding: 8px 14px; border-radius: 8px; cursor: pointer; border: 2px solid #dcfce7;">
-                                        <input type="checkbox" value="verified" class="badge-checkbox" style="width: 18px; height: 18px; accent-color: #22c55e;">
-                                        <span style="font-size: 13px; font-weight: 500;">✅ Verified by HomeVN</span>
-                                    </label>
-                                    <label style="display: flex; align-items: center; gap: 6px; background: #eff6ff; padding: 8px 14px; border-radius: 8px; cursor: pointer; border: 2px solid #dbeafe;">
-                                        <input type="checkbox" value="owner" class="badge-checkbox" style="width: 18px; height: 18px; accent-color: #3b82f6;">
-                                        <span style="font-size: 13px; font-weight: 500;">🏠 Owner Listed</span>
-                                    </label>
-                                    <label style="display: flex; align-items: center; gap: 6px; background: #fef3c7; padding: 8px 14px; border-radius: 8px; cursor: pointer; border: 2px solid #fde68a;">
-                                        <input type="checkbox" value="agent" class="badge-checkbox" style="width: 18px; height: 18px; accent-color: #f59e0b;">
-                                        <span style="font-size: 13px; font-weight: 500;">👔 Agent Listed</span>
-                                    </label>
-                                </div>
-                                <span style="font-size: 12px; color: #94a3b8; margin-top: 4px; display: block;">Select the badges that apply to this property</span>
-                            </div>
                                 <button type="submit" class="btn-primary" style="flex: 1; padding: 16px; font-size: 18px;">
                                     <span id="edit-submit-text"><i class="fas fa-save"></i> Update</span>
                                     <span id="edit-submit-loading" style="display: none;"><i class="fas fa-spinner fa-spin"></i> Updating...</span>
@@ -1080,7 +1013,6 @@
             messageDiv.style.display = 'none';
             const imageUrl = document.getElementById('edit-image').value.trim();
             const data = {
-                badges: badges,
                 title: document.getElementById('edit-title').value,
                 description: document.getElementById('edit-description').value,
                 price: parseFloat(document.getElementById('edit-price').value),
@@ -1146,11 +1078,6 @@
                             </div>
                         </div>
                         <div class="detail-content">
-                                    <div class="badge-container">
-                                        ${listing.badges && listing.badges.includes('verified') ? '<span class="badge-verified">✅ Verified by HomeVN</span>' : ''}
-                                        ${listing.badges && listing.badges.includes('owner') ? '<span class="badge-owner">🏠 Owner Listed</span>' : ''}
-                                        ${listing.badges && listing.badges.includes('agent') ? '<span class="badge-agent">👔 Agent Listed</span>' : ''}
-                                    </div>
                             <div style="display:flex;justify-content:space-between;align-items:flex-start;flex-wrap:wrap;gap:16px;margin-bottom:16px;">
                                 <div>
                                     <h1 class="detail-title">${listing.title}</h1>
@@ -1207,74 +1134,29 @@
             loadListings('listings-container');
         }
         
-async function submitListing(e) {
-    e.preventDefault();
-    const submitBtn = document.getElementById('submit-text');
-    const loadingBtn = document.getElementById('submit-loading');
-    const messageDiv = document.getElementById('form-message');
-    
-    submitBtn.style.display = 'none';
-    loadingBtn.style.display = 'inline';
-    messageDiv.style.display = 'none';
-    
-    let whatsapp = document.getElementById('whatsapp').value.trim();
-    whatsapp = whatsapp.replace(/D/g, '');
-    
-    const imageUrl = document.getElementById('image-url').value.trim();
-    const videoUrl = document.getElementById('video-url').value.trim();
-    
-    // COLLECT BADGES - THIS IS THE FIX
-    const badgeCheckboxes = document.querySelectorAll('.badge-checkbox:checked');
-    const badges = Array.from(badgeCheckboxes).map(cb => cb.value);
-    console.log('Badges selected:', badges);
-    
-    const data = {
-        title: document.getElementById('title').value,
-        description: document.getElementById('description').value,
-        price: parseFloat(document.getElementById('price').value),
-        location: document.getElementById('location').value,
-        houseType: document.getElementById('houseType').value,
-        whatsappNumber: whatsapp,
-        isAvailable: document.getElementById('available').checked,
-        featured: document.getElementById('featured').checked,
-        images: imageUrl ? [imageUrl] : ['https://example.com/image.jpg'],
-        videoUrl: videoUrl || 'https://example.com/video.mp4',
-        badges: badges
-    };
-    
-    console.log('Sending data:', data);
-    
-    try {
-        const response = await fetch(`${API_URL}/listings`, {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify(data)
-        });
-        
-        if (response.ok) {
-            messageDiv.style.display = 'block';
-            messageDiv.style.background = '#dcfce7';
-            messageDiv.style.color = '#166534';
-            messageDiv.innerHTML = '✅ Listing published successfully! Redirecting...';
-            showToast('✅ Listing published successfully!');
-            setTimeout(() => navigate('/'), 1500);
-        } else {
-            const error = await response.json();
-            messageDiv.style.display = 'block';
-            messageDiv.style.background = '#fee2e2';
-            messageDiv.style.color = '#991b1b';
-            messageDiv.innerHTML = '❌ ' + (error.message || 'Error publishing');
-        }
-    } catch(e) {
-        messageDiv.style.display = 'block';
-        messageDiv.style.background = '#fee2e2';
-        messageDiv.style.color = '#991b1b';
-        messageDiv.innerHTML = '❌ Cannot connect to server. Make sure the backend is running.';
-    }
-    
-    submitBtn.style.display = 'inline';
-    loadingBtn.style.display = 'none';
-}
+        async function submitListing(e) {
+            e.preventDefault();
+            const submitBtn = document.getElementById('submit-text');
+            const loadingBtn = document.getElementById('submit-loading');
+            const messageDiv = document.getElementById('form-message');
+            submitBtn.style.display = 'none';
+            loadingBtn.style.display = 'inline';
+            messageDiv.style.display = 'none';
+            let whatsapp = document.getElementById('whatsapp').value.trim().replace(/\D/g, '');
+            const imageUrl = document.getElementById('image-url').value.trim();
+            const videoUrl = document.getElementById('video-url').value.trim();
+            const data = {
+                title: document.getElementById('title').value,
+                description: document.getElementById('description').value,
+                price: parseFloat(document.getElementById('price').value),
+                location: document.getElementById('location').value,
+                houseType: document.getElementById('houseType').value,
+                whatsappNumber: whatsapp,
+                isAvailable: document.getElementById('available').checked,
+                featured: document.getElementById('featured').checked,
+                images: imageUrl ? [imageUrl] : ['https://example.com/image.jpg'],
+                videoUrl: videoUrl || 'https://example.com/video.mp4'
+            };
             try {
                 const response = await fetch(`${API_URL}/listings`, {
                     method: 'POST',
