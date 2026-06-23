@@ -312,10 +312,7 @@
                             <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-bottom: 18px;">
                                 <div>
                                     <label style="display: block; font-weight: 600; margin-bottom: 6px; color: #0f172a; font-size: 14px;">Property Type *</label>
-                                    <select id="houseType" required class="input-field">
-                                        <option value="">Select type</option>
-                                        ${houseTypes.map(t => `<option value="${t}">${t}</option>`).join('')}
-                                    </select>
+                                <input type="text" id="houseType" required placeholder="e.g., Apartment, Studio, Single Room" class="input-field">
                                 </div>
                                 <div>
                                     <label style="display: block; font-weight: 600; margin-bottom: 6px; color: #0f172a; font-size: 14px;">WhatsApp Number *</label>
@@ -690,9 +687,7 @@
                             <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-bottom: 18px;">
                                 <div>
                                     <label style="display: block; font-weight: 600; margin-bottom: 6px; color: #0f172a; font-size: 14px;">Property Type *</label>
-                                    <select id="edit-houseType" required class="input-field">
-                                        ${houseTypes.map(t => `<option value="${t}" ${listing.houseType === t ? 'selected' : ''}>${t}</option>`).join('')}
-                                    </select>
+                                    <input type="text" id="edit-houseType" required placeholder="e.g., Apartment, Studio, Single Room" class="input-field">
                                 </div>
                                 <div>
                                     <label style="display: block; font-weight: 600; margin-bottom: 6px; color: #0f172a; font-size: 14px;">WhatsApp *</label>
