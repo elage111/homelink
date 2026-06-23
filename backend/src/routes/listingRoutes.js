@@ -12,21 +12,13 @@ const validateListing = [
   body('whatsappNumber').notEmpty().withMessage('WhatsApp number is required')
 ];
 
-// Public routes
 router.get('/listings', listingController.getListings);
 router.get('/listings/:id', listingController.getListing);
 router.get('/stats', listingController.getStats);
 
-// Lead tracking (public)
-router.post('/listings/:id/lead', listingController.trackLead);
-
-// Admin routes
 router.post('/admin/login', listingController.adminLogin);
 router.post('/listings', validateListing, listingController.createListing);
 router.put('/listings/:id', listingController.updateListing);
 router.delete('/listings/:id', listingController.deleteListing);
-
-// Lead stats (admin only)
-router.get('/leads/stats', listingController.getLeadStats);
 
 export default router;
