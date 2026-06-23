@@ -90,7 +90,6 @@ export const getStats = async (req, res) => {
   }
 };
 
-// Get lead stats (admin only)
 export const getLeadStats = async (req, res) => {
   try {
     await db.read();
@@ -98,7 +97,6 @@ export const getLeadStats = async (req, res) => {
     const totalLeads = listings.reduce((sum, l) => sum + (l.leads || 0), 0);
     const listingsWithLeads = listings.filter(l => (l.leads || 0) > 0).length;
 
-    // Top listings by leads
     const topListings = [...listings]
       .sort((a, b) => (b.leads || 0) - (a.leads || 0))
       .slice(0, 10)
@@ -111,7 +109,6 @@ export const getLeadStats = async (req, res) => {
         price: l.price || 0
       }));
 
-    // All listings with lead count
     const allListings = listings.map(l => ({
       id: l._id,
       title: l.title || 'Untitled',
@@ -136,4 +133,13 @@ export const getLeadStats = async (req, res) => {
       error: error.message
     });
   }
+};
+
+// Test endpoint
+export const testEndpoint = async (req, res) => {
+  res.json({
+    success: true,
+    message: "API is working!",
+    timestamp: new Date().toISOString()
+  });
 };
