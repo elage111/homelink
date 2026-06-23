@@ -37,9 +37,28 @@
     header h1 {
       font-size: 28px;
       font-weight: 700;
+      cursor: pointer;
+      user-select: none;
+      transition: transform 0.1s ease;
+    }
+    header h1:active {
+      transform: scale(0.95);
     }
     header h1 span {
       color: #f59e0b;
+    }
+    /* Hint for desktop users */
+    header h1::after {
+      content: " (tap 5x for admin)";
+      font-size: 10px;
+      color: rgba(255,255,255,0.3);
+      font-weight: 400;
+      margin-left: 6px;
+    }
+    @media (max-width: 640px) {
+      header h1::after {
+        content: "";
+      }
     }
     .header-actions {
       display: flex;
@@ -100,13 +119,6 @@
     }
     .btn-outline:hover {
       background: rgba(255,255,255,0.1);
-    }
-    .btn-rented {
-      background: #ef4444;
-      color: white;
-    }
-    .btn-rented:hover {
-      background: #dc2626;
     }
     .stats {
       display: grid;
@@ -293,7 +305,6 @@
     .listing-card .video-link:hover {
       text-decoration: underline;
     }
-    /* Badges Styles */
     .badges-container {
       display: flex;
       gap: 6px;
@@ -433,15 +444,6 @@
       border-radius: 4px;
       font-size: 11px;
     }
-    /* Click to expand - exclude admin buttons from click */
-    .listing-card .clickable-area {
-      cursor: pointer;
-    }
-    .listing-card .admin-actions,
-    .listing-card .whatsapp,
-    .listing-card .video-link {
-      cursor: default;
-    }
     @media (max-width: 640px) {
       header .container {
         flex-direction: column;
@@ -469,10 +471,9 @@
 <body>
   <header>
     <div class="container">
-      <h1>🏠 Home<span>Link</span></h1>
+      <h1 onclick="handleLogoClick(event)">🏠 Home<span>Link</span></h1>
       <div class="header-actions">
         <button id="add-listing-btn" class="btn btn-primary" onclick="showAddListing()" style="display:none;">+ Add Listing</button>
-        <button class="btn btn-outline" onclick="toggleAdmin()">🔑 Admin</button>
         <span id="admin-status" style="font-size:12px;color:#9ca3af;"></span>
       </div>
     </div>
@@ -591,20 +592,63 @@
     const API_URL = 'https://homelink-production.up.railway.app/api';
 
     // ============================================
+    // SECRET TAP DETECTION (5 taps on logo)
+    // ============================================
+    let tapCount = 0;
+    let tapTimer = null;
+
+    function handleLogoClick(event) {
+      event.preventDefault();
+      tapCount++;
+      
+      // Visual feedback
+      const logo = document.querySelector('h1');
+      logo.style.transform = 'scale(0.95)';
+      setTimeout(() => { logo.style.transform = 'scale(1)'; }, 100);
+      
+      // Clear timer after 2 seconds of inactivity
+      clearTimeout(tapTimer);
+      tapTimer = setTimeout(() => {
+        tapCount = 0;
+      }, 2000);
+      
+      // If 5 taps detected
+      if (tapCount >= 5) {
+        tapCount = 0;
+        clearTimeout(tapTimer);
+        triggerAdminLogin();
+      }
+    }
+
+    function triggerAdminLogin() {
+      if (isAdmin) {
+        alert('✅ Already in admin mode');
+        return;
+      }
+      
+      const password = prompt('🔐 Enter admin password:');
+      if (password === 'elage123@123') {
+        isAdmin = true;
+        const addBtn = document.getElementById('add-listing-btn');
+        document.getElementById('admin-status').textContent = '✅ Admin mode';
+        if (addBtn) addBtn.style.display = 'block';
+        renderListings();
+        alert('✅ Admin mode activated!');
+      } else if (password !== null) {
+        alert('❌ Wrong password');
+      }
+    }
+
+    // ============================================
     // TEXT FORMATTING FUNCTION
     // ============================================
     function formatDescription(text) {
       if (!text) return '';
       let html = text;
-      // Bold: **text** -> <strong>text</strong>
       html = html.replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>');
-      // Italic: *text* -> <em>text</em>
       html = html.replace(/\*(.*?)\*/g, '<em>$1</em>');
-      // Bullet lists: - item -> <li>item</li>
       html = html.replace(/^-\s+(.*?)$/gm, '<li>$1</li>');
-      // Wrap consecutive <li> items in a <ul>
       html = html.replace(/((?:<li>.*?<\/li>\s*)+)/g, '<ul>$1</ul>');
-      // Line breaks
       html = html.replace(/\n/g, '<br>');
       return html;
     }
@@ -635,20 +679,6 @@
     }
 
     // ============================================
-    // TOGGLE DESCRIPTION EXPAND
-    // ============================================
-    function toggleDescription(card, listingId) {
-      const desc = card.querySelector('.description');
-      const hint = card.querySelector('.expand-hint');
-      if (desc) {
-        desc.classList.toggle('expanded');
-        if (hint) {
-          hint.textContent = desc.classList.contains('expanded') ? '👆 Click to collapse' : '👇 Click to expand';
-        }
-      }
-    }
-
-    // ============================================
     // RENDER LISTINGS
     // ============================================
     function renderListings(data) {
@@ -667,7 +697,6 @@
       }
 
       grid.innerHTML = items.map(listing => {
-        // Build badges HTML
         const badges = listing.badges || [];
         let badgesHtml = '';
         if (badges.length > 0) {
@@ -678,13 +707,9 @@
           </div>`;
         }
 
-        // Status badge
         const isAvailable = listing.isAvailable !== false;
         const statusHtml = `<span class="status-badge ${isAvailable ? 'status-available' : 'status-rented'}">${isAvailable ? '✅ Available' : '🔴 Rented'}</span>`;
-
-        // Formatted description
         const formattedDesc = formatDescription(listing.description || '');
-        // Check if description is long enough to need expansion (> 100 chars)
         const needsExpand = (listing.description || '').length > 100;
 
         return `
@@ -745,20 +770,6 @@
         }
       } catch (e) {
         console.error('Error fetching listings:', e);
-      }
-    }
-
-    async function fetchStats() {
-      try {
-        const res = await fetch(`${API_URL}/stats`);
-        const data = await res.json();
-        if (data.success) {
-          document.getElementById('stat-total').textContent = data.data.total || 0;
-          document.getElementById('stat-views').textContent = data.data.views || 0;
-          document.getElementById('stat-locations').textContent = data.data.locations || 0;
-        }
-      } catch (e) {
-        console.error('Error fetching stats:', e);
       }
     }
 
@@ -911,7 +922,7 @@
     // ============================================
     function showAddListing() {
       if (!isAdmin) {
-        alert('Please login as admin first (click the Admin button)');
+        alert('Please login as admin first (tap the HomeLink logo 5 times)');
         return;
       }
       editingId = null;
@@ -931,29 +942,6 @@
 
     function closeModal() {
       document.getElementById('listing-modal').classList.remove('show');
-    }
-
-    // ============================================
-    // ADMIN
-    // ============================================
-    function toggleAdmin() {
-      const addBtn = document.getElementById('add-listing-btn');
-      if (isAdmin) {
-        isAdmin = false;
-        document.getElementById('admin-status').textContent = '';
-        addBtn.style.display = 'none';
-        renderListings();
-        return;
-      }
-      const password = prompt('Enter admin password:');
-      if (password === 'elage123@123') {
-        isAdmin = true;
-        document.getElementById('admin-status').textContent = '✅ Admin mode';
-        addBtn.style.display = 'block';
-        renderListings();
-      } else if (password !== null) {
-        alert('❌ Wrong password');
-      }
     }
 
     // ============================================
