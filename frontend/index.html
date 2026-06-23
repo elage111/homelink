@@ -37,6 +37,12 @@
     header h1 {
       font-size: 28px;
       font-weight: 700;
+      cursor: pointer;
+      user-select: none;
+      transition: all 0.3s ease;
+    }
+    header h1:hover {
+      transform: scale(1.02);
     }
     header h1 span {
       color: #f59e0b;
@@ -93,13 +99,6 @@
     }
     .btn-outline:hover {
       background: rgba(255,255,255,0.1);
-    }
-    .btn-admin {
-      background: #8b5cf6;
-      color: white;
-    }
-    .btn-admin:hover {
-      background: #7c3aed;
     }
     .stats {
       display: grid;
@@ -278,6 +277,8 @@
       text-decoration: none;
       margin-top: 10px;
       transition: background 0.3s ease;
+      border: none;
+      cursor: pointer;
     }
     .listing-card .whatsapp:hover {
       background: #1ebe5d;
@@ -433,7 +434,6 @@
       margin-top: 40px;
       border-top: 1px solid #e5e7eb;
     }
-    /* Lead Dashboard Styles */
     .lead-dashboard {
       display: none;
       background: white;
@@ -538,7 +538,6 @@
       <h1>🏠 Home<span>Link</span></h1>
       <div class="header-actions">
         <button id="add-listing-btn" class="btn btn-primary" onclick="showAddListing()" style="display:none;">+ Add Listing</button>
-        <button class="btn btn-outline" onclick="toggleAdmin()">🔑 Admin</button>
         <span id="admin-status" style="font-size:12px;color:#9ca3af;"></span>
       </div>
     </div>
@@ -558,9 +557,6 @@
       <div class="stat-card">
         <div class="number" id="stat-locations">0</div>
         <div class="label">Locations</div>
-      </div>
-        <div class="label">📊 Total Leads</div>
-        <div class="sub">WhatsApp inquiries</div>
       </div>
     </div>
 
@@ -686,6 +682,48 @@
     const API_URL = 'https://homelink-production.up.railway.app/api';
 
     // ============================================
+    // SECRET ADMIN - 10 TAPS ON LOGO
+    // ============================================
+    let tapCount = 0;
+    let tapTimer = null;
+
+    document.addEventListener('DOMContentLoaded', function() {
+      const logo = document.querySelector('header h1');
+      if (!logo) return;
+
+      logo.style.cursor = 'pointer';
+      logo.title = '🔑 Tap 10 times to unlock admin';
+
+      logo.addEventListener('click', function(e) {
+        tapCount++;
+        clearTimeout(tapTimer);
+
+        // Visual feedback
+        if (tapCount >= 5 && tapCount < 10) {
+          this.style.color = '#f59e0b';
+          this.style.transform = 'scale(1.05)';
+          this.style.transition = 'all 0.2s';
+        }
+
+        tapTimer = setTimeout(() => {
+          tapCount = 0;
+          this.style.color = '';
+          this.style.transform = '';
+        }, 3000);
+
+        if (tapCount >= 10) {
+          tapCount = 0;
+          this.style.color = '';
+          this.style.transform = '';
+          toggleAdmin();
+        }
+      });
+
+      // Initial load
+      fetchListings();
+    });
+
+    // ============================================
     // BADGES FUNCTIONS
     // ============================================
     function updateBadges() {
@@ -720,12 +758,16 @@
       }
 
       try {
-        // Track the lead
-        await fetch(`${API_URL}/listings/${listingId}/lead`, {
+        const response = await fetch(`${API_URL}/listings/${listingId}/lead`, {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' }
         });
-        console.log('📊 Lead tracked for listing:', listingId);
+        const result = await response.json();
+        console.log('📊 Lead tracked:', result);
+        // Update the lead count in the UI
+        if (result.success) {
+          fetchListings();
+        }
       } catch (e) {
         console.error('Error tracking lead:', e);
       }
@@ -781,11 +823,11 @@
                 ${isAvailable ? '✅ Available' : '🔴 Rented'}
               </span>
               <span style="font-size:12px;color:#6b7280;margin-left:8px;">👁️ ${listing.views || 0}</span>
-              ${leads > 0 ? `<span style="font-size:12px;color:#f59e0b;margin-left:8px;">📊 ${leads}</span>` : ''}
+              ${isAdmin && leads > 0 ? `<span style="font-size:12px;color:#f59e0b;margin-left:8px;">📊 ${leads}</span>` : ''}
             </div>
             ${listing.whatsappNumber ? `
               <button onclick="trackLeadAndOpenWhatsApp('${listing._id}', '${listing.whatsappNumber}')" 
-                      style="background:#25D366;color:white;padding:8px 20px;border:none;border-radius:20px;font-size:14px;cursor:pointer;margin-top:10px;">
+                      class="whatsapp">
                 💬 Contact on WhatsApp
               </button>
             ` : ''}
@@ -809,7 +851,7 @@
     // ============================================
     async function toggleRented(id) {
       if (!isAdmin) {
-        alert('Please login as admin first');
+        alert('Please login as admin first (tap logo 10 times)');
         return;
       }
       const listing = listings.find(l => l._id === id);
@@ -837,6 +879,32 @@
     }
 
     // ============================================
+    // ADMIN TOGGLE
+    // ============================================
+    function toggleAdmin() {
+      const addBtn = document.getElementById('add-listing-btn');
+      const leadsTab = document.getElementById('leads-tab');
+      
+      if (isAdmin) {
+        isAdmin = false;
+        document.getElementById('admin-status').textContent = '';
+        addBtn.style.display = 'none';
+        leadsTab.classList.add('hidden');
+        // Switch back to listings tab
+        document.querySelector('.tab.active')?.click();
+        renderListings();
+        return;
+      }
+      
+      isAdmin = true;
+      document.getElementById('admin-status').textContent = '✅ Admin mode';
+      addBtn.style.display = 'block';
+      leadsTab.classList.remove('hidden');
+      renderListings();
+      fetchLeadStats();
+    }
+
+    // ============================================
     // API CALLS
     // ============================================
     async function fetchListings() {
@@ -856,30 +924,13 @@
       }
     }
 
-    async function fetchStats() {
-      try {
-        const res = await fetch(`${API_URL}/stats`);
-        const data = await res.json();
-        if (data.success) {
-          document.getElementById('stat-total').textContent = data.data.total || 0;
-          document.getElementById('stat-views').textContent = data.data.views || 0;
-          document.getElementById('stat-locations').textContent = data.data.locations || 0;
-          document.getElementById('stat-leads').textContent = data.data.leads || 0;
-        }
-      } catch (e) {
-        console.error('Error fetching stats:', e);
-      }
-    }
-
     function updateStats() {
       const total = listings.length;
       const views = listings.reduce((sum, l) => sum + (l.views || 0), 0);
       const locations = new Set(listings.map(l => l.location)).size;
-      const leads = listings.reduce((sum, l) => sum + (l.leads || 0), 0);
       document.getElementById('stat-total').textContent = total;
       document.getElementById('stat-views').textContent = views;
       document.getElementById('stat-locations').textContent = locations;
-      document.getElementById('stat-leads').textContent = leads;
     }
 
     // ============================================
@@ -911,7 +962,7 @@
       } else {
         let html = `<table class="lead-table">
           <thead><tr><th>#</th><th>Property</th><th>Location</th><th>Leads</th></tr></thead><tbody>`;
-        topListings.forEach((item, index) => {
+        topListings.slice(0, 5).forEach((item, index) => {
           const emojis = ['🔥🔥🔥', '🔥🔥', '🔥', '📈', '📈'];
           const emoji = index < 5 ? emojis[index] : '📊';
           html += `<tr>
@@ -1073,7 +1124,7 @@
     // ============================================
     function showAddListing() {
       if (!isAdmin) {
-        alert('Please login as admin first (click the Admin button)');
+        alert('Please login as admin first (tap logo 10 times)');
         return;
       }
       editingId = null;
@@ -1094,42 +1145,6 @@
       document.getElementById('listing-modal').classList.remove('show');
     }
 
-    // ============================================
-    // ADMIN
-    // ============================================
-    function toggleAdmin() {
-      const addBtn = document.getElementById('add-listing-btn');
-      const leadsTab = document.getElementById('leads-tab');
-      
-      if (isAdmin) {
-        isAdmin = false;
-        document.getElementById('admin-status').textContent = '';
-        addBtn.style.display = 'none';
-        leadsTab.classList.add('hidden');
-        // Switch back to listings tab
-        document.querySelector('.tab.active').click();
-        renderListings();
-        return;
-      }
-      
-      const password = prompt('Enter admin password:');
-      if (password === 'elage123@123') {
-        isAdmin = true;
-        document.getElementById('admin-status').textContent = '✅ Admin mode';
-        addBtn.style.display = 'block';
-        leadsTab.classList.remove('hidden');
-        renderListings();
-        fetchLeadStats();
-      } else if (password !== null) {
-        alert('❌ Wrong password');
-      }
-    }
-
-    // ============================================
-    // INIT
-    // ============================================
-    fetchListings();
-
     // Close modal on outside click
     document.getElementById('listing-modal').addEventListener('click', function(e) {
       if (e.target === this) closeModal();
@@ -1137,41 +1152,3 @@
   </script>
 </body>
 </html>
-
-// ============================================
-// SECRET ADMIN - 10 TAPS ON LOGO
-// ============================================
-let tapCount = 0;
-let tapTimer = null;
-
-function setupSecretAdmin() {
-  const logo = document.querySelector('header h1');
-  if (!logo) return;
-  
-  logo.style.cursor = 'pointer';
-  logo.title = 'Tap 10 times to unlock admin';
-  
-  logo.addEventListener('click', function(e) {
-    tapCount++;
-    clearTimeout(tapTimer);
-    
-    // Visual feedback
-    if (tapCount >= 5 && tapCount < 10) {
-      this.style.color = '#f59e0b';
-    }
-    
-    tapTimer = setTimeout(() => {
-      tapCount = 0;
-      this.style.color = '';
-    }, 3000);
-    
-    if (tapCount >= 10) {
-      tapCount = 0;
-      this.style.color = '';
-      toggleAdmin();
-    }
-  });
-}
-
-// Call this on page load
-document.addEventListener('DOMContentLoaded', setupSecretAdmin);

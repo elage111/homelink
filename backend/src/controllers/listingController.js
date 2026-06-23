@@ -1,5 +1,6 @@
 import Listing from "../models/Listing.js";
 import { validationResult } from "express-validator";
+import db from "../config/database.js";
 
 const ADMIN_PASSWORD = 'elage123@123';
 
@@ -66,15 +67,14 @@ export const deleteListing = async (req, res) => {
   }
 };
 
-// NEW: Track lead (WhatsApp click)
 export const trackLead = async (req, res) => {
   try {
     const listing = await Listing.addLead(req.params.id);
     if (!listing) return res.status(404).json({ message: "Listing not found" });
-    res.json({ 
-      success: true, 
-      message: "Lead tracked successfully", 
-      data: { leads: listing.leads } 
+    res.json({
+      success: true,
+      message: "Lead tracked successfully",
+      data: { leads: listing.leads }
     });
   } catch (error) {
     res.status(500).json({ message: "Server Error" });
@@ -90,15 +90,13 @@ export const getStats = async (req, res) => {
   }
 };
 
-// NEW: Get lead stats only
 export const getLeadStats = async (req, res) => {
   try {
     await db.read();
     const listings = db.data.listings || [];
     const totalLeads = listings.reduce((sum, l) => sum + (l.leads || 0), 0);
     const listingsWithLeads = listings.filter(l => (l.leads || 0) > 0).length;
-    
-    // Top listings by leads
+
     const topListings = [...listings]
       .sort((a, b) => (b.leads || 0) - (a.leads || 0))
       .slice(0, 10)
@@ -111,7 +109,6 @@ export const getLeadStats = async (req, res) => {
         price: l.price || 0
       }));
 
-    // All listings with lead count
     const allListings = listings.map(l => ({
       id: l._id,
       title: l.title || 'Untitled',

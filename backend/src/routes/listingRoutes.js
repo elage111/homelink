@@ -4,7 +4,6 @@ import { body } from 'express-validator';
 
 const router = express.Router();
 
-// Validation rules
 const validateListing = [
   body('title').notEmpty().withMessage('Title is required'),
   body('description').notEmpty().withMessage('Description is required'),
@@ -18,7 +17,7 @@ router.get('/listings', listingController.getListings);
 router.get('/listings/:id', listingController.getListing);
 router.get('/stats', listingController.getStats);
 
-// NEW: Lead tracking route (public - anyone can track a lead)
+// Lead tracking (public)
 router.post('/listings/:id/lead', listingController.trackLead);
 
 // Admin routes
@@ -27,7 +26,7 @@ router.post('/listings', validateListing, listingController.createListing);
 router.put('/listings/:id', listingController.updateListing);
 router.delete('/listings/:id', listingController.deleteListing);
 
-// NEW: Lead stats (protected - admin only)
+// Lead stats (admin only)
 router.get('/leads/stats', listingController.getLeadStats);
 
 export default router;
