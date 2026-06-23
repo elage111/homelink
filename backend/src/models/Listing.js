@@ -14,7 +14,8 @@ const Listing = {
       views: 0,
       viewedBy: [],
       featured: data.featured || false,
-      badges: data.badges || []  // NEW: badges array
+      badges: data.badges || [],
+      leads: 0  // NEW: Lead counter
     };
     db.data.listings.push(listing);
     await db.write();
@@ -56,6 +57,16 @@ const Listing = {
     return listing;
   },
 
+  // NEW: Track lead (WhatsApp click)
+  async addLead(id) {
+    await db.read();
+    const listing = db.data.listings.find(l => l._id === id);
+    if (!listing) return null;
+    listing.leads = (listing.leads || 0) + 1;
+    await db.write();
+    return listing;
+  },
+
   async update(id, data) {
     await db.read();
     const index = db.data.listings.findIndex(l => l._id === id);
@@ -63,7 +74,7 @@ const Listing = {
     db.data.listings[index] = {
       ...db.data.listings[index],
       ...data,
-      badges: data.badges || db.data.listings[index].badges || []  // NEW: preserve badges
+      badges: data.badges || db.data.listings[index].badges || []
     };
     await db.write();
     return db.data.listings[index];
@@ -84,7 +95,26 @@ const Listing = {
     const total = listings.length;
     const views = listings.reduce((sum, l) => sum + (l.views || 0), 0);
     const locations = new Set(listings.map(l => l.location)).size;
-    return { total, views, locations };
+    const leads = listings.reduce((sum, l) => sum + (l.leads || 0), 0);
+    const totalLeads = leads;
+    
+    // Get top listings by leads
+    const topListings = [...listings]
+      .sort((a, b) => (b.leads || 0) - (a.leads || 0))
+      .slice(0, 5)
+      .map(l => ({ 
+        title: l.title, 
+        location: l.location, 
+        leads: l.leads || 0 
+      }));
+    
+    return { 
+      total, 
+      views, 
+      locations, 
+      leads: totalLeads,
+      topListings 
+    };
   }
 };
 
