@@ -1065,3 +1065,104 @@
     </script>
 </body>
 </html>
+
+<script>
+// Badges functions
+function updateBadges() {
+  const checkboxes = document.querySelectorAll('#badge-verified, #badge-agent, #badge-owner');
+  const selected = [];
+  checkboxes.forEach(cb => {
+    if (cb.checked) selected.push(cb.value);
+  });
+  document.getElementById('badges-input').value = selected.join(',');
+}
+
+function loadBadges(badges) {
+  if (!badges) return;
+  const badgeList = badges.split(',');
+  document.querySelectorAll('#badge-verified, #badge-agent, #badge-owner').forEach(cb => {
+    cb.checked = badgeList.includes(cb.value);
+  });
+  document.getElementById('badges-input').value = badges;
+}
+
+// Modify existing addListing function to include badges
+const originalAddListing = window.addListing || function() {};
+window.addListing = function() {
+  const badges = document.getElementById('badges-input').value;
+  const listingData = {
+    // ... existing data ...
+    badges: badges ? badges.split(',') : []
+  };
+  // ... rest of function ...
+};
+</script>
+
+<script>
+// Badges functions for add form
+function updateBadges() {
+  const checkboxes = document.querySelectorAll('#badge-verified, #badge-agent, #badge-owner');
+  const selected = [];
+  checkboxes.forEach(cb => {
+    if (cb.checked) selected.push(cb.value);
+  });
+  document.getElementById('badges-input').value = selected.join(',');
+}
+
+// Badges functions for edit form
+function updateEditBadges() {
+  const checkboxes = document.querySelectorAll('#edit-badge-verified, #edit-badge-agent, #edit-badge-owner');
+  const selected = [];
+  checkboxes.forEach(cb => {
+    if (cb.checked) selected.push(cb.value);
+  });
+  document.getElementById('edit-badges-input').value = selected.join(',');
+}
+
+// Load badges into edit form
+function loadEditBadges(badges) {
+  if (!badges) return;
+  const badgeList = badges;
+  document.querySelectorAll('#edit-badge-verified, #edit-badge-agent, #edit-badge-owner').forEach(cb => {
+    cb.checked = badgeList.includes(cb.value);
+  });
+  document.getElementById('edit-badges-input').value = badges.join(',');
+}
+
+// Modify addListing to include badges
+function addListingWithBadges() {
+  const badgesInput = document.getElementById('badges-input');
+  const badges = badgesInput.value ? badgesInput.value.split(',') : [];
+  
+  // Get other form data
+  const formData = {
+    title: document.getElementById('title').value,
+    description: document.getElementById('description').value,
+    location: document.getElementById('location').value,
+    price: parseFloat(document.getElementById('price').value),
+    houseType: document.getElementById('houseType').value,
+    whatsappNumber: document.getElementById('whatsappNumber').value,
+    videoUrl: document.getElementById('videoUrl').value,
+    badges: badges
+  };
+  
+  // Send to API
+  fetch('https://homelink-production.up.railway.app/api/listings', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify(formData)
+  })
+  .then(response => response.json())
+  .then(data => {
+    if (data.success) {
+      alert('✅ Listing added successfully!');
+      location.reload();
+    } else {
+      alert('❌ Failed to add listing: ' + data.message);
+    }
+  })
+  .catch(error => {
+    alert('❌ Error: ' + error.message);
+  });
+}
+</script>

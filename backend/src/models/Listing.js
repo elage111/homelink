@@ -13,7 +13,8 @@ const Listing = {
       price: parseFloat(data.price),
       views: 0,
       viewedBy: [],
-      featured: data.featured || false
+      featured: data.featured || false,
+      badges: data.badges || []  // NEW: badges array
     };
     db.data.listings.push(listing);
     await db.write();
@@ -25,7 +26,7 @@ const Listing = {
     let listings = db.data.listings;
     if (filters.keyword) {
       const keyword = filters.keyword.toLowerCase();
-      listings = listings.filter(l => 
+      listings = listings.filter(l =>
         l.location.toLowerCase().includes(keyword) ||
         l.title.toLowerCase().includes(keyword) ||
         l.description.toLowerCase().includes(keyword)
@@ -44,17 +45,14 @@ const Listing = {
     await db.read();
     const listing = db.data.listings.find(l => l._id === id);
     if (!listing) return null;
-    
     if (!listing.viewedBy) {
       listing.viewedBy = [];
     }
-    
     if (!listing.viewedBy.includes(ip)) {
       listing.viewedBy.push(ip);
       listing.views = (listing.views || 0) + 1;
       await db.write();
     }
-    
     return listing;
   },
 
@@ -62,7 +60,11 @@ const Listing = {
     await db.read();
     const index = db.data.listings.findIndex(l => l._id === id);
     if (index === -1) return null;
-    db.data.listings[index] = { ...db.data.listings[index], ...data };
+    db.data.listings[index] = {
+      ...db.data.listings[index],
+      ...data,
+      badges: data.badges || db.data.listings[index].badges || []  // NEW: preserve badges
+    };
     await db.write();
     return db.data.listings[index];
   },
