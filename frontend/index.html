@@ -86,6 +86,13 @@
     .btn-success:hover {
       background: #059669;
     }
+    .btn-warning {
+      background: #f59e0b;
+      color: #1a1a2e;
+    }
+    .btn-warning:hover {
+      background: #d97706;
+    }
     .btn-outline {
       background: transparent;
       color: white;
@@ -93,6 +100,13 @@
     }
     .btn-outline:hover {
       background: rgba(255,255,255,0.1);
+    }
+    .btn-rented {
+      background: #ef4444;
+      color: white;
+    }
+    .btn-rented:hover {
+      background: #dc2626;
     }
     .stats {
       display: grid;
@@ -153,7 +167,7 @@
     }
     .listings-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+      grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
       gap: 24px;
     }
     .listing-card {
@@ -163,6 +177,7 @@
       box-shadow: 0 2px 8px rgba(0,0,0,0.06);
       transition: transform 0.3s ease, box-shadow 0.3s ease;
       padding: 20px;
+      position: relative;
     }
     .listing-card:hover {
       transform: translateY(-4px);
@@ -179,6 +194,29 @@
       font-size: 14px;
       margin-bottom: 8px;
     }
+    .listing-card .description {
+      color: #4b5563;
+      font-size: 14px;
+      margin: 8px 0;
+      display: -webkit-box;
+      -webkit-line-clamp: 3;
+      -webkit-box-orient: vertical;
+      overflow: hidden;
+      line-height: 1.5;
+    }
+    .listing-card .description strong {
+      color: #1a1a2e;
+    }
+    .listing-card .description em {
+      color: #6b7280;
+    }
+    .listing-card .description ul {
+      padding-left: 20px;
+      margin: 4px 0;
+    }
+    .listing-card .description li {
+      list-style: disc;
+    }
     .listing-card .price {
       font-size: 22px;
       font-weight: 700;
@@ -192,6 +230,22 @@
       border-radius: 20px;
       font-size: 12px;
       color: #374151;
+    }
+    .listing-card .status-badge {
+      display: inline-block;
+      padding: 4px 12px;
+      border-radius: 20px;
+      font-size: 12px;
+      font-weight: 600;
+      margin-left: 8px;
+    }
+    .status-available {
+      background: #10b981;
+      color: white;
+    }
+    .status-rented {
+      background: #ef4444;
+      color: white;
     }
     .listing-card .whatsapp {
       display: inline-block;
@@ -259,13 +313,14 @@
       border-radius: 10px;
       font-size: 14px;
       transition: border-color 0.3s;
+      font-family: inherit;
     }
     .form-group input:focus, .form-group textarea:focus, .form-group select:focus {
       border-color: #f59e0b;
       outline: none;
     }
     .form-group textarea {
-      min-height: 80px;
+      min-height: 100px;
       resize: vertical;
     }
     .modal {
@@ -341,6 +396,18 @@
       margin-top: 40px;
       border-top: 1px solid #e5e7eb;
     }
+    /* Formatting help text */
+    .formatting-hint {
+      font-size: 12px;
+      color: #6b7280;
+      margin-top: 4px;
+    }
+    .formatting-hint code {
+      background: #f3f4f6;
+      padding: 2px 6px;
+      border-radius: 4px;
+      font-size: 11px;
+    }
     @media (max-width: 640px) {
       header .container {
         flex-direction: column;
@@ -370,7 +437,7 @@
     <div class="container">
       <h1>🏠 Home<span>Link</span></h1>
       <div class="header-actions">
-        <button class="btn btn-primary" onclick="showAddListing()">+ Add Listing</button>
+        <button id="add-listing-btn" class="btn btn-primary" onclick="showAddListing()" style="display:none;">+ Add Listing</button>
         <button class="btn btn-outline" onclick="toggleAdmin()">🔑 Admin</button>
         <span id="admin-status" style="font-size:12px;color:#9ca3af;"></span>
       </div>
@@ -420,6 +487,9 @@
         <div class="form-group">
           <label>Description *</label>
           <textarea id="form-description" required placeholder="Describe the property..."></textarea>
+          <div class="formatting-hint">
+            💡 You can use: <code>**bold**</code>, <code>*italic*</code>, and bullet lists with <code>- item</code>
+          </div>
         </div>
         <div class="form-group">
           <label>Location *</label>
@@ -464,6 +534,7 @@
         <!-- ===== END BADGES SECTION ===== -->
 
         <input type="hidden" id="form-id" value="">
+        <input type="hidden" id="form-isAvailable" value="true">
         <div style="display:flex; gap:12px; margin-top:20px;">
           <button type="submit" class="btn btn-primary" style="flex:1;">💾 Save Listing</button>
           <button type="button" class="btn btn-danger" onclick="closeModal()">Cancel</button>
@@ -484,6 +555,25 @@
     let isAdmin = false;
     let editingId = null;
     const API_URL = 'https://homelink-production.up.railway.app/api';
+
+    // ============================================
+    // TEXT FORMATTING FUNCTION
+    // ============================================
+    function formatDescription(text) {
+      if (!text) return '';
+      let html = text;
+      // Bold: **text** -> <strong>text</strong>
+      html = html.replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>');
+      // Italic: *text* -> <em>text</em>
+      html = html.replace(/\*(.*?)\*/g, '<em>$1</em>');
+      // Bullet lists: - item -> <li>item</li>
+      html = html.replace(/^-\s+(.*?)$/gm, '<li>$1</li>');
+      // Wrap consecutive <li> items in a <ul>
+      html = html.replace(/((?:<li>.*?<\/li>\s*)+)/g, '<ul>$1</ul>');
+      // Line breaks
+      html = html.replace(/\n/g, '<br>');
+      return html;
+    }
 
     // ============================================
     // BADGES FUNCTIONS
@@ -522,7 +612,7 @@
           <div class="empty-state" style="grid-column:1/-1;">
             <h3>🏠 No listings found</h3>
             <p>Be the first to add a property!</p>
-            <button class="btn btn-primary" onclick="showAddListing()" style="margin-top:16px;">+ Add Listing</button>
+            ${isAdmin ? `<button class="btn btn-primary" onclick="showAddListing()" style="margin-top:16px;">+ Add Listing</button>` : ''}
           </div>
         `;
         return;
@@ -540,14 +630,23 @@
           </div>`;
         }
 
+        // Status badge
+        const isAvailable = listing.isAvailable !== false;
+        const statusHtml = `<span class="status-badge ${isAvailable ? 'status-available' : 'status-rented'}">${isAvailable ? '✅ Available' : '🔴 Rented'}</span>`;
+
+        // Formatted description
+        const formattedDesc = formatDescription(listing.description || '');
+
         return `
           <div class="listing-card">
             <div class="title">${listing.title || 'Untitled'}</div>
             <div class="location">📍 ${listing.location || 'Unknown location'}</div>
             ${badgesHtml}
+            <div class="description">${formattedDesc}</div>
             <div class="price">${(listing.price || 0).toLocaleString()} FCFA/month</div>
             <div>
               <span class="type">${listing.houseType || 'N/A'}</span>
+              ${statusHtml}
               <span style="font-size:12px;color:#6b7280;margin-left:8px;">👁️ ${listing.views || 0}</span>
             </div>
             ${listing.whatsappNumber ? `<a href="https://wa.me/237${listing.whatsappNumber}" target="_blank" class="whatsapp">💬 Contact on WhatsApp</a>` : ''}
@@ -555,6 +654,7 @@
             ${isAdmin ? `
               <div class="admin-actions">
                 <button class="btn btn-secondary" onclick="editListing('${listing._id}')">✏️ Edit</button>
+                <button class="btn ${isAvailable ? 'btn-warning' : 'btn-success'}" onclick="toggleRented('${listing._id}')">${isAvailable ? '📋 Mark Rented' : '🏠 Mark Available'}</button>
                 <button class="btn btn-danger" onclick="deleteListing('${listing._id}')">🗑️ Delete</button>
               </div>
             ` : ''}
@@ -637,7 +737,8 @@
         houseType: document.getElementById('form-houseType').value.trim(),
         whatsappNumber: document.getElementById('form-whatsapp').value.trim(),
         videoUrl: document.getElementById('form-video').value.trim(),
-        badges: getBadgesFromForm()
+        badges: getBadgesFromForm(),
+        isAvailable: document.getElementById('form-isAvailable').value === 'true'
       };
 
       if (!data.title || !data.description || !data.location || !data.price || !data.whatsappNumber) {
@@ -697,8 +798,42 @@
       document.getElementById('form-houseType').value = listing.houseType || '';
       document.getElementById('form-whatsapp').value = listing.whatsappNumber || '';
       document.getElementById('form-video').value = listing.videoUrl || '';
+      document.getElementById('form-isAvailable').value = listing.isAvailable !== false ? 'true' : 'false';
       loadBadgesIntoForm(listing.badges || []);
       document.getElementById('listing-modal').classList.add('show');
+    }
+
+    // ============================================
+    // TOGGLE RENTED STATUS
+    // ============================================
+    async function toggleRented(id) {
+      if (!isAdmin) {
+        alert('Please login as admin first');
+        return;
+      }
+      const listing = listings.find(l => l._id === id);
+      if (!listing) return;
+      const isCurrentlyAvailable = listing.isAvailable !== false;
+      const newStatus = !isCurrentlyAvailable;
+      const statusText = newStatus ? 'available' : 'rented';
+      if (!confirm(`Mark this property as ${statusText}?`)) return;
+
+      try {
+        const res = await fetch(`${API_URL}/listings/${id}`, {
+          method: 'PUT',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ isAvailable: newStatus })
+        });
+        const result = await res.json();
+        if (result.success) {
+          alert(`✅ Property marked as ${statusText}!`);
+          fetchListings();
+        } else {
+          alert('❌ Error updating status');
+        }
+      } catch (e) {
+        alert('❌ Error: ' + e.message);
+      }
     }
 
     // ============================================
@@ -719,6 +854,7 @@
       document.getElementById('form-houseType').value = '';
       document.getElementById('form-whatsapp').value = '';
       document.getElementById('form-video').value = '';
+      document.getElementById('form-isAvailable').value = 'true';
       loadBadgesIntoForm([]);
       document.getElementById('listing-modal').classList.add('show');
     }
@@ -731,9 +867,11 @@
     // ADMIN
     // ============================================
     function toggleAdmin() {
+      const addBtn = document.getElementById('add-listing-btn');
       if (isAdmin) {
         isAdmin = false;
         document.getElementById('admin-status').textContent = '';
+        addBtn.style.display = 'none';
         renderListings();
         return;
       }
@@ -741,6 +879,7 @@
       if (password === 'elage123@123') {
         isAdmin = true;
         document.getElementById('admin-status').textContent = '✅ Admin mode';
+        addBtn.style.display = 'block';
         renderListings();
       } else if (password !== null) {
         alert('❌ Wrong password');
