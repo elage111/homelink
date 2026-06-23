@@ -1,0 +1,54 @@
+<script>
+// Mobile-friendly auto-save
+document.addEventListener('DOMContentLoaded', function() {
+    try {
+        var saved = localStorage.getItem('homelink_form');
+        if (saved) {
+            var data = JSON.parse(saved);
+            for (var key in data) {
+                var el = document.getElementById(key);
+                if (el) {
+                    if (el.type === 'checkbox') {
+                        el.checked = data[key];
+                    } else {
+                        el.value = data[key];
+                    }
+                }
+            }
+        }
+    } catch(e) {}
+    
+    // Save on input change
+    var inputs = document.querySelectorAll('#listing-form input, #listing-form textarea, #listing-form select');
+    for (var i = 0; i < inputs.length; i++) {
+        if (inputs[i].id) {
+            inputs[i].addEventListener('input', saveForm);
+            inputs[i].addEventListener('change', saveForm);
+        }
+    }
+});
+
+function saveForm() {
+    try {
+        var data = {};
+        var inputs = document.querySelectorAll('#listing-form input, #listing-form textarea, #listing-form select');
+        for (var i = 0; i < inputs.length; i++) {
+            var el = inputs[i];
+            if (el.id) {
+                if (el.type === 'checkbox') {
+                    data[el.id] = el.checked;
+                } else {
+                    data[el.id] = el.value;
+                }
+            }
+        }
+        localStorage.setItem('homelink_form', JSON.stringify(data));
+    } catch(e) {}
+}
+
+function clearSavedForm() {
+    try {
+        localStorage.removeItem('homelink_form');
+    } catch(e) {}
+}
+</script>
