@@ -37,28 +37,9 @@
     header h1 {
       font-size: 28px;
       font-weight: 700;
-      cursor: pointer;
-      user-select: none;
-      transition: transform 0.1s ease;
-    }
-    header h1:active {
-      transform: scale(0.95);
     }
     header h1 span {
       color: #f59e0b;
-    }
-    /* Hint for desktop users */
-    header h1::after {
-      content: " (tap 5x for admin)";
-      font-size: 10px;
-      color: rgba(255,255,255,0.3);
-      font-weight: 400;
-      margin-left: 6px;
-    }
-    @media (max-width: 640px) {
-      header h1::after {
-        content: "";
-      }
     }
     .header-actions {
       display: flex;
@@ -105,13 +86,6 @@
     .btn-success:hover {
       background: #059669;
     }
-    .btn-warning {
-      background: #f59e0b;
-      color: #1a1a2e;
-    }
-    .btn-warning:hover {
-      background: #d97706;
-    }
     .btn-outline {
       background: transparent;
       color: white;
@@ -119,6 +93,13 @@
     }
     .btn-outline:hover {
       background: rgba(255,255,255,0.1);
+    }
+    .btn-admin {
+      background: #8b5cf6;
+      color: white;
+    }
+    .btn-admin:hover {
+      background: #7c3aed;
     }
     .stats {
       display: grid;
@@ -142,6 +123,21 @@
       color: #6b7280;
       font-size: 14px;
       margin-top: 4px;
+    }
+    .stat-card .sub {
+      font-size: 12px;
+      color: #9ca3af;
+      margin-top: 2px;
+    }
+    .stat-card.highlight {
+      background: linear-gradient(135deg, #f59e0b, #d97706);
+      color: white;
+    }
+    .stat-card.highlight .number {
+      color: white;
+    }
+    .stat-card.highlight .label {
+      color: rgba(255,255,255,0.9);
     }
     .search-bar {
       display: flex;
@@ -177,9 +173,36 @@
     .search-bar button:hover {
       background: #d97706;
     }
+    .tabs {
+      display: flex;
+      gap: 8px;
+      margin-bottom: 24px;
+      flex-wrap: wrap;
+    }
+    .tab {
+      padding: 10px 24px;
+      border: none;
+      border-radius: 12px;
+      cursor: pointer;
+      font-weight: 600;
+      font-size: 14px;
+      background: #e5e7eb;
+      color: #374151;
+      transition: all 0.3s ease;
+    }
+    .tab:hover {
+      background: #d1d5db;
+    }
+    .tab.active {
+      background: #1a1a2e;
+      color: white;
+    }
+    .tab.hidden {
+      display: none;
+    }
     .listings-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
+      grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
       gap: 24px;
     }
     .listing-card {
@@ -190,7 +213,6 @@
       transition: transform 0.3s ease, box-shadow 0.3s ease;
       padding: 20px;
       position: relative;
-      cursor: pointer;
     }
     .listing-card:hover {
       transform: translateY(-4px);
@@ -201,58 +223,26 @@
       font-weight: 600;
       color: #1a1a2e;
       margin-bottom: 8px;
-      pointer-events: none;
     }
     .listing-card .location {
       color: #6b7280;
       font-size: 14px;
       margin-bottom: 8px;
-      pointer-events: none;
-    }
-    .listing-card .description-wrapper {
-      position: relative;
-      pointer-events: none;
     }
     .listing-card .description {
       color: #4b5563;
       font-size: 14px;
-      margin: 8px 0;
-      line-height: 1.6;
-      max-height: 80px;
+      margin: 6px 0;
+      display: -webkit-box;
+      -webkit-line-clamp: 2;
+      -webkit-box-orient: vertical;
       overflow: hidden;
-      transition: max-height 0.4s ease;
-      pointer-events: none;
-    }
-    .listing-card .description.expanded {
-      max-height: none;
-    }
-    .listing-card .description strong {
-      color: #1a1a2e;
-    }
-    .listing-card .description em {
-      color: #6b7280;
-    }
-    .listing-card .description ul {
-      padding-left: 20px;
-      margin: 4px 0;
-    }
-    .listing-card .description li {
-      list-style: disc;
-    }
-    .listing-card .expand-hint {
-      color: #3b82f6;
-      font-size: 12px;
-      font-weight: 500;
-      pointer-events: none;
-      display: block;
-      margin-top: 2px;
     }
     .listing-card .price {
       font-size: 22px;
       font-weight: 700;
       color: #f59e0b;
       margin: 8px 0;
-      pointer-events: none;
     }
     .listing-card .type {
       display: inline-block;
@@ -261,7 +251,6 @@
       border-radius: 20px;
       font-size: 12px;
       color: #374151;
-      pointer-events: none;
     }
     .listing-card .status-badge {
       display: inline-block;
@@ -270,26 +259,25 @@
       font-size: 12px;
       font-weight: 600;
       margin-left: 8px;
-      pointer-events: none;
     }
     .status-available {
-      background: #10b981;
-      color: white;
+      background: #d1fae5;
+      color: #065f46;
     }
     .status-rented {
-      background: #ef4444;
-      color: white;
+      background: #fee2e2;
+      color: #991b1b;
     }
     .listing-card .whatsapp {
       display: inline-block;
       background: #25D366;
       color: white;
-      padding: 6px 16px;
+      padding: 8px 20px;
       border-radius: 20px;
       font-size: 14px;
       text-decoration: none;
       margin-top: 10px;
-      pointer-events: auto;
+      transition: background 0.3s ease;
     }
     .listing-card .whatsapp:hover {
       background: #1ebe5d;
@@ -300,7 +288,6 @@
       text-decoration: none;
       font-size: 14px;
       margin-top: 8px;
-      pointer-events: auto;
     }
     .listing-card .video-link:hover {
       text-decoration: underline;
@@ -310,7 +297,6 @@
       gap: 6px;
       flex-wrap: wrap;
       margin: 8px 0;
-      pointer-events: none;
     }
     .badge {
       padding: 2px 10px;
@@ -331,6 +317,23 @@
       background: #f59e0b;
       color: white;
     }
+    .badge-popular {
+      background: #ef4444;
+      color: white;
+      animation: pulse 2s infinite;
+    }
+    @keyframes pulse {
+      0%, 100% { transform: scale(1); }
+      50% { transform: scale(1.05); }
+    }
+    .lead-count {
+      font-size: 13px;
+      color: #6b7280;
+      margin-top: 4px;
+    }
+    .lead-count strong {
+      color: #1a1a2e;
+    }
     .form-group {
       margin-bottom: 16px;
     }
@@ -348,14 +351,13 @@
       border-radius: 10px;
       font-size: 14px;
       transition: border-color 0.3s;
-      font-family: inherit;
     }
     .form-group input:focus, .form-group textarea:focus, .form-group select:focus {
       border-color: #f59e0b;
       outline: none;
     }
     .form-group textarea {
-      min-height: 100px;
+      min-height: 80px;
       resize: vertical;
     }
     .modal {
@@ -408,12 +410,10 @@
       gap: 8px;
       margin-top: 12px;
       flex-wrap: wrap;
-      pointer-events: auto;
     }
     .admin-actions .btn {
       font-size: 12px;
       padding: 6px 14px;
-      pointer-events: auto;
     }
     .empty-state {
       text-align: center;
@@ -433,16 +433,74 @@
       margin-top: 40px;
       border-top: 1px solid #e5e7eb;
     }
-    .formatting-hint {
-      font-size: 12px;
-      color: #6b7280;
-      margin-top: 4px;
+    /* Lead Dashboard Styles */
+    .lead-dashboard {
+      display: none;
+      background: white;
+      border-radius: 16px;
+      padding: 24px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+      margin-bottom: 30px;
     }
-    .formatting-hint code {
-      background: #f3f4f6;
-      padding: 2px 6px;
-      border-radius: 4px;
-      font-size: 11px;
+    .lead-dashboard.show {
+      display: block;
+    }
+    .lead-dashboard h2 {
+      font-size: 22px;
+      margin-bottom: 20px;
+      color: #1a1a2e;
+    }
+    .lead-stats-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 16px;
+      margin-bottom: 24px;
+    }
+    .lead-stat-card {
+      background: #f9fafb;
+      padding: 16px;
+      border-radius: 12px;
+      text-align: center;
+    }
+    .lead-stat-card .number {
+      font-size: 28px;
+      font-weight: 700;
+      color: #1a1a2e;
+    }
+    .lead-stat-card .label {
+      color: #6b7280;
+      font-size: 14px;
+    }
+    .lead-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 14px;
+    }
+    .lead-table th {
+      text-align: left;
+      padding: 12px 8px;
+      background: #f9fafb;
+      font-weight: 600;
+      color: #374151;
+    }
+    .lead-table td {
+      padding: 10px 8px;
+      border-bottom: 1px solid #e5e7eb;
+    }
+    .lead-table tr:hover {
+      background: #f9fafb;
+    }
+    .lead-table .rank {
+      font-weight: 700;
+      color: #f59e0b;
+    }
+    .lead-table .lead-count {
+      font-weight: 700;
+      color: #1a1a2e;
+    }
+    .lead-table .no-leads {
+      color: #9ca3af;
+      font-style: italic;
     }
     @media (max-width: 640px) {
       header .container {
@@ -465,15 +523,22 @@
       .modal-content {
         padding: 20px;
       }
+      .lead-table {
+        font-size: 12px;
+      }
+      .lead-table th, .lead-table td {
+        padding: 6px 4px;
+      }
     }
   </style>
 </head>
 <body>
   <header>
     <div class="container">
-      <h1 onclick="handleLogoClick(event)">🏠 Home<span>Link</span></h1>
+      <h1>🏠 Home<span>Link</span></h1>
       <div class="header-actions">
         <button id="add-listing-btn" class="btn btn-primary" onclick="showAddListing()" style="display:none;">+ Add Listing</button>
+        <button class="btn btn-outline" onclick="toggleAdmin()">🔑 Admin</button>
         <span id="admin-status" style="font-size:12px;color:#9ca3af;"></span>
       </div>
     </div>
@@ -494,13 +559,49 @@
         <div class="number" id="stat-locations">0</div>
         <div class="label">Locations</div>
       </div>
+      <div class="stat-card highlight">
+        <div class="number" id="stat-leads">0</div>
+        <div class="label">📊 Total Leads</div>
+        <div class="sub">WhatsApp inquiries</div>
+      </div>
+    </div>
+
+    <!-- Tabs -->
+    <div class="tabs">
+      <button class="tab active" onclick="switchTab('listings', this)">🏠 Listings</button>
+      <button id="leads-tab" class="tab hidden" onclick="switchTab('leads', this)">📊 Lead Dashboard</button>
     </div>
 
     <!-- Search -->
-    <div class="search-bar">
+    <div class="search-bar" id="search-section">
       <input type="text" id="search-input" placeholder="Search by location, title..." onkeyup="if(event.key==='Enter') searchListings()">
       <button onclick="searchListings()">🔍 Search</button>
       <button onclick="clearSearch()" style="background:#e5e7eb;color:#374151;">✕</button>
+    </div>
+
+    <!-- Lead Dashboard -->
+    <div class="lead-dashboard" id="lead-dashboard">
+      <h2>📊 Lead Dashboard</h2>
+      <div class="lead-stats-grid">
+        <div class="lead-stat-card">
+          <div class="number" id="lead-total">0</div>
+          <div class="label">Total Leads</div>
+        </div>
+        <div class="lead-stat-card">
+          <div class="number" id="lead-properties">0</div>
+          <div class="label">Properties with Leads</div>
+        </div>
+        <div class="lead-stat-card">
+          <div class="number" id="lead-avg">0</div>
+          <div class="label">Avg Leads / Property</div>
+        </div>
+      </div>
+
+      <h3 style="margin: 20px 0 12px; font-size:18px;">🔥 Top 5 Most Popular Properties</h3>
+      <div id="top-leads-container"></div>
+
+      <h3 style="margin: 24px 0 12px; font-size:18px;">📋 All Listings (by Leads)</h3>
+      <div id="all-leads-container"></div>
     </div>
 
     <!-- Listings -->
@@ -522,9 +623,6 @@
         <div class="form-group">
           <label>Description *</label>
           <textarea id="form-description" required placeholder="Describe the property..."></textarea>
-          <div class="formatting-hint">
-            💡 You can use: <code>**bold**</code>, <code>*italic*</code>, and bullet lists with <code>- item</code>
-          </div>
         </div>
         <div class="form-group">
           <label>Location *</label>
@@ -547,7 +645,7 @@
           <input type="url" id="form-video" placeholder="https://www.tiktok.com/@...">
         </div>
 
-        <!-- ===== BADGES SECTION ===== -->
+        <!-- Badges Section -->
         <div class="form-group">
           <label>Badges (Select all that apply)</label>
           <div style="display: flex; gap: 16px; flex-wrap: wrap; margin-top: 8px;">
@@ -566,10 +664,8 @@
           </div>
           <input type="hidden" id="form-badges" value="">
         </div>
-        <!-- ===== END BADGES SECTION ===== -->
 
         <input type="hidden" id="form-id" value="">
-        <input type="hidden" id="form-isAvailable" value="true">
         <div style="display:flex; gap:12px; margin-top:20px;">
           <button type="submit" class="btn btn-primary" style="flex:1;">💾 Save Listing</button>
           <button type="button" class="btn btn-danger" onclick="closeModal()">Cancel</button>
@@ -590,68 +686,6 @@
     let isAdmin = false;
     let editingId = null;
     const API_URL = 'https://homelink-production.up.railway.app/api';
-
-    // ============================================
-    // SECRET TAP DETECTION (5 taps on logo)
-    // ============================================
-    let tapCount = 0;
-    let tapTimer = null;
-
-    function handleLogoClick(event) {
-      event.preventDefault();
-      tapCount++;
-      
-      // Visual feedback
-      const logo = document.querySelector('h1');
-      logo.style.transform = 'scale(0.95)';
-      setTimeout(() => { logo.style.transform = 'scale(1)'; }, 100);
-      
-      // Clear timer after 2 seconds of inactivity
-      clearTimeout(tapTimer);
-      tapTimer = setTimeout(() => {
-        tapCount = 0;
-      }, 2000);
-      
-      // If 5 taps detected
-      if (tapCount >= 5) {
-        tapCount = 0;
-        clearTimeout(tapTimer);
-        triggerAdminLogin();
-      }
-    }
-
-    function triggerAdminLogin() {
-      if (isAdmin) {
-        alert('✅ Already in admin mode');
-        return;
-      }
-      
-      const password = prompt('🔐 Enter admin password:');
-      if (password === 'elage123@123') {
-        isAdmin = true;
-        const addBtn = document.getElementById('add-listing-btn');
-        document.getElementById('admin-status').textContent = '✅ Admin mode';
-        if (addBtn) addBtn.style.display = 'block';
-        renderListings();
-        alert('✅ Admin mode activated!');
-      } else if (password !== null) {
-        alert('❌ Wrong password');
-      }
-    }
-
-    // ============================================
-    // TEXT FORMATTING FUNCTION
-    // ============================================
-    function formatDescription(text) {
-      if (!text) return '';
-      let html = text;
-      html = html.replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>');
-      html = html.replace(/\*(.*?)\*/g, '<em>$1</em>');
-      html = html.replace(/^-\s+(.*?)$/gm, '<li>$1</li>');
-      html = html.replace(/((?:<li>.*?<\/li>\s*)+)/g, '<ul>$1</ul>');
-      html = html.replace(/\n/g, '<br>');
-      return html;
-    }
 
     // ============================================
     // BADGES FUNCTIONS
@@ -679,6 +713,30 @@
     }
 
     // ============================================
+    // LEAD TRACKING
+    // ============================================
+    async function trackLeadAndOpenWhatsApp(listingId, phoneNumber) {
+      if (!listingId || !phoneNumber) {
+        window.open(`https://wa.me/237${phoneNumber}`, '_blank');
+        return;
+      }
+
+      try {
+        // Track the lead
+        await fetch(`${API_URL}/listings/${listingId}/lead`, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' }
+        });
+        console.log('📊 Lead tracked for listing:', listingId);
+      } catch (e) {
+        console.error('Error tracking lead:', e);
+      }
+
+      // Open WhatsApp
+      window.open(`https://wa.me/237${phoneNumber}`, '_blank');
+    }
+
+    // ============================================
     // RENDER LISTINGS
     // ============================================
     function renderListings(data) {
@@ -690,7 +748,7 @@
           <div class="empty-state" style="grid-column:1/-1;">
             <h3>🏠 No listings found</h3>
             <p>Be the first to add a property!</p>
-            ${isAdmin ? `<button class="btn btn-primary" onclick="showAddListing()" style="margin-top:16px;">+ Add Listing</button>` : ''}
+            <button class="btn btn-primary" onclick="showAddListing()" style="margin-top:16px;">+ Add Listing</button>
           </div>
         `;
         return;
@@ -698,41 +756,48 @@
 
       grid.innerHTML = items.map(listing => {
         const badges = listing.badges || [];
+        const leads = listing.leads || 0;
+        const isAvailable = listing.isAvailable !== false;
+        const isPopular = leads >= 5;
+
         let badgesHtml = '';
-        if (badges.length > 0) {
+        if (badges.length > 0 || isPopular) {
           badgesHtml = `<div class="badges-container">
             ${badges.includes('verified') ? '<span class="badge badge-verified">✅ Verified by HomeVN</span>' : ''}
             ${badges.includes('agent') ? '<span class="badge badge-agent">🏢 Agent Listed</span>' : ''}
             ${badges.includes('owner') ? '<span class="badge badge-owner">👤 Owner Listed</span>' : ''}
+            ${isPopular ? `<span class="badge badge-popular">🔥 ${leads} people inquired</span>` : ''}
           </div>`;
         }
 
-        const isAvailable = listing.isAvailable !== false;
-        const statusHtml = `<span class="status-badge ${isAvailable ? 'status-available' : 'status-rented'}">${isAvailable ? '✅ Available' : '🔴 Rented'}</span>`;
-        const formattedDesc = formatDescription(listing.description || '');
-        const needsExpand = (listing.description || '').length > 100;
-
         return `
-          <div class="listing-card" data-id="${listing._id}" onclick="handleCardClick(event, '${listing._id}')">
+          <div class="listing-card">
             <div class="title">${listing.title || 'Untitled'}</div>
             <div class="location">📍 ${listing.location || 'Unknown location'}</div>
+            ${listing.description ? `<div class="description">${listing.description}</div>` : ''}
             ${badgesHtml}
-            <div class="description-wrapper">
-              <div class="description ${needsExpand ? '' : 'expanded'}">${formattedDesc}</div>
-              ${needsExpand ? '<span class="expand-hint">👇 Click to expand</span>' : ''}
-            </div>
             <div class="price">${(listing.price || 0).toLocaleString()} FCFA/month</div>
             <div>
               <span class="type">${listing.houseType || 'N/A'}</span>
-              ${statusHtml}
+              <span class="status-badge ${isAvailable ? 'status-available' : 'status-rented'}">
+                ${isAvailable ? '✅ Available' : '🔴 Rented'}
+              </span>
               <span style="font-size:12px;color:#6b7280;margin-left:8px;">👁️ ${listing.views || 0}</span>
+              ${leads > 0 ? `<span style="font-size:12px;color:#f59e0b;margin-left:8px;">📊 ${leads}</span>` : ''}
             </div>
-            ${listing.whatsappNumber ? `<a href="https://wa.me/237${listing.whatsappNumber}" target="_blank" class="whatsapp" onclick="event.stopPropagation();">💬 Contact on WhatsApp</a>` : ''}
-            ${listing.videoUrl ? `<br><a href="${listing.videoUrl}" target="_blank" class="video-link" onclick="event.stopPropagation();">▶️ Watch Video</a>` : ''}
+            ${listing.whatsappNumber ? `
+              <button onclick="trackLeadAndOpenWhatsApp('${listing._id}', '${listing.whatsappNumber}')" 
+                      style="background:#25D366;color:white;padding:8px 20px;border:none;border-radius:20px;font-size:14px;cursor:pointer;margin-top:10px;">
+                💬 Contact on WhatsApp
+              </button>
+            ` : ''}
+            ${listing.videoUrl ? `<br><a href="${listing.videoUrl}" target="_blank" class="video-link">▶️ Watch Video</a>` : ''}
             ${isAdmin ? `
-              <div class="admin-actions" onclick="event.stopPropagation();">
+              <div class="admin-actions">
                 <button class="btn btn-secondary" onclick="editListing('${listing._id}')">✏️ Edit</button>
-                <button class="btn ${isAvailable ? 'btn-warning' : 'btn-success'}" onclick="toggleRented('${listing._id}')">${isAvailable ? '📋 Mark Rented' : '🏠 Mark Available'}</button>
+                <button class="btn ${isAvailable ? 'btn-danger' : 'btn-success'}" onclick="toggleRented('${listing._id}')">
+                  ${isAvailable ? '🔴 Mark Rented' : '🏠 Mark Available'}
+                </button>
                 <button class="btn btn-danger" onclick="deleteListing('${listing._id}')">🗑️ Delete</button>
               </div>
             ` : ''}
@@ -742,17 +807,34 @@
     }
 
     // ============================================
-    // HANDLE CARD CLICK
+    // TOGGLE RENTED STATUS
     // ============================================
-    function handleCardClick(event, listingId) {
-      const card = event.currentTarget;
-      const desc = card.querySelector('.description');
-      const hint = card.querySelector('.expand-hint');
-      if (desc) {
-        desc.classList.toggle('expanded');
-        if (hint) {
-          hint.textContent = desc.classList.contains('expanded') ? '👆 Click to collapse' : '👇 Click to expand';
+    async function toggleRented(id) {
+      if (!isAdmin) {
+        alert('Please login as admin first');
+        return;
+      }
+      const listing = listings.find(l => l._id === id);
+      if (!listing) return;
+      const newStatus = listing.isAvailable === false ? true : false;
+      const statusText = newStatus ? 'available' : 'rented';
+      if (!confirm(`Mark this property as ${statusText}?`)) return;
+      
+      try {
+        const res = await fetch(`${API_URL}/listings/${id}`, {
+          method: 'PUT',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ isAvailable: newStatus })
+        });
+        const result = await res.json();
+        if (result.success) {
+          alert(`✅ Property marked as ${statusText}!`);
+          fetchListings();
+        } else {
+          alert('❌ Error updating status');
         }
+      } catch (e) {
+        alert('❌ Error: ' + e.message);
       }
     }
 
@@ -767,9 +849,27 @@
           listings = data.data || [];
           updateStats();
           renderListings();
+          if (isAdmin) {
+            fetchLeadStats();
+          }
         }
       } catch (e) {
         console.error('Error fetching listings:', e);
+      }
+    }
+
+    async function fetchStats() {
+      try {
+        const res = await fetch(`${API_URL}/stats`);
+        const data = await res.json();
+        if (data.success) {
+          document.getElementById('stat-total').textContent = data.data.total || 0;
+          document.getElementById('stat-views').textContent = data.data.views || 0;
+          document.getElementById('stat-locations').textContent = data.data.locations || 0;
+          document.getElementById('stat-leads').textContent = data.data.leads || 0;
+        }
+      } catch (e) {
+        console.error('Error fetching stats:', e);
       }
     }
 
@@ -777,9 +877,78 @@
       const total = listings.length;
       const views = listings.reduce((sum, l) => sum + (l.views || 0), 0);
       const locations = new Set(listings.map(l => l.location)).size;
+      const leads = listings.reduce((sum, l) => sum + (l.leads || 0), 0);
       document.getElementById('stat-total').textContent = total;
       document.getElementById('stat-views').textContent = views;
       document.getElementById('stat-locations').textContent = locations;
+      document.getElementById('stat-leads').textContent = leads;
+    }
+
+    // ============================================
+    // LEAD STATS
+    // ============================================
+    async function fetchLeadStats() {
+      try {
+        const res = await fetch(`${API_URL}/leads/stats`);
+        const data = await res.json();
+        if (data.success) {
+          renderLeadDashboard(data.data);
+        }
+      } catch (e) {
+        console.error('Error fetching lead stats:', e);
+      }
+    }
+
+    function renderLeadDashboard(stats) {
+      document.getElementById('lead-total').textContent = stats.totalLeads || 0;
+      document.getElementById('lead-properties').textContent = stats.listingsWithLeads || 0;
+      const avg = stats.listingsWithLeads > 0 ? (stats.totalLeads / stats.listingsWithLeads).toFixed(1) : 0;
+      document.getElementById('lead-avg').textContent = avg;
+
+      // Top 5 Listings
+      const topContainer = document.getElementById('top-leads-container');
+      const topListings = stats.topListings || [];
+      if (topListings.length === 0) {
+        topContainer.innerHTML = '<p style="color:#9ca3af;">No leads yet. Share your listings!</p>';
+      } else {
+        let html = `<table class="lead-table">
+          <thead><tr><th>#</th><th>Property</th><th>Location</th><th>Leads</th></tr></thead><tbody>`;
+        topListings.forEach((item, index) => {
+          const emojis = ['🔥🔥🔥', '🔥🔥', '🔥', '📈', '📈'];
+          const emoji = index < 5 ? emojis[index] : '📊';
+          html += `<tr>
+            <td class="rank">${index + 1}</td>
+            <td><strong>${item.title || 'Untitled'}</strong></td>
+            <td>${item.location || 'Unknown'}</td>
+            <td class="lead-count">${item.leads} ${emoji}</td>
+          </tr>`;
+        });
+        html += '</tbody></table>';
+        topContainer.innerHTML = html;
+      }
+
+      // All Listings
+      const allContainer = document.getElementById('all-leads-container');
+      const allListings = stats.allListings || [];
+      if (allListings.length === 0) {
+        allContainer.innerHTML = '<p style="color:#9ca3af;">No listings found.</p>';
+      } else {
+        let html = `<table class="lead-table">
+          <thead><tr><th>#</th><th>Property</th><th>Location</th><th>Leads</th><th>Status</th></tr></thead><tbody>`;
+        allListings.forEach((item, index) => {
+          const status = item.isAvailable !== false ? '✅ Available' : '🔴 Rented';
+          const leadsDisplay = item.leads > 0 ? `<span class="lead-count">${item.leads}</span>` : `<span class="no-leads">No leads yet</span>`;
+          html += `<tr>
+            <td>${index + 1}</td>
+            <td>${item.title || 'Untitled'}</td>
+            <td>${item.location || 'Unknown'}</td>
+            <td>${leadsDisplay}</td>
+            <td>${status}</td>
+          </tr>`;
+        });
+        html += '</tbody></table>';
+        allContainer.innerHTML = html;
+      }
     }
 
     // ============================================
@@ -805,6 +974,27 @@
     }
 
     // ============================================
+    // TABS
+    // ============================================
+    function switchTab(tab, button) {
+      document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+      button.classList.add('active');
+
+      if (tab === 'leads') {
+        document.getElementById('lead-dashboard').classList.add('show');
+        document.getElementById('listings-container').style.display = 'none';
+        document.getElementById('search-section').style.display = 'none';
+        if (isAdmin) {
+          fetchLeadStats();
+        }
+      } else {
+        document.getElementById('lead-dashboard').classList.remove('show');
+        document.getElementById('listings-container').style.display = 'block';
+        document.getElementById('search-section').style.display = 'flex';
+      }
+    }
+
+    // ============================================
     // CRUD OPERATIONS
     // ============================================
     async function saveListing() {
@@ -816,8 +1006,7 @@
         houseType: document.getElementById('form-houseType').value.trim(),
         whatsappNumber: document.getElementById('form-whatsapp').value.trim(),
         videoUrl: document.getElementById('form-video').value.trim(),
-        badges: getBadgesFromForm(),
-        isAvailable: document.getElementById('form-isAvailable').value === 'true'
+        badges: getBadgesFromForm()
       };
 
       if (!data.title || !data.description || !data.location || !data.price || !data.whatsappNumber) {
@@ -865,7 +1054,6 @@
     }
 
     async function editListing(id) {
-      event.stopPropagation();
       const listing = listings.find(l => l._id === id);
       if (!listing) return;
       editingId = id;
@@ -878,43 +1066,8 @@
       document.getElementById('form-houseType').value = listing.houseType || '';
       document.getElementById('form-whatsapp').value = listing.whatsappNumber || '';
       document.getElementById('form-video').value = listing.videoUrl || '';
-      document.getElementById('form-isAvailable').value = listing.isAvailable !== false ? 'true' : 'false';
       loadBadgesIntoForm(listing.badges || []);
       document.getElementById('listing-modal').classList.add('show');
-    }
-
-    // ============================================
-    // TOGGLE RENTED STATUS
-    // ============================================
-    async function toggleRented(id) {
-      event.stopPropagation();
-      if (!isAdmin) {
-        alert('Please login as admin first');
-        return;
-      }
-      const listing = listings.find(l => l._id === id);
-      if (!listing) return;
-      const isCurrentlyAvailable = listing.isAvailable !== false;
-      const newStatus = !isCurrentlyAvailable;
-      const statusText = newStatus ? 'available' : 'rented';
-      if (!confirm(`Mark this property as ${statusText}?`)) return;
-
-      try {
-        const res = await fetch(`${API_URL}/listings/${id}`, {
-          method: 'PUT',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({ isAvailable: newStatus })
-        });
-        const result = await res.json();
-        if (result.success) {
-          alert(`✅ Property marked as ${statusText}!`);
-          fetchListings();
-        } else {
-          alert('❌ Error updating status');
-        }
-      } catch (e) {
-        alert('❌ Error: ' + e.message);
-      }
     }
 
     // ============================================
@@ -922,7 +1075,7 @@
     // ============================================
     function showAddListing() {
       if (!isAdmin) {
-        alert('Please login as admin first (tap the HomeLink logo 5 times)');
+        alert('Please login as admin first (click the Admin button)');
         return;
       }
       editingId = null;
@@ -935,13 +1088,43 @@
       document.getElementById('form-houseType').value = '';
       document.getElementById('form-whatsapp').value = '';
       document.getElementById('form-video').value = '';
-      document.getElementById('form-isAvailable').value = 'true';
       loadBadgesIntoForm([]);
       document.getElementById('listing-modal').classList.add('show');
     }
 
     function closeModal() {
       document.getElementById('listing-modal').classList.remove('show');
+    }
+
+    // ============================================
+    // ADMIN
+    // ============================================
+    function toggleAdmin() {
+      const addBtn = document.getElementById('add-listing-btn');
+      const leadsTab = document.getElementById('leads-tab');
+      
+      if (isAdmin) {
+        isAdmin = false;
+        document.getElementById('admin-status').textContent = '';
+        addBtn.style.display = 'none';
+        leadsTab.classList.add('hidden');
+        // Switch back to listings tab
+        document.querySelector('.tab.active').click();
+        renderListings();
+        return;
+      }
+      
+      const password = prompt('Enter admin password:');
+      if (password === 'elage123@123') {
+        isAdmin = true;
+        document.getElementById('admin-status').textContent = '✅ Admin mode';
+        addBtn.style.display = 'block';
+        leadsTab.classList.remove('hidden');
+        renderListings();
+        fetchLeadStats();
+      } else if (password !== null) {
+        alert('❌ Wrong password');
+      }
     }
 
     // ============================================
