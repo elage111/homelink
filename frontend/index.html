@@ -559,8 +559,6 @@
         <div class="number" id="stat-locations">0</div>
         <div class="label">Locations</div>
       </div>
-      <div class="stat-card highlight">
-        <div class="number" id="stat-leads">0</div>
         <div class="label">📊 Total Leads</div>
         <div class="sub">WhatsApp inquiries</div>
       </div>
@@ -1139,3 +1137,41 @@
   </script>
 </body>
 </html>
+
+// ============================================
+// SECRET ADMIN - 10 TAPS ON LOGO
+// ============================================
+let tapCount = 0;
+let tapTimer = null;
+
+function setupSecretAdmin() {
+  const logo = document.querySelector('header h1');
+  if (!logo) return;
+  
+  logo.style.cursor = 'pointer';
+  logo.title = 'Tap 10 times to unlock admin';
+  
+  logo.addEventListener('click', function(e) {
+    tapCount++;
+    clearTimeout(tapTimer);
+    
+    // Visual feedback
+    if (tapCount >= 5 && tapCount < 10) {
+      this.style.color = '#f59e0b';
+    }
+    
+    tapTimer = setTimeout(() => {
+      tapCount = 0;
+      this.style.color = '';
+    }, 3000);
+    
+    if (tapCount >= 10) {
+      tapCount = 0;
+      this.style.color = '';
+      toggleAdmin();
+    }
+  });
+}
+
+// Call this on page load
+document.addEventListener('DOMContentLoaded', setupSecretAdmin);
