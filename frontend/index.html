@@ -178,6 +178,7 @@
       transition: transform 0.3s ease, box-shadow 0.3s ease;
       padding: 20px;
       position: relative;
+      cursor: pointer;
     }
     .listing-card:hover {
       transform: translateY(-4px);
@@ -188,21 +189,30 @@
       font-weight: 600;
       color: #1a1a2e;
       margin-bottom: 8px;
+      pointer-events: none;
     }
     .listing-card .location {
       color: #6b7280;
       font-size: 14px;
       margin-bottom: 8px;
+      pointer-events: none;
+    }
+    .listing-card .description-wrapper {
+      position: relative;
+      pointer-events: none;
     }
     .listing-card .description {
       color: #4b5563;
       font-size: 14px;
       margin: 8px 0;
-      display: -webkit-box;
-      -webkit-line-clamp: 3;
-      -webkit-box-orient: vertical;
+      line-height: 1.6;
+      max-height: 80px;
       overflow: hidden;
-      line-height: 1.5;
+      transition: max-height 0.4s ease;
+      pointer-events: none;
+    }
+    .listing-card .description.expanded {
+      max-height: none;
     }
     .listing-card .description strong {
       color: #1a1a2e;
@@ -217,11 +227,20 @@
     .listing-card .description li {
       list-style: disc;
     }
+    .listing-card .expand-hint {
+      color: #3b82f6;
+      font-size: 12px;
+      font-weight: 500;
+      pointer-events: none;
+      display: block;
+      margin-top: 2px;
+    }
     .listing-card .price {
       font-size: 22px;
       font-weight: 700;
       color: #f59e0b;
       margin: 8px 0;
+      pointer-events: none;
     }
     .listing-card .type {
       display: inline-block;
@@ -230,6 +249,7 @@
       border-radius: 20px;
       font-size: 12px;
       color: #374151;
+      pointer-events: none;
     }
     .listing-card .status-badge {
       display: inline-block;
@@ -238,6 +258,7 @@
       font-size: 12px;
       font-weight: 600;
       margin-left: 8px;
+      pointer-events: none;
     }
     .status-available {
       background: #10b981;
@@ -256,6 +277,7 @@
       font-size: 14px;
       text-decoration: none;
       margin-top: 10px;
+      pointer-events: auto;
     }
     .listing-card .whatsapp:hover {
       background: #1ebe5d;
@@ -266,6 +288,7 @@
       text-decoration: none;
       font-size: 14px;
       margin-top: 8px;
+      pointer-events: auto;
     }
     .listing-card .video-link:hover {
       text-decoration: underline;
@@ -276,6 +299,7 @@
       gap: 6px;
       flex-wrap: wrap;
       margin: 8px 0;
+      pointer-events: none;
     }
     .badge {
       padding: 2px 10px;
@@ -373,10 +397,12 @@
       gap: 8px;
       margin-top: 12px;
       flex-wrap: wrap;
+      pointer-events: auto;
     }
     .admin-actions .btn {
       font-size: 12px;
       padding: 6px 14px;
+      pointer-events: auto;
     }
     .empty-state {
       text-align: center;
@@ -396,7 +422,6 @@
       margin-top: 40px;
       border-top: 1px solid #e5e7eb;
     }
-    /* Formatting help text */
     .formatting-hint {
       font-size: 12px;
       color: #6b7280;
@@ -407,6 +432,15 @@
       padding: 2px 6px;
       border-radius: 4px;
       font-size: 11px;
+    }
+    /* Click to expand - exclude admin buttons from click */
+    .listing-card .clickable-area {
+      cursor: pointer;
+    }
+    .listing-card .admin-actions,
+    .listing-card .whatsapp,
+    .listing-card .video-link {
+      cursor: default;
     }
     @media (max-width: 640px) {
       header .container {
@@ -601,6 +635,20 @@
     }
 
     // ============================================
+    // TOGGLE DESCRIPTION EXPAND
+    // ============================================
+    function toggleDescription(card, listingId) {
+      const desc = card.querySelector('.description');
+      const hint = card.querySelector('.expand-hint');
+      if (desc) {
+        desc.classList.toggle('expanded');
+        if (hint) {
+          hint.textContent = desc.classList.contains('expanded') ? '👆 Click to collapse' : '👇 Click to expand';
+        }
+      }
+    }
+
+    // ============================================
     // RENDER LISTINGS
     // ============================================
     function renderListings(data) {
@@ -636,23 +684,28 @@
 
         // Formatted description
         const formattedDesc = formatDescription(listing.description || '');
+        // Check if description is long enough to need expansion (> 100 chars)
+        const needsExpand = (listing.description || '').length > 100;
 
         return `
-          <div class="listing-card">
+          <div class="listing-card" data-id="${listing._id}" onclick="handleCardClick(event, '${listing._id}')">
             <div class="title">${listing.title || 'Untitled'}</div>
             <div class="location">📍 ${listing.location || 'Unknown location'}</div>
             ${badgesHtml}
-            <div class="description">${formattedDesc}</div>
+            <div class="description-wrapper">
+              <div class="description ${needsExpand ? '' : 'expanded'}">${formattedDesc}</div>
+              ${needsExpand ? '<span class="expand-hint">👇 Click to expand</span>' : ''}
+            </div>
             <div class="price">${(listing.price || 0).toLocaleString()} FCFA/month</div>
             <div>
               <span class="type">${listing.houseType || 'N/A'}</span>
               ${statusHtml}
               <span style="font-size:12px;color:#6b7280;margin-left:8px;">👁️ ${listing.views || 0}</span>
             </div>
-            ${listing.whatsappNumber ? `<a href="https://wa.me/237${listing.whatsappNumber}" target="_blank" class="whatsapp">💬 Contact on WhatsApp</a>` : ''}
-            ${listing.videoUrl ? `<br><a href="${listing.videoUrl}" target="_blank" class="video-link">▶️ Watch Video</a>` : ''}
+            ${listing.whatsappNumber ? `<a href="https://wa.me/237${listing.whatsappNumber}" target="_blank" class="whatsapp" onclick="event.stopPropagation();">💬 Contact on WhatsApp</a>` : ''}
+            ${listing.videoUrl ? `<br><a href="${listing.videoUrl}" target="_blank" class="video-link" onclick="event.stopPropagation();">▶️ Watch Video</a>` : ''}
             ${isAdmin ? `
-              <div class="admin-actions">
+              <div class="admin-actions" onclick="event.stopPropagation();">
                 <button class="btn btn-secondary" onclick="editListing('${listing._id}')">✏️ Edit</button>
                 <button class="btn ${isAvailable ? 'btn-warning' : 'btn-success'}" onclick="toggleRented('${listing._id}')">${isAvailable ? '📋 Mark Rented' : '🏠 Mark Available'}</button>
                 <button class="btn btn-danger" onclick="deleteListing('${listing._id}')">🗑️ Delete</button>
@@ -661,6 +714,21 @@
           </div>
         `;
       }).join('');
+    }
+
+    // ============================================
+    // HANDLE CARD CLICK
+    // ============================================
+    function handleCardClick(event, listingId) {
+      const card = event.currentTarget;
+      const desc = card.querySelector('.description');
+      const hint = card.querySelector('.expand-hint');
+      if (desc) {
+        desc.classList.toggle('expanded');
+        if (hint) {
+          hint.textContent = desc.classList.contains('expanded') ? '👆 Click to collapse' : '👇 Click to expand';
+        }
+      }
     }
 
     // ============================================
@@ -786,6 +854,7 @@
     }
 
     async function editListing(id) {
+      event.stopPropagation();
       const listing = listings.find(l => l._id === id);
       if (!listing) return;
       editingId = id;
@@ -807,6 +876,7 @@
     // TOGGLE RENTED STATUS
     // ============================================
     async function toggleRented(id) {
+      event.stopPropagation();
       if (!isAdmin) {
         alert('Please login as admin first');
         return;
