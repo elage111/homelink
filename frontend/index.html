@@ -49,7 +49,7 @@
     }
     /* Hint for desktop users */
     header h1::after {
-      content: " (tap 5x for admin)";
+      content: " ";
       font-size: 10px;
       color: rgba(255,255,255,0.3);
       font-weight: 400;
@@ -592,7 +592,7 @@
     const API_URL = 'https://homelink-production.up.railway.app/api';
 
     // ============================================
-    // SECRET TAP DETECTION (5 taps on logo)
+    // SECRET TAP DETECTION (10 taps on logo)
     // ============================================
     let tapCount = 0;
     let tapTimer = null;
@@ -612,7 +612,7 @@
         tapCount = 0;
       }, 2000);
       
-      // If 5 taps detected
+      // If 10 taps detected
       if (tapCount >= 5) {
         tapCount = 0;
         clearTimeout(tapTimer);
@@ -922,7 +922,7 @@
     // ============================================
     function showAddListing() {
       if (!isAdmin) {
-        alert('Please login as admin first (tap the HomeLink logo 5 times)');
+        alert('Please login as admin first (tap the HomeLink logo 10 times)');
         return;
       }
       editingId = null;
